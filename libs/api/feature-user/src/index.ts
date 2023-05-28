@@ -1,1 +1,1 @@
-export * from './lib/api-feature-user';
+export * from './lib/user.module';
