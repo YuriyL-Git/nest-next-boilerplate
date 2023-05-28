@@ -24,6 +24,9 @@
       ],
       "@next-nest-okkino/api/generated-db-types": [
         "libs/api/generated-db-types/src/index.ts"
+      ],
+      "@next-nest-okkino/web/data-access-graphql": [
+        "libs/web/data-access-graphql/src/index.ts"
       ]
     }
   },
