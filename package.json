@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "yarn dockers:dev & yarn db:migrate:dev && yarn prisma-generate &&   yarn start:api & yarn gen:gql-client & yarn start:web",
+    "start": "open http://localhost:4200 & yarn validate:api-env && yarn validate:web-env &&  yarn dockers:dev & yarn db:migrate:dev && yarn prisma-generate && yarn start:api & yarn gen:gql-client & yarn start:web ",
     "start:api": "nx serve api",
     "start:web": "nx serve web",
     "build": "nx build",
@@ -14,6 +14,8 @@
     "prisma-generate": "prisma generate",
     "gen:gql-client": "graphql-codegen --config tools/graphql-codegen/codegen.yml --watch",
     "lint": "nx lint --fix --all",
+    "validate:api-env": "npx env-cmd -f .local.env ts-node --project tools/tsconfig.tools.json tools/validate-env/validate-api-env.ts",
+    "validate:web-env": "npx env-cmd -f .local.env ts-node --project tools/tsconfig.tools.json tools/validate-env/validate-web-env.ts",
     "verify": "yarn lint && nx format:write && nx format:check && nx affected --target=lint --fix --parallel=3"
   },
   "private": true,

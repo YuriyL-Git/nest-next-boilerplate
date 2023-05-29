@@ -10,11 +10,10 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "lib": ["es2020", "dom"],
+    "lib": ["es2017", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "noPropertyAccessFromIndexSignature": false,
     "paths": {
       "@next-nest-boilerplate/api/data-access-db": [
         "libs/api/data-access-db/src/index.ts"
@@ -26,7 +25,7 @@
       "@next-nest-boilerplate/web/data-access-graphql": [
         "libs/web/data-access-graphql/src/index.ts"
       ]
-    }
+    },
   },
   "exclude": ["node_modules", "tmp"]
 }
