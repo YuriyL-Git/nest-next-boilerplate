@@ -1,17 +1,30 @@
 {
-  "name": "@next-nest-okkino/source",
+  "name": "@next-nest-boilerplate/source",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
+    "start": "open http://localhost:4200 & yarn serve:all",
+
+    "serve:all": "npx concurrently --kill-others-on-fail \"npm:start:*\"",
+    "start:verify-env": "npm run validate:web-env && npm run validate:api-env",
     "start:api": "nx serve api",
     "start:web": "nx serve web",
-    "build": "nx build",
-    "test": "nx test",
-    "dockers:dev": "docker compose -f tools/db-environment/dev.docker-compose.yml up -d --no-recreate --remove-orphans",
+    "start:db:watch": "npm run db:dockers:dev && npm run db:migrate:dev && prisma generate --watch",
+    "start:gql:watch": "graphql-codegen --config tools/graphql-codegen/codegen.yml --watch",
+
+    "db:dockers:dev": "npx env-cmd -f .local.env docker compose -f tools/db-environment/dev.docker-compose.yml up -d --no-recreate --remove-orphans",
     "db:migrate:dev": "npx env-cmd -f .local.env npx prisma migrate dev",
     "db:studio": "npx env-cmd -f .local.env npx prisma studio",
     "prisma-generate": "prisma generate",
-    "gen:gql-client": "graphql-codegen --config tools/graphql-codegen/codegen.yml --watch"
+
+    "validate:api-env": "npx env-cmd -f .local.env ts-node --project tools/tsconfig.tools.json tools/validate-env/validate-api-env.ts",
+    "validate:web-env": "npx env-cmd -f .local.env ts-node --project tools/tsconfig.tools.json tools/validate-env/validate-web-env.ts",
+
+    "lint": "nx lint --fix --all",
+    "verify": "yarn lint && nx format:write && nx format:check && nx affected --target=lint --fix --parallel=3",
+
+    "build": "nx build",
+    "test": "nx test"
   },
   "private": true,
   "dependencies": {
@@ -71,20 +84,23 @@
     "@types/node": "18.14.2",
     "@types/react": "18.0.28",
     "@types/react-dom": "18.0.11",
-    "@typescript-eslint/eslint-plugin": "^5.58.0",
-    "@typescript-eslint/parser": "^5.58.0",
+    "@typescript-eslint/eslint-plugin": "^5.59.7",
+    "@typescript-eslint/parser": "^5.59.7",
     "autoprefixer": "^10.4.14",
     "babel-jest": "^29.4.1",
     "cypress": "^12.11.0",
     "env-cmd": "^10.1.0",
-    "eslint": "~8.15.0",
+    "eslint": "^8.41.0",
     "eslint-config-next": "13.4.1",
     "eslint-config-prettier": "8.1.0",
     "eslint-plugin-cypress": "^2.10.3",
     "eslint-plugin-import": "2.27.5",
     "eslint-plugin-jsx-a11y": "6.7.1",
+    "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "7.32.2",
     "eslint-plugin-react-hooks": "4.6.0",
+    "eslint-plugin-unicorn": "^47.0.0",
+    "eslint-plugin-unused-imports": "^2.0.0",
     "graphql-codegen": "^0.4.0",
     "jest": "^29.4.1",
     "jest-environment-jsdom": "^29.4.1",

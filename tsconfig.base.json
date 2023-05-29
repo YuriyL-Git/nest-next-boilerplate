@@ -10,25 +10,22 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "lib": ["es2020", "dom"],
+    "lib": ["es2017", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "noPropertyAccessFromIndexSignature": false,
     "paths": {
-      "@next-nest-okkino/api/data-access-db": [
+      "@next-nest-boilerplate/api/data-access-db": [
         "libs/api/data-access-db/src/index.ts"
       ],
-      "@next-nest-okkino/api/feature-user": [
-        "libs/api/feature-user/src/index.ts"
-      ],
-      "@next-nest-okkino/api/generated-db-types": [
+      "@next-nest-boilerplate/api/feature-user": ["libs/api/feature-user/src/index.ts"],
+      "@next-nest-boilerplate/api/generated-db-types": [
         "libs/api/generated-db-types/src/index.ts"
       ],
-      "@next-nest-okkino/web/data-access-graphql": [
+      "@next-nest-boilerplate/web/data-access-graphql": [
         "libs/web/data-access-graphql/src/index.ts"
       ]
-    }
+    },
   },
   "exclude": ["node_modules", "tmp"]
 }

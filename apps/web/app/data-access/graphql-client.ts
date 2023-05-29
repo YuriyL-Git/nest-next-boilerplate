@@ -1,3 +1,8 @@
-import { getGraphqlClient } from '@next-nest-okkino/web/data-access-graphql';
+import { getGraphqlClient } from "@next-nest-boilerplate/web/data-access-graphql";
+import { webEnv } from "../../environments/environments";
 
-export const gql = getGraphqlClient('http://localhost:3333/graphql');
+const {
+  api: { gqlUrl }
+} = webEnv;
+
+export const gql = getGraphqlClient(gqlUrl);

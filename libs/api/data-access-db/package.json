@@ -1,5 +1,5 @@
 {
-  "name": "@next-nest-okkino/api/data-access-db",
+  "name": "@next-nest-boilerplate/api/data-access-db",
   "version": "0.0.1",
   "type": "commonjs"
 }

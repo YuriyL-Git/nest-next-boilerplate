@@ -1,12 +1,12 @@
-import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
-import { UserService } from './user.service';
+import { Resolver, Query, Mutation, Args } from "@nestjs/graphql";
+import { UserService } from "./user.service";
 import {
   CreateOneUserArgs,
   DeleteOneUserArgs,
   FindUniqueUserArgs,
   UpdateOneUserArgs,
-  User,
-} from '@next-nest-okkino/api/generated-db-types';
+  User
+} from "@next-nest-boilerplate/api/generated-db-types";
 
 @Resolver(() => User)
 export class UserResolver {
