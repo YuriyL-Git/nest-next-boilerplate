@@ -5,6 +5,8 @@ import { gql } from './data-access/graphql-client';
 export default async function Index() {
   const { users } = await gql.GetUsers();
 
+  console.log('Users: ', users);
+
   return (
     <div className={styles.page}>
       <TestPage />

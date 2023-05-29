@@ -3,7 +3,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { MercuriusDriver, MercuriusDriverConfig } from '@nestjs/mercurius';
 import * as path from 'path';
 import { APP_PIPE } from '@nestjs/core';
-import { UserModule } from '@next-nest-okkino/api/feature-user';
+import { UserModule } from '@next-nest-boilerplate/api/feature-user';
 
 const validationProvider = {
   provide: APP_PIPE,

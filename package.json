@@ -1,13 +1,14 @@
 {
-  "name": "@next-nest-okkino/source",
+  "name": "@next-nest-boilerplate/source",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
+    "start": "yarn db:migrate:dev && yarn prisma-generate &&  yarn dockers:dev && yarn start:api & yarn gen:gql-client & yarn start:web",
     "start:api": "nx serve api",
     "start:web": "nx serve web",
     "build": "nx build",
     "test": "nx test",
-    "dockers:dev": "docker compose -f tools/db-environment/dev.docker-compose.yml up -d --no-recreate --remove-orphans",
+    "dockers:dev": "npx env-cmd -f .local.env docker compose -f tools/db-environment/dev.docker-compose.yml up -d --no-recreate --remove-orphans",
     "db:migrate:dev": "npx env-cmd -f .local.env npx prisma migrate dev",
     "db:studio": "npx env-cmd -f .local.env npx prisma studio",
     "prisma-generate": "prisma generate",

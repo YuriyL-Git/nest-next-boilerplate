@@ -6,7 +6,7 @@ import {
   FindUniqueUserArgs,
   UpdateOneUserArgs,
   User,
-} from '@next-nest-okkino/api/generated-db-types';
+} from '@next-nest-boilerplate/api/generated-db-types';
 
 @Resolver(() => User)
 export class UserResolver {

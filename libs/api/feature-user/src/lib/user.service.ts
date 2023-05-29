@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from '@next-nest-okkino/api/data-access-db';
+import { PrismaService } from '@next-nest-boilerplate/api/data-access-db';
 import {
   CreateOneUserArgs,
   DeleteOneUserArgs,
   FindUniqueUserArgs,
   UpdateOneUserArgs,
-} from '@next-nest-okkino/api/generated-db-types';
+} from '@next-nest-boilerplate/api/generated-db-types';
 import * as bcrypt from 'bcrypt';
 
 @Injectable()
