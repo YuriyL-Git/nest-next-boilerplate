@@ -3,20 +3,28 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "open http://localhost:4200 & yarn validate:api-env && yarn validate:web-env &&  yarn dockers:dev & yarn db:migrate:dev && yarn prisma-generate && yarn start:api & yarn gen:gql-client & yarn start:web ",
+    "start": "open http://localhost:4200 & yarn serve:all",
+
+    "serve:all": "npx concurrently --kill-others-on-fail \"npm:start:*\"",
+    "start:verify-env": "npm run validate:web-env && npm run validate:api-env",
     "start:api": "nx serve api",
     "start:web": "nx serve web",
-    "build": "nx build",
-    "test": "nx test",
-    "dockers:dev": "npx env-cmd -f .local.env docker compose -f tools/db-environment/dev.docker-compose.yml up -d --no-recreate --remove-orphans",
+    "start:db:watch": "npm run db:dockers:dev && npm run db:migrate:dev && prisma generate --watch",
+    "start:gql:watch": "graphql-codegen --config tools/graphql-codegen/codegen.yml --watch",
+
+    "db:dockers:dev": "npx env-cmd -f .local.env docker compose -f tools/db-environment/dev.docker-compose.yml up -d --no-recreate --remove-orphans",
     "db:migrate:dev": "npx env-cmd -f .local.env npx prisma migrate dev",
     "db:studio": "npx env-cmd -f .local.env npx prisma studio",
     "prisma-generate": "prisma generate",
-    "gen:gql-client": "graphql-codegen --config tools/graphql-codegen/codegen.yml --watch",
-    "lint": "nx lint --fix --all",
+
     "validate:api-env": "npx env-cmd -f .local.env ts-node --project tools/tsconfig.tools.json tools/validate-env/validate-api-env.ts",
     "validate:web-env": "npx env-cmd -f .local.env ts-node --project tools/tsconfig.tools.json tools/validate-env/validate-web-env.ts",
-    "verify": "yarn lint && nx format:write && nx format:check && nx affected --target=lint --fix --parallel=3"
+
+    "lint": "nx lint --fix --all",
+    "verify": "yarn lint && nx format:write && nx format:check && nx affected --target=lint --fix --parallel=3",
+
+    "build": "nx build",
+    "test": "nx test"
   },
   "private": true,
   "dependencies": {
