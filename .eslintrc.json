@@ -82,9 +82,7 @@
       "env": {
         "jest": true
       },
-      "rules": {
-
-      }
+      "rules": {}
     }
   ]
 }

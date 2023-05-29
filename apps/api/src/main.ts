@@ -1,10 +1,9 @@
-import { Logger } from '@nestjs/common';
-import { NestFactory } from '@nestjs/core';
+import { Logger } from "@nestjs/common";
+import { NestFactory } from "@nestjs/core";
 
-import { AppModule } from './app/app.module';
-import {FastifyAdapter, NestFastifyApplication} from "@nestjs/platform-fastify";
-import helmet from '@fastify/helmet'
-
+import { AppModule } from "./app/app.module";
+import { FastifyAdapter, NestFastifyApplication } from "@nestjs/platform-fastify";
+import helmet from "@fastify/helmet";
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -13,7 +12,7 @@ async function bootstrap() {
   );
 
   // TODO: contentSecurityPolicy should turn on in production
-  await app.register(helmet, {contentSecurityPolicy: false})
+  await app.register(helmet, { contentSecurityPolicy: false });
   app.enableCors();
 
   const port = process.env.PORT || 3333;
@@ -23,4 +22,5 @@ async function bootstrap() {
   );
 }
 
-bootstrap();
+// eslint-disable-next-line unicorn/prefer-top-level-await
+bootstrap().catch((error) => console.log(error));
