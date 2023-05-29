@@ -8,14 +8,14 @@ documents:
   - 'libs/**/*gql.ts'
 
 generates:
-  libs/web/data-access-graphql/src/lib/types.ts:
+  libs/web/data-access-graphql/src/lib/generated/types.ts:
     plugins:
     - typescript
   libs/:
     preset: near-operation-file
     presetConfig:
       extension: .gen.ts
-      baseTypesPath: 'web/data-access-graphql/src/lib/types.ts'
+      baseTypesPath: 'web/data-access-graphql/src/lib/generated/types.ts'
     plugins:
       - typescript-operations
       - typescript-graphql-request
