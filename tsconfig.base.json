@@ -18,6 +18,9 @@
       "@next-nest-boilerplate/api/data-access-db": [
         "libs/api/data-access-db/src/index.ts"
       ],
+      "@next-nest-boilerplate/api/feature-home-block": [
+        "libs/api/feature-home-block/src/index.ts"
+      ],
       "@next-nest-boilerplate/api/feature-user": ["libs/api/feature-user/src/index.ts"],
       "@next-nest-boilerplate/api/generated-db-types": [
         "libs/api/generated-db-types/src/index.ts"
