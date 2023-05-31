@@ -3,26 +3,24 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "open http://localhost:4200 & yarn serve:all",
+    "start": "npx concurrently --kill-others-on-fail \"npm:start:*\"",
 
-    "serve:all": "npx concurrently --kill-others-on-fail \"npm:start:*\"",
-    "start:verify-env": "npm run validate:web-env && npm run validate:api-env",
-    "start:api": "nx serve api",
-    "start:web": "nx serve web",
+    "start:api": "wait-on tcp:5433 && nx serve api",
+    "start:web": "wait-on tcp:3333 && nx serve web",
+    "start:web-browser": "wait-on tcp:4200 && open http://localhost:4200",
     "start:db:watch": "npm run db:dockers:dev && npm run db:migrate:dev && prisma generate --watch",
-    "start:gql:watch": "graphql-codegen --config tools/graphql-codegen/codegen.yml --watch",
+    "start:gql:watch": "wait-on tcp:3333 && graphql-codegen --config tools/graphql-codegen/codegen.yml --watch",
+    "start:verify-env": "npm run validate:web-env && npm run validate:api-env",
+    "start:prisma-studio": "wait-on tcp:3333 && npx env-cmd -f .local.env npx prisma studio",
 
-    "db:dockers:dev": "npx env-cmd -f .local.env docker compose -f tools/db-environment/dev.docker-compose.yml up -d --no-recreate --remove-orphans",
-    "db:migrate:dev": "npx env-cmd -f .local.env npx prisma migrate dev",
-    "db:studio": "npx env-cmd -f .local.env npx prisma studio",
     "prisma-generate": "prisma generate",
-
+    "db:migrate:dev": "npx env-cmd -f .local.env npx prisma migrate dev",
+    "db:dockers:dev": "npx env-cmd -f .local.env docker compose -f tools/db-environment/dev.docker-compose.yml up -d --no-recreate --remove-orphans",
     "validate:api-env": "npx env-cmd -f .local.env ts-node --project tools/tsconfig.tools.json tools/validate-env/validate-api-env.ts",
     "validate:web-env": "npx env-cmd -f .local.env ts-node --project tools/tsconfig.tools.json tools/validate-env/validate-web-env.ts",
 
     "lint": "nx lint --fix --all",
     "verify": "yarn lint && nx format:write && nx format:check && nx affected --target=lint --fix --parallel=3",
-
     "build": "nx build",
     "test": "nx test"
   },
@@ -113,7 +111,8 @@
     "tailwindcss": "^3.3.2",
     "ts-jest": "^29.1.0",
     "ts-node": "10.9.1",
-    "typescript": "~5.0.2"
+    "typescript": "~5.0.2",
+    "wait-on": "^7.0.1"
   },
   "prisma": {
     "schema": "libs/api/data-access-db/src/lib/schema.prisma"
