@@ -1,7 +1,11 @@
 Commands:
-## generate user cruds
-nx g @nrwl/nest:resource --project=api-feature-user --directory=lib --type="graphql-code-first" --crud --name user
+## generate feature
+nx g @nrwl/nest:resource --project=api-feature-{feature-name} --directory=lib --type="graphql-code-first" --crud --name {feature-name}
+
+## Generate resolver:
+ nx g @nrwl/nest:resource --project=api-feature-{feature-name} --type="graphql-code-first" --crud --name {feature-name}
 
 
-## generate db-types
-nx generate @nrwl/js:library --name=generated-db-types --directory=api --compiler=swc --buildable --tags "scope:api"
+
+## generate lib
+nx generate @nrwl/js:library --name={lib name} --directory={scope name} --compiler=swc --buildable --tags "scope:{scope name}"
