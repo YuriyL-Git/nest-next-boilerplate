@@ -1,4 +1,4 @@
-import * as Types from './generated/types';
+import * as Types from '../generated/types';
 
 import { GraphQLClient } from 'graphql-request';
 import { GraphQLClientRequestHeaders } from 'graphql-request/build/cjs/types';
@@ -6,7 +6,7 @@ import { gql } from 'graphql-request';
 export type GetUsersVariables = Types.Exact<{ [key: string]: never; }>;
 
 
-export type GetUsers = { __typename?: 'Query', users: Array<{ __typename?: 'User', id: string, email: string, name?: string | null }> };
+export type GetUsers = { __typename?: 'Query', users: Array<{ __typename: 'User', id: string, email: string, name?: string | null }> };
 
 
 export const GetUsersDocument = /*#__PURE__*/ gql`
@@ -15,6 +15,7 @@ export const GetUsersDocument = /*#__PURE__*/ gql`
     id
     email
     name
+    __typename
   }
 }
     `;

@@ -13,7 +13,7 @@
     "start:gql:watch": "wait-on tcp:3333 && graphql-codegen --config tools/graphql-codegen/codegen.yml --watch",
     "start:verify-env": "npm run validate:web-env && npm run validate:api-env",
     "start:prisma-studio": "wait-on tcp:3333 && npx env-cmd -f .local.env npx prisma studio",
-    
+
     "prisma-generate": "prisma generate",
     "db:migrate:dev": "npx env-cmd -f .local.env npx prisma migrate dev",
     "db:dockers:dev": "npx env-cmd -f .local.env docker compose -f tools/db-environment/dev.docker-compose.yml up -d --no-recreate --remove-orphans",

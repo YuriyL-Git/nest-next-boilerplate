@@ -1,5 +1,5 @@
 import { GraphQLClient } from "graphql-request";
-import { getSdk } from "./data-access.gql.gen";
+import { getSdk } from "./queries/data-access-queries.gql.gen";
 import { GraphQLClientRequestHeaders, MaybeLazy } from "graphql-request/build/cjs/types";
 
 export const getGraphqlClient = (
