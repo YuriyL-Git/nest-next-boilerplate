@@ -13,12 +13,17 @@ export class WebEnvVo implements WebEnv {
   public isProd: boolean;
 
   @ValidateNested()
-  @Type(() => WebEnvApiVo)
-  public api: WebEnvApiVo;
+  @Type(() => ApiVo)
+  public api: ApiVo;
 
   @ValidateNested()
   @Type(() => WebStorageVo)
   public storage: WebStorageVo;
+}
+
+class ApiVo {
+  @IsUrl({ require_tld: false })
+  public gqlUrl: string;
 }
 
 class WebStorageVo {
@@ -27,11 +32,6 @@ class WebStorageVo {
 
   @IsString()
   public endpoint: string;
-}
-
-class WebEnvApiVo {
-  @IsUrl({ require_tld: false })
-  public gqlUrl: string;
 }
 
 const webEnvVoInstance = plainToInstance(WebEnvVo, webEnv);

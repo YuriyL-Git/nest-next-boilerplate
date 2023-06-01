@@ -10,3 +10,19 @@ const GET_USERS = gql`
     }
   }
 `;
+
+const GET_HOME_BLOCKS = gql`
+  query GetHomeImages {
+    HomeBlocks {
+      id
+      title
+      imagePath
+      navigationPath
+      rgbBackground {
+        r
+        g
+        b
+      }
+    }
+  }
+`;
