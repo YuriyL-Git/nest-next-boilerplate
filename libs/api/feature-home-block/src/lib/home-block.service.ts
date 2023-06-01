@@ -21,7 +21,11 @@ export class HomeBlockService {
   }
 
   findAll() {
-    return this.prisma.homeBlock.findMany();
+    return this.prisma.homeBlock.findMany({
+      include: {
+        rgbBackground: true
+      }
+    });
   }
 
   findOne(findArgs: FindUniqueHomeBlockArgs) {
