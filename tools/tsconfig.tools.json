@@ -7,6 +7,8 @@
     "target": "es5",
     "types": ["node"],
     "importHelpers": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
   },
   "include": ["**/*.ts"]
 }
