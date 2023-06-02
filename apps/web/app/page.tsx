@@ -1,26 +1,38 @@
-import styles from "./page.module.css";
-import { TestPage } from "./pages/test-page";
 import { gql } from "./data-access/graphql-client";
 import Image from "next/image";
+import Link from "next/link";
 import { webEnv } from "../environments/environments";
+import { rgbToDataUrl } from "@next-nest-boilerplate/web/utils-shared";
 
 const { storage } = webEnv;
 export default async function Index() {
   const { HomeBlocks } = await gql.GetHomeImages();
 
-  console.log("storage", storage);
   return (
-    <div className={styles.page}>
-      <TestPage />
-      {HomeBlocks.map((block) => (
-        <Image
-          src={`${storage.url}/${block.imagePath}`}
-          alt="test"
-          key={block.imagePath}
-          width="500"
-          height="500"
-        />
-      ))}
+    <div className="grid gap-4 lg:grid-cols-2 lg:gap-7 xl:gap-12">
+      {HomeBlocks.map((block) => {
+        const { r, g, b } = block.rgbBackground;
+        return (
+          <Link
+            href={block.navigationPath}
+            key={block.id}
+            className="flex h-[calc(50vh-5.5rem)] min-h-[232px] items-center justify-center gap-4 overflow-hidden sm:h-[auto] md:h-[calc(50vh-7.5rem)] lg:h-[calc(100vh-18rem)]"
+          >
+            <Image
+              src={`${storage.url}/${block.imagePath}`}
+              alt={block.title}
+              height={774}
+              width={774}
+              className={
+                "hover:transition-{scale} h-full object-cover duration-1000 hover:scale-105"
+              }
+              placeholder="blur"
+              blurDataURL={rgbToDataUrl(r, g, b)}
+              title={block.title}
+            ></Image>
+          </Link>
+        );
+      })}
     </div>
   );
 }
