@@ -1,5 +1,5 @@
 import { getGraphqlClient } from "@next-nest-boilerplate/web/data-access-graphql";
-import { webEnv } from "../../environments/environments";
+import { webEnv } from "../environments/environments";
 
 const {
   api: { gqlUrl }
