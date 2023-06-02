@@ -9,7 +9,6 @@ import publicFilesFile from "./i18n/publicFiles.gen.json";
 
 function getLocale(request: NextRequest): string | undefined {
   const negotiatorHeaders: Record<string, string> = {};
-
   // @ts-ignore
   for (const [key, value] of request.headers.entries()) {
     negotiatorHeaders[key] = value;
