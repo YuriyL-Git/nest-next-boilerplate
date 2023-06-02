@@ -5,6 +5,7 @@ import Link from "next/link";
 import { getDictionary } from "../../i18n/getDirctionary";
 import LocaleSwitcher from "./components/LocaleSwitcher/LocaleSwitcher";
 import { NavBar } from "./components/NavBar/NavBar";
+import { Providers } from "../providers/providers";
 
 export const metadata = {
   title: "Test",
@@ -27,22 +28,24 @@ export default async function RootLayout({
   return (
     <html lang={params.lang}>
       <body>
-        <div className="mr-6 ml-6 max-w-screen-2xl md:ml-14 md:mr-14">
-          <nav className="flex h-20 items-center justify-between md:h-28 lg:h-36">
-            <div className="flex items-center gap-10">
-              <Link href={"/menu"} className="text-xs uppercase text-black">
-                {dictionary.NavBarStrings.Menu}
-              </Link>
-              <Link href={"/cart"} className="text-xs uppercase text-black">
-                {dictionary.NavBarStrings.Cart}
-              </Link>
-              <NavBar dictionary={dictionary} />
+        <Providers>
+          <div className="mr-6 ml-6 max-w-screen-2xl md:ml-14 md:mr-14">
+            <nav className="flex h-20 items-center justify-between md:h-28 lg:h-36">
+              <div className="flex items-center gap-10">
+                <Link href={"/menu"} className="text-xs uppercase text-black">
+                  {dictionary.NavBarStrings.Menu}
+                </Link>
+                <Link href={"/cart"} className="text-xs uppercase text-black">
+                  {dictionary.NavBarStrings.Cart}
+                </Link>
+                <NavBar dictionary={dictionary} />
 
-              <LocaleSwitcher />
-            </div>
-          </nav>
-          {children}
-        </div>
+                <LocaleSwitcher />
+              </div>
+            </nav>
+            {children}
+          </div>
+        </Providers>
       </body>
     </html>
   );
