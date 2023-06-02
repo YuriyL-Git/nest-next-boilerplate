@@ -1,5 +1,13 @@
+"use client";
 import { FC } from "react";
+import { Dictionary } from "../../../../i18n/getDirctionary";
 
-export const NavBar: FC = () => {
-  return <></>;
+interface Props {
+  dictionary: Dictionary;
+}
+
+export const NavBar: FC<Props> = ({ dictionary }) => {
+  const { NavBarStrings } = dictionary;
+
+  return <>{NavBarStrings.Cart}</>;
 };

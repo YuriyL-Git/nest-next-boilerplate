@@ -4,6 +4,7 @@ import { ReactNode } from "react";
 import Link from "next/link";
 import { getDictionary } from "../../i18n/getDirctionary";
 import LocaleSwitcher from "./components/LocaleSwitcher/LocaleSwitcher";
+import { NavBar } from "./components/NavBar/NavBar";
 
 export const metadata = {
   title: "Test",
@@ -21,7 +22,7 @@ export default async function RootLayout({
   children: ReactNode;
   params: { lang: Locale };
 }) {
-  const { navBar } = await getDictionary(params.lang);
+  const dictionary = await getDictionary(params.lang);
 
   return (
     <html lang={params.lang}>
@@ -30,11 +31,12 @@ export default async function RootLayout({
           <nav className="flex h-20 items-center justify-between md:h-28 lg:h-36">
             <div className="flex items-center gap-10">
               <Link href={"/menu"} className="text-xs uppercase text-black">
-                {navBar.menu}
+                {dictionary.NavBarStrings.Menu}
               </Link>
               <Link href={"/cart"} className="text-xs uppercase text-black">
-                {navBar.cart}
+                {dictionary.NavBarStrings.Cart}
               </Link>
+              <NavBar dictionary={dictionary} />
 
               <LocaleSwitcher />
             </div>

@@ -5,7 +5,7 @@ import { i18n } from "./i18n/i18nConfig";
 
 import { match as matchLocale } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
-import publicFilesFile from "./i18n/publicFiles.gen.json";
+import publicFiles from "./i18n/publicFiles.gen.json";
 
 function getLocale(request: NextRequest): string | undefined {
   const negotiatorHeaders: Record<string, string> = {};
@@ -15,6 +15,7 @@ function getLocale(request: NextRequest): string | undefined {
   }
 
   const languages = new Negotiator({ headers: negotiatorHeaders }).languages();
+
   // @ts-ignore locales are readonly
   const locales: string[] = i18n.locales;
   return matchLocale(languages, locales, i18n.defaultLocale);
@@ -24,8 +25,7 @@ export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
   // // `/_next/` and `/api/` are ignored by the watcher, but we need to ignore files in `public` manually.
-  // // If you have one
-  if (publicFilesFile.publicFiles.includes(pathname)) {
+  if (publicFiles.list.includes(pathname)) {
     return;
   }
 
@@ -38,8 +38,7 @@ export function middleware(request: NextRequest) {
   if (pathnameIsMissingLocale) {
     const locale = getLocale(request);
 
-    // e.g. incoming request is /products
-    // The new URL is now /en-US/products
+    //pass i18n.defaultLocale to always redirect to default locale
     return NextResponse.redirect(new URL(`/${locale}/${pathname}`, request.url));
   }
 }

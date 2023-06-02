@@ -1,5 +1,4 @@
 import styles from "./page.module.css";
-import { TestPage } from "./pages/TestPage";
 import { gql } from "../../data-access/graphql-client";
 
 export default async function Index() {
@@ -7,7 +6,6 @@ export default async function Index() {
 
   return (
     <div className={styles.page}>
-      <TestPage />
       {users.map((user) => (
         <div key={user.id}>{user.name}</div>
       ))}

@@ -1,6 +1,6 @@
 {
-  "navBar": {
-    "menu": "Меню",
-    "cart": "Корзина"
+  "NavBarStrings": {
+    "Menu": "Меню",
+    "Cart": "Корзина"
   }
 }
