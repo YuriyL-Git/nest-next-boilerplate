@@ -8,7 +8,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
-    "target": "es2015",
+    "target": "es2016",
     "module": "esnext",
     "lib": ["es2017", "dom"],
     "skipLibCheck": true,
@@ -24,8 +24,9 @@
       ],
       "@next-nest-boilerplate/web/data-access-graphql": [
         "libs/web/data-access-graphql/src/index.ts"
-      ]
-    },
+      ],
+      "@next-nest-boilerplate/web/utils-shared": ["libs/web/utils-shared/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
