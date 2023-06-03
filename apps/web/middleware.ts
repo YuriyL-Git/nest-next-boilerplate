@@ -1,11 +1,11 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-import { i18n } from "./i18n/i18nConfig";
+import { i18n } from "./i18n/i18n-config";
 
 import { match as matchLocale } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
-import publicFiles from "./i18n/publicFiles.gen.json";
+import publicFiles from "./i18n/public-files.gen.json";
 
 function getLocale(request: NextRequest): string | undefined {
   const negotiatorHeaders: Record<string, string> = {};

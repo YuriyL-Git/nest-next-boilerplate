@@ -3,7 +3,7 @@ const chokidar = require("chokidar");
 
 const encoding = "utf8";
 const pathToPublicFolder = "./apps/web/public";
-const pathToFile = "./apps/web/i18n/publicFiles.gen.json";
+const pathToFile = "./apps/web/i18n/public-files.gen.json";
 
 async function generatePublicFilesList() {
   const list = (await fs.readdir(pathToPublicFolder)).map((file) => `/${file}`);

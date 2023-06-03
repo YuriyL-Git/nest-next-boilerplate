@@ -1,10 +1,10 @@
 import "../../styles/global.css";
-import { i18n, Locale } from "../../i18n/i18nConfig";
+import { i18n, Locale } from "../../i18n/i18n-config";
 import { ReactNode } from "react";
 import Link from "next/link";
-import { getDictionary } from "../../i18n/getDirctionary";
-import LocaleSwitcher from "./components/LocaleSwitcher/LocaleSwitcher";
-import { NavBar } from "./components/NavBar/NavBar";
+import { getDictionary } from "../../i18n/get-dirctionary";
+import LocaleSwitcher from "../components/locale-switcher/locale-switcher";
+import { NavBar } from "../components/nav-bar/nav-bar";
 import { Providers } from "../providers/providers";
 
 export const metadata = {

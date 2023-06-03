@@ -1,4 +1,4 @@
-import type { Locale } from "./i18nConfig";
+import type { Locale } from "./i18n-config";
 import dictionary from "./dictionaries/ru.json";
 
 const dictionaries = {

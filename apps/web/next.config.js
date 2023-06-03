@@ -2,6 +2,7 @@
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { composePlugins, withNx } = require("@nx/next");
+const webpack = require("webpack");
 
 /**
  * @type {import('@nx/next/plugins/with-nx').WithNxOptions}
@@ -20,6 +21,14 @@ const nextConfig = {
         hostname: process.env.STORAGE_ENDPOINT
       }
     ]
+  },
+  webpack: (config, options) => {
+    config.plugins.push(
+      new webpack.NormalModuleReplacementPlugin(/^node:/, (resource) => {
+        resource.request = resource.request.replace(/^node:/, "");
+      })
+    );
+    return config;
   }
 };
 
