@@ -3,6 +3,7 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { composePlugins, withNx } = require("@nx/next");
 const webpack = require("webpack");
+const config = require("dotenv").config;
 
 /**
  * @type {import('@nx/next/plugins/with-nx').WithNxOptions}
@@ -21,6 +22,14 @@ const nextConfig = {
         hostname: process.env.STORAGE_ENDPOINT
       }
     ]
+  },
+  async rewrites() {
+    return [
+      {
+        source: "/api/:path*",
+        destination: `${process.env.API_URL}/:path*`
+      }
+    ];
   },
   webpack: (config, options) => {
     config.plugins.push(

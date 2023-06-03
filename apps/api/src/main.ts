@@ -7,6 +7,7 @@ import helmet from "@fastify/helmet";
 import { apiEnv } from "./environments/environments";
 
 const { api, isProd } = apiEnv;
+const host = isProd ? "0.0.0.0" : "localhost";
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -19,10 +20,8 @@ async function bootstrap() {
   app.enableCors();
 
   const port = api.port;
-  await app.listen(port);
-  Logger.log(
-    `🚀 Application playground is running on: http://localhost:${port}/graphiql`
-  );
+  await app.listen(port, host);
+  Logger.log(`🚀 Application playground is running on: http://${host}:${port}/graphiql`);
 }
 
 // eslint-disable-next-line unicorn/prefer-top-level-await
