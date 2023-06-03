@@ -20,9 +20,15 @@
     "validate:web-env": "npx env-cmd -f .local.env ts-node --project tools/tsconfig.tools.json tools/validate-env/validate-web-env.ts",
     "lint": "nx lint --fix --all",
     "verify": "yarn lint && nx format:write && nx format:check && nx affected --target=lint --fix --parallel=3",
-    "build": "nx build",
     "upgrade": "nx migrate latest && npm install && npm i next@latest",
-    "test": "nx test"
+    "test": "nx test",
+    "-------------":"----------------------------------------------------------",
+    "cd:api": "npm run cd:validate-api && npm run cd:db-push && npx nx build api --prod",
+    "cd:web": "npm run cd:validate-web && npx nx build web --prod",
+    "cd:validate-api": "npx env-cmd -f .env npx ts-node --project tools/tsconfig.tools.json tools/validate-env/validate-api-env.ts",
+    "cd:validate-web": "npx env-cmd -f .env npx ts-node --project tools/tsconfig.tools.json tools/validate-env/validate-web-env.ts",
+    "cd:db-push": "npx prisma db push --accept-data-loss",
+    "cd:db-seed": "npx ts-node --project tools/tsconfig.tools.json tools/database/seed.dev.ts"
   },
   "private": true,
   "dependencies": {

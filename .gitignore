@@ -42,3 +42,4 @@ Thumbs.db
 .next
 schema.graphql
 TODO
+.env
