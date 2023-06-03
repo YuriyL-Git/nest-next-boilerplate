@@ -1,6 +1,7 @@
-"use client";
 import { FC } from "react";
-import { Dictionary } from "../../../../i18n/getDirctionary";
+import { Dictionary } from "../../../i18n/get-dirctionary";
+import Link from "next/link";
+import LocaleSwitcher from "../locale-switcher/locale-switcher";
 
 interface Props {
   dictionary: Dictionary;
@@ -9,5 +10,17 @@ interface Props {
 export const NavBar: FC<Props> = ({ dictionary }) => {
   const { NavBarStrings } = dictionary;
 
-  return <>{NavBarStrings.Cart}</>;
+  return (
+    <nav className="flex h-20 items-center justify-between md:h-28 lg:h-36">
+      <div className="flex items-center gap-10">
+        <Link href={"/menu"} className="text-xs uppercase text-black">
+          {NavBarStrings.Menu}
+        </Link>
+        <Link href={"/cart"} className="text-xs uppercase text-black">
+          {NavBarStrings.Cart}
+        </Link>
+        <LocaleSwitcher />
+      </div>
+    </nav>
+  );
 };

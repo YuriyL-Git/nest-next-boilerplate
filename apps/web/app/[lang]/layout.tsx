@@ -1,9 +1,7 @@
 import "../../styles/global.css";
 import { i18n, Locale } from "../../i18n/i18n-config";
 import { ReactNode } from "react";
-import Link from "next/link";
 import { getDictionary } from "../../i18n/get-dirctionary";
-import LocaleSwitcher from "../components/locale-switcher/locale-switcher";
 import { NavBar } from "../components/nav-bar/nav-bar";
 import { Providers } from "../providers/providers";
 
@@ -30,19 +28,7 @@ export default async function RootLayout({
       <body>
         <Providers>
           <div className="mr-6 ml-6 max-w-screen-2xl md:ml-14 md:mr-14">
-            <nav className="flex h-20 items-center justify-between md:h-28 lg:h-36">
-              <div className="flex items-center gap-10">
-                <Link href={"/menu"} className="text-xs uppercase text-black">
-                  {dictionary.NavBarStrings.Menu}
-                </Link>
-                <Link href={"/cart"} className="text-xs uppercase text-black">
-                  {dictionary.NavBarStrings.Cart}
-                </Link>
-                <NavBar dictionary={dictionary} />
-
-                <LocaleSwitcher />
-              </div>
-            </nav>
+            <NavBar dictionary={dictionary} />
             {children}
           </div>
         </Providers>

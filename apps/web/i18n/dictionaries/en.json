@@ -2,5 +2,8 @@
   "NavBarStrings": {
     "Menu": "Menu",
     "Cart": "Cart"
+  },
+  "HomePageStrings": {
+    "Title": "Home Page"
   }
 }
