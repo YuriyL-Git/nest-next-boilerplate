@@ -52,13 +52,14 @@ runs:
                     sudo git checkout "${{ inputs.build-branch-name }}" &&
                     sudo git pull &&
                     sudo echo "${{ inputs.env-file }}" | base64 --decode | sudo tee .env &&
+                    sudo killall node &&
                     sudo git diff --name-only HEAD HEAD~1 | grep package.json && sudo npm ci --cache cachedir  --prefer-offline --verbose;
                     sudo rm -rf dist &&
                     sudo npm run db:dockers &&
                     sudo npm run "build:api" &&
                     sudo npm run "serve:api" &
                     sudo npm run "build:web" &&
-                    sudo npm run "serve:web";
+                    sudo npm run "serve:web"; exit 0;
 
 
 
