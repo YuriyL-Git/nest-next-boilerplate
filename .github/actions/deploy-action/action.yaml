@@ -49,7 +49,8 @@ runs:
         command: cd /home/${{ inputs.vm-user-name }}/${{ github.event.repository.name }} &&
                     sudo git config --global --add safe.directory /home/${{ inputs.vm-user-name }}/${{ github.event.repository.name }} &&
                     sudo git fetch --all &&
-                    sudo git reset --hard "origin/${{ inputs.build-branch-name }}" &&
+                    sudo git checkout "${{ inputs.build-branch-name }}" &&
+                    sudo git pull &&
                     sudo echo "${{ inputs.env-file }}" | base64 --decode | sudo tee .env &&
                     sudo git diff --name-only HEAD HEAD~1 | grep package.json && sudo npm ci --cache cachedir  --prefer-offline --verbose;
                     npm run db:dockers
