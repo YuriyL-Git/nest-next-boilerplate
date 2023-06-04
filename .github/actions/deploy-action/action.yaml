@@ -55,10 +55,10 @@ runs:
                     sudo git diff --name-only HEAD HEAD~1 | grep package.json && sudo npm ci --cache cachedir  --prefer-offline --verbose;
                     sudo rm -rf dist &&
                     sudo npm run db:dockers &&
-                    sudo npm run "build:api"
-                 #  && sudo npm run "serve:api" &
-                 #   sudo npm run "build:web" &&
-                 #   sudo npm run "serve:web";
+                    sudo npm run "build:api" &&
+                    sudo npm run "serve:api" &
+                    sudo npm run "build:web" &&
+                    sudo npm run "serve:web";
 
 
 
