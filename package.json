@@ -28,7 +28,7 @@
     "build:api": "wait-on tcp:5433 && npm run cd:validate-api && npm run cd:db-push && npx nx build api --prod",
     "build:web": "wait-on tcp:3333 && npm run cd:validate-web && npx nx build web --prod",
     "serve:api": "npx nx serve api --prod",
-    "serve:web": "npx nx serve web --prod",
+    "serve:web": "cd dist/apps/web && npx env-cmd -f ./../../../.env npx next start -p 443",
 
 
     "cd:validate-api": "npx env-cmd -f .env npx ts-node --project tools/tsconfig.tools.json tools/validate-env/validate-api-env.ts",
