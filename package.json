@@ -22,6 +22,7 @@
     "verify": "yarn lint && nx format:write && nx format:check && nx affected --target=lint --fix --parallel=3",
     "upgrade": "nx migrate latest && npm install && npm i next@latest",
     "test": "nx test",
+    "env-gen": "cat .env | base64 -w 0 > env.txt ",
     "-------------": "----------------------------------------------------------",
     "cd:api": "npm run cd:validate-api && npm run cd:db-push && npx nx build api --prod",
     "cd:web": "npm run cd:validate-web && npx nx build web --prod",

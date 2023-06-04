@@ -43,3 +43,6 @@ Thumbs.db
 schema.graphql
 TODO
 .env
+.local.env
+env.txt
+
