@@ -6,7 +6,7 @@ Type=simple
 Restart=always
 RestartSec=5
 ExecStart=/usr/bin/npm run serve:web
-WorkingDirectory=/home/yuriy_lipchey_work/nest-next-boilerplate
+WorkingDirectory=/mnt/Data/Projects/Learning/next-nest-boilerplate
 
 [Install]
 WantedBy=multi-user.target

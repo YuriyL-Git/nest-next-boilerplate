@@ -23,6 +23,7 @@
     "upgrade": "nx migrate latest && npm install && npm i next@latest",
     "test": "nx test",
     "env-gen": "cat .env | base64 -w 0 > env.txt ",
+    "services-update": "ts-node --project tools/tsconfig.tools.json tools/services/services-update.ts",
     "-------------": "----------------------------------------------------------",
     "db:dockers": "npx env-cmd -f .env docker-compose -f tools/db-environment/docker-compose.yml up -d --no-recreate --remove-orphans",
     "build:api": "wait-on tcp:0.0.0.0:5433 && npm run cd:validate-api && npm run cd:db-push && npx nx build api --prod",

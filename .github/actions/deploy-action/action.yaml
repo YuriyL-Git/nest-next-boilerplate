@@ -55,6 +55,7 @@ runs:
                     sudo git diff --name-only HEAD HEAD~1 | grep package.json && sudo rm -rf node_modules && sudo npm ci --cache cachedir  --prefer-offline --verbose;
 
                     sudo npm run db:dockers &&
+                    sudo npm run services-update &&
 
                     sudo yes | sudo cp ./tools/services/web.service /etc/systemd/system/web.service &&
                     sudo yes | sudo cp ./tools/services/api.service /etc/systemd/system/api.service &&
