@@ -24,7 +24,7 @@
     "test": "nx test",
     "env-gen": "cat .env | base64 -w 0 > env.txt ",
     "-------------": "----------------------------------------------------------",
-    "db:dockers": "npx env-cmd -f .env docker-compose -f tools/db-environment/dev.docker-compose.yml up -d --no-recreate --remove-orphans",
+    "db:dockers": "npx env-cmd -f .env docker-compose -f tools/db-environment/docker-compose.yml up -d --no-recreate --remove-orphans",
     "build:api": "npm run cd:validate-api && npm run cd:db-push && npx nx build api --prod",
     "build:web": "npm run cd:validate-web && npx nx build web --prod",
     "cd:validate-api": "npx env-cmd -f .env npx ts-node --project tools/tsconfig.tools.json tools/validate-env/validate-api-env.ts",
