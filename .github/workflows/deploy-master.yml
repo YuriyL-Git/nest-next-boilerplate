@@ -18,7 +18,7 @@ jobs:
           https-certificate: ${{ secrets.HTTPS_SERTIFICATE }}
           https-key: ${{ secrets.HTTPS_KEY }}
 
-          build-branch-name: master-build
+          build-branch-name: master
           subdomain-name: stage
           instance_name: next-stage-server1
           zone: us-central1-a

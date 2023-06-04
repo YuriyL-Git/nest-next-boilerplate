@@ -12,7 +12,7 @@ inputs:
     description: 'Env file'
   gcp-credentials:
     required: true
-    description: 'Google service account json credentials file'
+    description: 'Google service account json credentials file. Before service account should be set-up and added to vm instance'
   gcp-ssh-private-key:
     required: true
     description: 'Google virtual machine ssh private key - https://cloud.google.com/compute/docs/connect/create-ssh-keys -> create metadata key and set private key here'
