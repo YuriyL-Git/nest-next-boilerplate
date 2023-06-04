@@ -57,9 +57,9 @@ runs:
                     sudo rm -rf dist &&
                     sudo npm run db:dockers &&
                     sudo npm run "build:api" &&
-                    sudo npm run "serve:api" &
-                    sudo npm run "build:web" &&
-                    sudo npm run "serve:web"; exit 0;
+                    sudo npm run "serve:api" & exit 0;
+                   # sudo npm run "build:web" &&
+                   # sudo npm run "serve:web";
 
 
 
