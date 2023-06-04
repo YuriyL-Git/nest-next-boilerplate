@@ -23,7 +23,7 @@ jobs:
           instance_name: next-stage-server1
           zone: us-central1-a
           vm-user-name: yuriy_lipchey_work
-#test3
+#test4
 
 
 
