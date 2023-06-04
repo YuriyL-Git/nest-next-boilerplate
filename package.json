@@ -25,8 +25,12 @@
     "env-gen": "cat .env | base64 -w 0 > env.txt ",
     "-------------": "----------------------------------------------------------",
     "db:dockers": "npx env-cmd -f .env docker-compose -f tools/db-environment/docker-compose.yml up -d --no-recreate --remove-orphans",
-    "build:api": "npm run cd:validate-api && npm run cd:db-push && npx nx build api --prod",
-    "build:web": "npm run cd:validate-web && npx nx build web --prod",
+    "build:api": "wait-on tcp:5433 && npm run cd:validate-api && npm run cd:db-push && npx nx build api --prod",
+    "build:web": "wait-on tcp:3333 && npm run cd:validate-web && npx nx build web --prod",
+    "serve:api": "npx nx serve api --prod",
+    "serve:web": "npx nx serve web --prod",
+
+
     "cd:validate-api": "npx env-cmd -f .env npx ts-node --project tools/tsconfig.tools.json tools/validate-env/validate-api-env.ts",
     "cd:validate-web": "npx env-cmd -f .env npx ts-node --project tools/tsconfig.tools.json tools/validate-env/validate-web-env.ts",
     "cd:db-push": "npx prisma db push --accept-data-loss",

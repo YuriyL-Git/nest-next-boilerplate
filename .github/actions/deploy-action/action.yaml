@@ -53,7 +53,14 @@ runs:
                     sudo git pull &&
                     sudo echo "${{ inputs.env-file }}" | base64 --decode | sudo tee .env &&
                     sudo git diff --name-only HEAD HEAD~1 | grep package.json && sudo npm ci --cache cachedir  --prefer-offline --verbose;
-                    npm run db:dockers
+                    sudo rm -rf dist &&
+                    npm run db:dockers &&
+                    sudo npm run "build:api" &&
+                    sudo npm run "serve:api" &
+                    sudo npm run "build:web" &&
+                    sudo npm run "serve:web";
+
+
 
 
 
