@@ -15,7 +15,7 @@ inputs:
     description: 'Google service account json credentials file'
   gcp-ssh-private-key:
     required: true
-    description: 'Google virtual machine ssh private key - https://console.cloud.google.com/compute/metadata -> ssh'
+    description: 'Google virtual machine ssh private key - https://cloud.google.com/compute/docs/connect/create-ssh-keys -> create metadata key and set private key here'
   vm-user-name:
     required: true
     description: 'Virtual machine user name'
