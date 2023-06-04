@@ -52,14 +52,25 @@ runs:
                     sudo git checkout "${{ inputs.build-branch-name }}" &&
                     sudo git pull &&
                     sudo echo "${{ inputs.env-file }}" | base64 --decode | sudo tee .env &&
-                    sudo killall node &&
                     sudo git diff --name-only HEAD HEAD~1 | grep package.json && sudo npm ci --cache cachedir  --prefer-offline --verbose;
-                    sudo rm -rf dist &&
+
                     sudo npm run db:dockers &&
+
+                    sudo yes | sudo cp ./tools/services/web.service /etc/systemd/system/web.service &&
+                    sudo yes | sudo cp ./tools/services/api.service /etc/systemd/system/api.service &&
+                    sudo systemctl daemon-reload &&
+                    sudo systemctl enable api &&
+                    sudo systemctl enable web &&
+
+                    sudo systemctl stop api &&
+                    sudo systemctl stop web &&
+                    sudo rm -rf dist &&
+
                     sudo npm run "build:api" &&
-                    sudo npm run "serve:api" & exit 0;
-                   # sudo npm run "build:web" &&
-                   # sudo npm run "serve:web";
+                    sudo systemctl start api &&
+
+                    sudo npm run "build:web" &&
+                    sudo systemctl start web
 
 
 

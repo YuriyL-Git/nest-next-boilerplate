@@ -1,0 +1,12 @@
+[Unit]
+Description=api
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=5
+ExecStart=/usr/bin/npm run serve:api
+WorkingDirectory=/home/yuriy_lipchey_work/nest-next-boilerplate
+
+[Install]
+WantedBy=multi-user.target
