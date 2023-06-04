@@ -1,0 +1,56 @@
+name: 'Build'
+description: 'Build branch action'
+inputs:
+  subdomain-name:
+    required: false
+    description: 'Subdomain name for build'
+  build-branch-name:
+    required: true
+    description: 'Branch name to push build files to'
+  env-file:
+    required: true
+    description: 'Env file'
+  gcp-credentials:
+    required: true
+    description: 'Google service account json credentials file'
+  gcp-ssh-private-key:
+    required: true
+    description: 'Google virtual machine ssh private key - https://console.cloud.google.com/compute/metadata -> ssh'
+  vm-user-name:
+    required: true
+    description: 'Virtual machine user name'
+  instance_name:
+    required: true
+    description: 'Virtual machine instance name'
+  zone:
+    required: true
+    description: 'Virtual machine zone'
+  https-certificate:
+    required: true
+    description: 'Https certificate file content'
+  https-key:
+    required: true
+    description: 'Https key file content'
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v3
+
+    - id: 'auth'
+      uses: 'google-github-actions/auth@v1'
+      with:
+        credentials_json: '${{ inputs.gcp-credentials }}'
+    - id: 'compute-ssh'
+      uses: 'google-github-actions/ssh-compute@v0'
+      with:
+        instance_name: '${{ inputs.instance_name }}'
+        zone: '${{ inputs.zone }}'
+        ssh_private_key: '${{ inputs.gcp-ssh-private-key }}'
+        command: cd /home/${{ inputs.vm-user-name }}/${{ github.event.repository.name }} &&
+                    sudo git config --global --add safe.directory /home/${{ inputs.vm-user-name }}/${{ github.event.repository.name }} &&
+                    sudo git fetch --all &&
+                    sudo git reset --hard "origin/${{ inputs.build-branch-name }}" &&
+                    sudo echo "${{ inputs.env-file }}" | base64 --decode | sudo tee .env
+
+
+
