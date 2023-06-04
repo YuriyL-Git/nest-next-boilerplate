@@ -35,7 +35,6 @@
     "cd:validate-web": "npx env-cmd -f .env npx ts-node --project tools/tsconfig.tools.json tools/validate-env/validate-web-env.ts",
     "cd:db-push": "npx prisma db push --accept-data-loss",
     "cd:db-seed": "npx ts-node --project tools/tsconfig.tools.json tools/database/seed.dev.ts"
-
   },
   "private": true,
   "dependencies": {
