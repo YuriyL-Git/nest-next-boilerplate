@@ -19,7 +19,7 @@ jobs:
           https-key: ${{ secrets.HTTPS_KEY }}
 
           build-branch: master
-          instance_name: next-stage-server1
+          instance_name: next-stage-server
           zone: us-central1-a
           vm-user-name: yuriy_lipchey_work
 #test
