@@ -17,11 +17,13 @@ jobs:
           gcp-ssh-private-key: ${{ secrets.GCP_SSH_PRIVATE_KEY }}
           https-certificate: ${{ secrets.HTTPS_SERTIFICATE }}
           https-key: ${{ secrets.HTTPS_KEY }}
+          vm-user-name: ${{ vars.VM_USER_NAME }}
+          build-branch: ${{ github.head_ref || github.ref_name }}
 
-          build-branch: production
+          # adjustable values
           instance_name: next-prod-server-1
           zone: us-central1-a
-          vm-user-name: yuriy_lipchey_work
+
 
 
 

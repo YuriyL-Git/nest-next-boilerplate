@@ -14,7 +14,7 @@ export default async function Page({ params }: Props) {
   return (
     <div className={styles.container}>
       <h1>{HomePageStrings.Title}</h1>
-      <h1>Update readme</h1>
+      <h1>Update readme update branch name</h1>
       {users.map((user) => (
         <div key={user.id}>{user.name}</div>
       ))}
