@@ -1,0 +1,30 @@
+name: CI-CD-stage
+on:
+  push:
+    branches: [ stage ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/deploy-action
+        with:
+          env-file: ${{ secrets.ENV_FILE }}
+          gcp-credentials: ${{ secrets.GCP_CREDENTIALS }}
+          gcp-ssh-private-key: ${{ secrets.GCP_SSH_PRIVATE_KEY }}
+          https-certificate: ${{ secrets.HTTPS_SERTIFICATE }}
+          https-key: ${{ secrets.HTTPS_KEY }}
+          vm-user-name: ${{ vars.VM_USER_NAME }}
+          build-branch: ${{ github.head_ref || github.ref_name }}
+
+          # adjustable values
+          instance_name: next-stage-testing
+          zone: us-central1-a
+
+
+
+
+
