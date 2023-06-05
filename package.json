@@ -35,7 +35,6 @@
     "cd:db-push": "pnpm prisma db push --accept-data-loss",
     "cd:db-seed": "npx ts-node --project tools/tsconfig.tools.json tools/database/seed.dev.ts",
     "preinstall": "npx only-allow pnpm"
-
   },
   "private": true,
   "dependencies": {
