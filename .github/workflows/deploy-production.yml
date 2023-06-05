@@ -18,9 +18,8 @@ jobs:
           https-certificate: ${{ secrets.HTTPS_SERTIFICATE }}
           https-key: ${{ secrets.HTTPS_KEY }}
 
-          build-branch-name: production-build
-          # subdomain-name: don't need to set for prod build!!
-          instance_name: next-stage-server1
+          build-branch: production
+          instance_name: next-prod-server-1
           zone: us-central1-a
           vm-user-name: yuriy_lipchey_work
 

@@ -18,12 +18,11 @@ jobs:
           https-certificate: ${{ secrets.HTTPS_SERTIFICATE }}
           https-key: ${{ secrets.HTTPS_KEY }}
 
-          build-branch-name: master
-          subdomain-name: stage
+          build-branch: master
           instance_name: next-stage-server1
           zone: us-central1-a
           vm-user-name: yuriy_lipchey_work
-#test 
+#test
 
 
 
