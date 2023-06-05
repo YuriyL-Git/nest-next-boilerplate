@@ -1,9 +1,6 @@
 name: 'Build'
 description: 'Build branch action'
 inputs:
-  subdomain-name:
-    required: false
-    description: 'Subdomain name for build'
   build-branch:
     required: true
     description: 'Branch name to build'
