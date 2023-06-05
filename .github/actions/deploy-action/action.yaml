@@ -52,10 +52,10 @@ runs:
                     sudo git reset --hard "origin/${{ inputs.build-branch-name }}" &&
 
                     sudo echo "${{ inputs.env-file }}" | base64 --decode | sudo tee .env &&
-                    sudo git diff --name-only HEAD HEAD~1 | grep package.json && sudo rm -rf node_modules && sudo npm ci --cache cachedir  --prefer-offline --verbose;
+                    sudo git diff --name-only HEAD HEAD~1 | grep package.json && sudo rm -rf node_modules && CI=true pnpm i
 
-                    sudo npm run db:dockers &&
-                    sudo npm run services-update &&
+                    sudo pnpm db:dockers &&
+                    sudo pnpm services-update &&
 
                     sudo yes | sudo cp ./tools/services/web.service /etc/systemd/system/web.service &&
                     sudo yes | sudo cp ./tools/services/api.service /etc/systemd/system/api.service &&
@@ -67,10 +67,10 @@ runs:
                     sudo systemctl stop web &&
                     sudo rm -rf dist &&
 
-                    sudo npm run "build:api" &&
+                    sudo pnpm "build:api" &&
                     sudo systemctl start api &&
 
-                    sudo npm run "build:web" &&
+                    sudo pnpm "build:web" &&
                     sudo systemctl start web
 
 

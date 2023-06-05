@@ -5,7 +5,7 @@ Description=api
 Type=simple
 Restart=always
 RestartSec=5
-ExecStart=/usr/bin/npm run serve:api
+ExecStart=/usr/bin/pnpm run serve:api
 WorkingDirectory=/mnt/Data/Projects/Learning/next-nest-boilerplate
 
 [Install]
