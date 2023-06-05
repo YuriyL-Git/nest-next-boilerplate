@@ -52,7 +52,7 @@ runs:
                     sudo git reset --hard "origin/${{ inputs.build-branch-name }}" &&
 
                     sudo echo "${{ inputs.env-file }}" | base64 --decode | sudo tee .env &&
-                    CI=true pnpm i &&
+                    pnpm install &&
 
                     sudo pnpm db:dockers &&
                     sudo pnpm services-update &&
