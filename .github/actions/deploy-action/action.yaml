@@ -52,7 +52,7 @@ runs:
         zone: '${{ inputs.zone }}'
         ssh_private_key: '${{ inputs.gcp-ssh-private-key }}'
         command:    cd /home/${{ inputs.vm-user-name }} &&
-                    sudo echo "${{ steps.hostsetup.outputs.content }}" | sudo tee hostsetup.sh &&
+                    sudo echo "${{ steps.hostsetup.outputs.content }}" | sudo tee hostsetup.sh ${{ github.repository }} ${{ github.vm-user-name }} &&
                     sudo chmod +x hostsetup.sh &&
                     sudo test -e /home/hostsetup || sudo ./hostsetup.sh ${{ github.repository }} ${{ github.vm-user-name }};
 
