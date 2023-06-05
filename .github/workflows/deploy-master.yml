@@ -21,7 +21,7 @@ jobs:
           build-branch: master
           instance_name: next-stage-server
           zone: us-central1-a
-          vm-user-name: yuriy_lipchey_work
+          vm-user-name: ${{ vars.VM_USER_NAME }}
 #test
 
 
