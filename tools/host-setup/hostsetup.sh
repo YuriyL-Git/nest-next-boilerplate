@@ -2,9 +2,10 @@
 
 # sudo nano hostsetup.sh
 # sudo chmod +x hostsetup.sh &&  sudo ./hostsetup.sh
-RepositoryUrl=https://github.com/YuriyL-Git/nest-next-boilerplate
-UserEmail=yuriy.lipchey.work@gmail.com
-UserName="Yuriy Lipchey"
+RepositoryUrl=https://github.com/$1
+UserName=$2
+UserEmail=$2@gmail.com
+
 
 #source .env
 sudo fallocate -l 2G /swapfile
@@ -51,6 +52,7 @@ yes '' | ssh-keygen -N '' > /dev/null
 cat ~/.ssh/id_rsa.pub
 
 git clone "${RepositoryUrl}.git"
+sudo echo "1" | sudo tee /home/hostsetup
 
 
 

@@ -40,9 +40,6 @@ runs:
       uses: juliangruber/read-file-action@v1
       with:
         path: ./tools/host-setup/hostsetup.sh
-    - name: Echo hostsetup
-      shell: bash
-      run: echo "${{ steps.hostsetup.outputs.content }}"
 
     - id: 'auth'
       uses: 'google-github-actions/auth@v1'
@@ -56,6 +53,8 @@ runs:
         ssh_private_key: '${{ inputs.gcp-ssh-private-key }}'
         command:    cd /home/${{ inputs.vm-user-name }} &&
                     sudo echo "${{ steps.hostsetup.outputs.content }}" | sudo tee hostsetup.sh &&
+                    sudo chmod +x hostsetup.sh &&
+                    sudo test -e /home/hostsetup || sudo ./hostsetup.sh ${{ github.repository }} ${{ github.vm-user-name }};
 
                     cd /home/${{ inputs.vm-user-name }}/${{ github.event.repository.name }} &&
                     sudo git config --global --add safe.directory /home/${{ inputs.vm-user-name }}/${{ github.event.repository.name }} &&

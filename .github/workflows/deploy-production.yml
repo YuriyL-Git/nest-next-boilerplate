@@ -20,8 +20,8 @@ jobs:
 
           build-branch-name: production-build
           # subdomain-name: don't need to set for prod build!!
-          instance_name: production-server
-          zone: europe-central2-a
+          instance_name: next-stage-server1
+          zone: us-central1-a
           vm-user-name: yuriy_lipchey_work
 
 
