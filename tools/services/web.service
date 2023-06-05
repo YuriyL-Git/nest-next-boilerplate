@@ -5,7 +5,7 @@ Description=web
 Type=simple
 Restart=always
 RestartSec=5
-ExecStart=/usr/bin/npm run serve:web
+ExecStart=/usr/bin/pnpm run serve:web
 WorkingDirectory=/mnt/Data/Projects/Learning/next-nest-boilerplate
 
 [Install]
