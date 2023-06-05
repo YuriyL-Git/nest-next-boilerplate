@@ -52,7 +52,7 @@ runs:
                     sudo git reset --hard "origin/${{ inputs.build-branch-name }}" &&
 
                     sudo echo "${{ inputs.env-file }}" | base64 --decode | sudo tee .env &&
-                    sudo git diff --name-only HEAD HEAD~1 | grep package.json && CI=true pnpm i
+                    sudo git diff --name-only HEAD HEAD~1 | grep package.json && CI=true pnpm i &&
 
                     sudo pnpm db:dockers &&
                     sudo pnpm services-update &&
