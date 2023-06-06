@@ -3,7 +3,9 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { composePlugins, withNx } = require("@nx/next");
 const webpack = require("webpack");
-const config = require("dotenv").config;
+const config = require("dotenv").config();
+
+const apiRoute = process.env.WEB_GQL_URL?.replace("/graphql", "")?.split("/").pop();
 
 /**
  * @type {import('@nx/next/plugins/with-nx').WithNxOptions}
@@ -26,7 +28,7 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: "/apiserver/:path*",
+        source: `/${apiRoute}/:path*`,
         destination: `${process.env.API_URL}/:path*`
       }
     ];
