@@ -1,7 +1,11 @@
+"use client";
+
 import { FC } from "react";
 import { Dictionary } from "../../../i18n/get-dirctionary";
 import Link from "next/link";
 import LocaleSwitcher from "../locale-switcher/locale-switcher";
+import { Button } from "@mui/material";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 interface Props {
   dictionary: Dictionary;
@@ -20,6 +24,7 @@ export const NavBar: FC<Props> = ({ dictionary }) => {
           {NavBarStrings.Cart}
         </Link>
         <LocaleSwitcher />
+        <Button onClick={() => signIn()}>Login</Button>
       </div>
     </nav>
   );

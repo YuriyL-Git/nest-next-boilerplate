@@ -19,6 +19,18 @@ export class WebEnvVo implements WebEnv {
   @ValidateNested()
   @Type(() => WebStorageVo)
   public storage: WebStorageVo;
+
+  @ValidateNested()
+  @Type(() => WebGoogleProviderVo)
+  public googleProvider: WebGoogleProviderVo;
+}
+
+class WebGoogleProviderVo {
+  @IsString()
+  public clientId: string;
+
+  @IsString()
+  public clientSecret: string;
 }
 
 class WebStorageVo {

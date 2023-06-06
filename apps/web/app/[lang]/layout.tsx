@@ -4,6 +4,8 @@ import { ReactNode } from "react";
 import { getDictionary } from "../../i18n/get-dirctionary";
 import { NavBar } from "../components/nav-bar/nav-bar";
 import { Providers } from "../providers/providers";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "../api/[...nextauth]/route";
 
 export const metadata = {
   title: "Test",
@@ -22,11 +24,12 @@ export default async function RootLayout({
   params: { lang: Locale };
 }) {
   const dictionary = await getDictionary(params.lang);
+  const session = await getServerSession(authOptions);
 
   return (
     <html lang={params.lang}>
       <body>
-        <Providers>
+        <Providers session={session}>
           <div className="mr-6 ml-6 max-w-screen-2xl md:ml-14 md:mr-14">
             <NavBar dictionary={dictionary} />
             {children}

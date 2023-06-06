@@ -8,5 +8,9 @@ export const webEnv = {
   storage: {
     url: process.env.STORAGE_URL as string,
     endpoint: process.env.STORAGE_ENDPOINT as string
+  },
+  googleProvider: {
+    clientId: process.env.GOOGLE_CLIENT_ID as string,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET as string
   }
 };
