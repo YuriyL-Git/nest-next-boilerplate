@@ -1,8 +1,7 @@
+"use client";
+
 import { getGraphqlClient } from "@next-nest-boilerplate/web/data-access-graphql";
-import { webEnv } from "../environments/environments";
 
-const {
-  api: { gqlUrl }
-} = webEnv;
+const gqlUrl = process.env.NEXT_PUBLIC_WEB_GQL_URL as string;
 
-export const gql = getGraphqlClient(gqlUrl);
+export const gqlClient = getGraphqlClient(gqlUrl);

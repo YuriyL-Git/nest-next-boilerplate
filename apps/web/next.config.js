@@ -5,7 +5,9 @@ const { composePlugins, withNx } = require("@nx/next");
 const webpack = require("webpack");
 const config = require("dotenv").config();
 
-const apiRoute = process.env.WEB_GQL_URL?.replace("/graphql", "")?.split("/").pop();
+const apiRoute = process.env.NEXT_PUBLIC_WEB_GQL_URL?.replace("/graphql", "")
+  ?.split("/")
+  .pop();
 
 /**
  * @type {import('@nx/next/plugins/with-nx').WithNxOptions}

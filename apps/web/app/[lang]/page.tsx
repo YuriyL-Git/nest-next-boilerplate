@@ -1,5 +1,5 @@
 import styles from "./page.module.css";
-import { gql } from "../../data-access/graphql-client";
+import { gqlServer } from "../../data-access/graphql-server";
 import { getDictionary } from "../../i18n/get-dirctionary";
 import { Locale } from "../../i18n/i18n-config";
 
@@ -8,7 +8,7 @@ interface Props {
 }
 
 export default async function Page({ params }: Props) {
-  const { users } = await gql.GetUsers();
+  const { users } = await gqlServer.GetUsers();
   const { HomePageStrings } = await getDictionary(params.lang);
 
   return (
