@@ -7,6 +7,8 @@ import {
   UpdateOneUserArgs,
   User
 } from "@next-nest-boilerplate/api/generated-db-types";
+import { UseGuards } from "@nestjs/common";
+import { SetAuthGuard } from "../../../../../apps/api/src/app/auth/guards/set-auth.guard";
 
 @Resolver(() => User)
 export class UserResolver {
@@ -17,6 +19,7 @@ export class UserResolver {
     return this.userService.create(createOneUserArgs);
   }
 
+  @UseGuards(SetAuthGuard)
   @Query(() => [User])
   users(): Promise<User[]> {
     return this.userService.findAll();

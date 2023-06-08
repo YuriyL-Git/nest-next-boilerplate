@@ -16,6 +16,15 @@ export class ApiEnvVo implements ApiEnv {
   @IsBoolean()
   public isProd: boolean;
 
+  @IsString()
+  public cookieSecret: string;
+
+  @IsString()
+  public jwtSecret: string;
+
+  @IsNumber()
+  public jwtExpiresSeconds: number;
+
   @IsDefined()
   @ValidateNested()
   @Type(() => ApiEnvDbVo)

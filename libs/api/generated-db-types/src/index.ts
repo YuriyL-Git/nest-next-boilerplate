@@ -355,7 +355,7 @@ export class UserCreateManyInput {
     name?: string;
     @Field(() => String, {nullable:false})
     @Validator.IsString()
-    @Validator.MaxLength(100)
+    @Validator.MaxLength(300)
     @Validator.MinLength(5)
     password!: string;
 }
@@ -374,7 +374,7 @@ export class UserCreateInput {
     name?: string;
     @Field(() => String, {nullable:false})
     @Validator.IsString()
-    @Validator.MaxLength(100)
+    @Validator.MaxLength(300)
     @Validator.MinLength(5)
     password!: string;
 }
@@ -567,7 +567,7 @@ export class UserUncheckedCreateInput {
     name?: string;
     @Field(() => String, {nullable:false})
     @Validator.IsString()
-    @Validator.MaxLength(100)
+    @Validator.MaxLength(300)
     @Validator.MinLength(5)
     password!: string;
 }
@@ -586,7 +586,7 @@ export class UserUncheckedUpdateManyInput {
     name?: string;
     @Field(() => String, {nullable:true})
     @Validator.IsString()
-    @Validator.MaxLength(100)
+    @Validator.MaxLength(300)
     @Validator.MinLength(5)
     password?: string;
 }
@@ -605,7 +605,7 @@ export class UserUncheckedUpdateInput {
     name?: string;
     @Field(() => String, {nullable:true})
     @Validator.IsString()
-    @Validator.MaxLength(100)
+    @Validator.MaxLength(300)
     @Validator.MinLength(5)
     password?: string;
 }
@@ -624,7 +624,7 @@ export class UserUpdateManyMutationInput {
     name?: string;
     @Field(() => String, {nullable:true})
     @Validator.IsString()
-    @Validator.MaxLength(100)
+    @Validator.MaxLength(300)
     @Validator.MinLength(5)
     password?: string;
 }
@@ -643,7 +643,7 @@ export class UserUpdateInput {
     name?: string;
     @Field(() => String, {nullable:true})
     @Validator.IsString()
-    @Validator.MaxLength(100)
+    @Validator.MaxLength(300)
     @Validator.MinLength(5)
     password?: string;
 }

@@ -5,6 +5,7 @@ import { PrismaModule } from "@next-nest-boilerplate/api/data-access-db";
 
 @Module({
   providers: [UserResolver, UserService],
-  imports: [PrismaModule]
+  imports: [PrismaModule],
+  exports: [UserService]
 })
 export class UserModule {}
