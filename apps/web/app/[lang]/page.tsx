@@ -8,16 +8,16 @@ interface Props {
 }
 
 export default async function Page({ params }: Props) {
-  const { users } = await gqlServer.GetUsers();
+  // const { users } = await gqlServer.GetUsers();
   const { HomePageStrings } = await getDictionary(params.lang);
 
   return (
     <div className={styles.container}>
       <h1>{HomePageStrings.Title}</h1>
       <h1>Update readme update branch name</h1>
-      {users.map((user) => (
+      {/* {users.map((user) => (
         <div key={user.id}>{user.name}</div>
-      ))}
+      ))}*/}
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import { plainToInstance, Type } from "class-transformer";
-import { apiEnv } from "../../apps/api/src/environments/environments";
 import { IsNotEmpty, validateSync } from "class-validator";
+// @ts-ignore
+import { apiEnv } from "../../apps/api/src/environments/environments";
 import {
   IsBoolean,
   IsDefined,

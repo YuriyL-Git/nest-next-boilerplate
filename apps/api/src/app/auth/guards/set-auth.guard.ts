@@ -33,7 +33,7 @@ export class SetAuthGuard extends AuthGuard("local") {
     return request;
   }
 
-  handleRequest(error, user, info, context) {
+  override handleRequest(error, user, info, context) {
     if (error || !user || info) throw error || new UnauthorizedException();
 
     const authContext = GqlExecutionContext.create(context);

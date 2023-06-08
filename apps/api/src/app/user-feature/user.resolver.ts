@@ -8,7 +8,7 @@ import {
   User
 } from "@next-nest-boilerplate/api/generated-db-types";
 import { UseGuards } from "@nestjs/common";
-import { SetAuthGuard } from "../../../../../apps/api/src/app/auth/guards/set-auth.guard";
+import { SetAuthGuard } from "../auth/guards/set-auth.guard";
 
 @Resolver(() => User)
 export class UserResolver {

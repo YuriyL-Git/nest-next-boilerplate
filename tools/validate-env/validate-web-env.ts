@@ -1,5 +1,6 @@
 import { plainToInstance } from "class-transformer";
 import { IsString, validateSync } from "class-validator";
+// @ts-ignore
 import { webEnv } from "../../apps/web/environments/environments";
 
 import { IsBoolean, IsUrl, ValidateNested } from "class-validator";
