@@ -2,8 +2,8 @@ import "../../styles/global.css";
 import { i18n, Locale } from "../../i18n/i18n-config";
 import { ReactNode } from "react";
 import { getDictionary } from "../../i18n/get-dirctionary";
-import { NavBar } from "../components/nav-bar/nav-bar";
 import { Providers } from "../providers/providers";
+import { NavBar } from "../components/nav-bar/nav-bar";
 
 export const metadata = {
   title: "Test",
@@ -26,12 +26,7 @@ export default async function RootLayout({
   return (
     <html lang={params.lang}>
       <body>
-        <Providers>
-          <div className="mr-6 ml-6 max-w-screen-2xl md:ml-14 md:mr-14">
-            <NavBar dictionary={dictionary} />
-            {children}
-          </div>
-        </Providers>
+        <Providers dictionary={dictionary}>{children}</Providers>
       </body>
     </html>
   );

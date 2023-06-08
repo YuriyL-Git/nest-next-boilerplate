@@ -5,20 +5,20 @@ import { Dictionary } from "../../../i18n/get-dirctionary";
 import Link from "next/link";
 import LocaleSwitcher from "../locale-switcher/locale-switcher";
 
-import { gqlClient } from "../../../data-access/graphql-client";
+import { gqlClient } from "../../../common/data-access/graphql-client";
 import { Typography } from "@mui/material";
 
 import { GetUsers } from "@next-nest-boilerplate/web/data-access-graphql";
+import { useDictionary } from "../../hooks/use-dictionary";
 
-interface Props {
-  dictionary: Dictionary;
-}
-
-export const NavBar: FC<Props> = ({ dictionary }) => {
-  const { NavBarStrings } = dictionary;
+export const NavBar: FC = () => {
+  const { NavBarStrings } = useDictionary();
   const [users, setUsers] = useState<GetUsers["users"]>([]);
   useEffect(() => {
-    gqlClient.GetUsers().then((res) => setUsers(res.users));
+    gqlClient
+      .GetUsers()
+      .then((res) => setUsers(res.users))
+      .catch(console.log);
   }, []);
 
   return (

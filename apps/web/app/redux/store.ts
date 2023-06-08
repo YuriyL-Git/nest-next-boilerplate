@@ -5,7 +5,7 @@ import {
   useSelector as useSelectorBase
 } from "react-redux";
 
-import { webEnv } from "../../environments/environments";
+import { webEnv } from "../../common/environments/environments";
 
 const { isProd } = webEnv;
 
