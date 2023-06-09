@@ -128,6 +128,13 @@ export type GetUsersVariables = Exact<{ [key: string]: never; }>;
 
 export type GetUsers = { __typename?: 'Query', users: Array<{ __typename: 'User', id: string, email: string, name?: string | null }> };
 
+export type GetUserVariables = Exact<{
+  where: UserWhereUniqueInput;
+}>;
+
+
+export type GetUser = { __typename?: 'Query', user: { __typename: 'User', id: string, email: string, name?: string | null } };
+
 
 export const CreateUserDocument = /*#__PURE__*/ gql`
     mutation CreateUser($data: UserCreateInput!) {
@@ -148,6 +155,16 @@ export const GetUsersDocument = /*#__PURE__*/ gql`
   }
 }
     `;
+export const GetUserDocument = /*#__PURE__*/ gql`
+    query GetUser($where: UserWhereUniqueInput!) {
+  user(where: $where) {
+    id
+    email
+    name
+    __typename
+  }
+}
+    `;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string) => Promise<T>;
 
@@ -161,6 +178,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     GetUsers(variables?: GetUsersVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetUsers> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetUsers>(GetUsersDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetUsers', 'query');
+    },
+    GetUser(variables: GetUserVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetUser> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetUser>(GetUserDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetUser', 'query');
     }
   };
 }

@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "npx concurrently --kill-others-on-fail \"pnpm run start:*\" & pnpm run gql:watch",
+    "start": "pnpm stop-ports; npx concurrently --kill-others-on-fail \"pnpm run start:*\" & pnpm run gql:watch",
     "start:api": "wait-on tcp:5433 && nx serve api",
     "start:web": "wait-on tcp:3333 && nx serve web",
     "start:web-browser": "wait-on tcp:4200 && open http://localhost:4200",
@@ -14,6 +14,7 @@
     "start:prisma-studio": "wait-on tcp:3333 && npx env-cmd -f .local.env npx prisma studio",
     "start:generate-public": "npx ts-node --project tools/tsconfig.tools.json tools/generate-public-files-list/generate-public-list.ts",
     "prisma-generate": "prisma generate",
+    "stop-ports": "npx kill-port 5433 3333 4200",
     "db:migrate:dev": "npx env-cmd -f .local.env npx prisma migrate dev",
     "db:dockers:dev": "npx env-cmd -f .local.env docker compose -f tools/db-environment/dev.docker-compose.yml up -d --no-recreate --remove-orphans",
     "validate:api-env": "npx env-cmd -f .local.env ts-node --project tools/tsconfig.tools.json tools/validate-env/validate-api-env.ts",

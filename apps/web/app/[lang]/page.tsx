@@ -12,7 +12,12 @@ export default async function Page({ params }: Props) {
   let usersArray: User[] = [];
 
   try {
+    const user = await gqlServer.GetUser({
+      where: { id: "2721f70f-8687-49f8-9834-ed686bdfb3c8" }
+    });
+    console.log("USER=", user);
     const { users } = await gqlServer.GetUsers();
+
     usersArray = users;
     // @ts-ignore
   } catch {
