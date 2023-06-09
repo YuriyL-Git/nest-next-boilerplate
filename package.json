@@ -9,7 +9,7 @@
     "start:web-browser": "wait-on tcp:4200 && open http://localhost:4200",
     "start:graphql-playground": "wait-on tcp:3333 && open http://localhost:3333/graphiql",
     "start:db:watch": "pnpm db:dockers:dev && prisma generate --watch",
-    "start:gql:watch": "wait-on tcp:3333 && graphql-codegen --config tools/graphql-codegen/codegen.yml --watch",
+    "start:gql:watch": "wait-on tcp:3333 && graphql-codegen --config tools/graphql-codegen/codegen.ts --watch",
     "start:verify-env": "pnpm validate:web-env && pnpm validate:api-env",
     "start:prisma-studio": "wait-on tcp:3333 && npx env-cmd -f .local.env npx prisma studio",
     "start:generate-public": "npx ts-node --project tools/tsconfig.tools.json tools/generate-public-files-list/generate-public-list.ts",
