@@ -8,7 +8,10 @@ import { UserModule } from "./user-feature/user.module";
 
 const validationProvider = {
   provide: APP_PIPE,
-  useValue: new ValidationPipe()
+  useValue: new ValidationPipe({
+    skipMissingProperties: true,
+    enableDebugMessages: true
+  })
 };
 
 @Module({
