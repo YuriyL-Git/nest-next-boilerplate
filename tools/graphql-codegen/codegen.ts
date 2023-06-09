@@ -5,13 +5,9 @@ const config: CodegenConfig = {
   overwrite: true,
   documents: ["apps/**/*gql.ts", "libs/**/*gql.ts"],
   generates: {
-    "libs/web/data-access-graphql/src/lib/generated/types.ts": {
-      plugins: ["typescript"]
-    },
     "libs/web/data-access-graphql/src/lib/generated/": {
       preset: "graphql-modules",
       presetConfig: {
-        filename: "sdk.gen.ts",
         baseTypesPath: "./types.ts"
       },
       plugins: ["typescript", "typescript-operations", "typescript-graphql-request"],

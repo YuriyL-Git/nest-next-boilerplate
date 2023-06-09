@@ -2,19 +2,21 @@ import styles from "./page.module.css";
 import { gqlServer } from "../../common/data-access/graphql-server";
 import { getDictionary } from "../../i18n/get-dirctionary";
 import { Locale } from "../../i18n/i18n-config";
-import { GetUsers } from "@next-nest-boilerplate/web/data-access-graphql";
+import { User } from "@next-nest-boilerplate/web/data-access-graphql";
 
 interface Props {
   params: { lang: Locale };
 }
 
 export default async function Page({ params }: Props) {
-  let usersArray: GetUsers["users"] = [];
+  let usersArray: User[] = [];
+
   try {
     const { users } = await gqlServer.GetUsers();
     usersArray = users;
-  } catch (error) {
-    console.log(error);
+    // @ts-ignore
+  } catch {
+    console.log("error");
   }
   const { HomePageStrings } = await getDictionary(params.lang);
 
