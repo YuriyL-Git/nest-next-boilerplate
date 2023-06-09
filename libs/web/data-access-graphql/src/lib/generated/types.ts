@@ -1,3 +1,6 @@
+import { GraphQLClient } from 'graphql-request';
+import { GraphQLClientRequestHeaders } from 'graphql-request/build/cjs/types';
+import { gql } from 'graphql-request';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -112,3 +115,53 @@ export type UserWhereUniqueInput = {
   email?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
 };
+
+export type CreateUserVariables = Exact<{
+  data: UserCreateInput;
+}>;
+
+
+export type CreateUser = { __typename?: 'Mutation', createUser: { __typename?: 'User', email: string, name?: string | null, id: string } };
+
+export type GetUsersVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetUsers = { __typename?: 'Query', users: Array<{ __typename: 'User', id: string, email: string, name?: string | null }> };
+
+
+export const CreateUserDocument = /*#__PURE__*/ gql`
+    mutation CreateUser($data: UserCreateInput!) {
+  createUser(data: $data) {
+    email
+    name
+    id
+  }
+}
+    `;
+export const GetUsersDocument = /*#__PURE__*/ gql`
+    query GetUsers {
+  users {
+    id
+    email
+    name
+    __typename
+  }
+}
+    `;
+
+export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string) => Promise<T>;
+
+
+const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationType) => action();
+
+export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
+  return {
+    CreateUser(variables: CreateUserVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateUser> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateUser>(CreateUserDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateUser', 'mutation');
+    },
+    GetUsers(variables?: GetUsersVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetUsers> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetUsers>(GetUsersDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetUsers', 'query');
+    }
+  };
+}
+export type Sdk = ReturnType<typeof getSdk>;

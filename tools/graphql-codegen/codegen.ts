@@ -8,13 +8,13 @@ const config: CodegenConfig = {
     "libs/web/data-access-graphql/src/lib/generated/types.ts": {
       plugins: ["typescript"]
     },
-    "libs/": {
-      preset: "near-operation-file",
+    "libs/web/data-access-graphql/src/lib/generated/": {
+      preset: "graphql-modules",
       presetConfig: {
-        extension: ".gen.ts",
-        baseTypesPath: "web/data-access-graphql/src/lib/generated/types.ts"
+        filename: "sdk.gen.ts",
+        baseTypesPath: "./types.ts"
       },
-      plugins: ["typescript-operations", "typescript-graphql-request"],
+      plugins: ["typescript", "typescript-operations", "typescript-graphql-request"],
       config: {
         gqlImport: "graphql-request#gql",
         pureMagicComment: true,
