@@ -6,7 +6,7 @@ import helmet from "@fastify/helmet";
 import fastifyCookie from "@fastify/cookie";
 import { environment } from "@libs/shared/environement";
 
-const { api, isProd, cookieSecret, corsOrigin } = environment;
+const { api, isProd, cookieSecret, corsOrigin, corsEnabled } = environment;
 const host = isProd ? "0.0.0.0" : "localhost";
 
 async function bootstrap() {
@@ -27,10 +27,10 @@ async function bootstrap() {
     contentSecurityPolicy: isProd ? true : developmentContentSecurityPolicy,
   });
   app.enableCors({
-    origin: isProd ? corsOrigin : "*",
+    origin: isProd && corsEnabled ? corsOrigin : "*",
     credentials: true,
   });
-  //update cors
+
   const port = api.port;
   await app.listen(port, host);
   Logger.log(`🚀 Application playground is running on: http://${host}:${port}/graphiql`);

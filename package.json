@@ -34,7 +34,8 @@
     "cd:db-seed": "npx ts-node --project tools/tsconfig.tools.json tools/seed-db/seed-db.ts",
     "preinstall": "npx only-allow pnpm",
     "web-out": "sudo journalctl -f -u web",
-    "api-out": "sudo journalctl -f -u api"
+    "api-out": "sudo journalctl -f -u api",
+    "enable-cors": "npx ts-node --project tools/tsconfig.tools.json tools/env-update/enable-cors.ts"
   },
   "private": true,
   "dependencies": {

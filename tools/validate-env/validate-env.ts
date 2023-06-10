@@ -1,5 +1,5 @@
 import { plainToInstance, Type } from "class-transformer";
-import { IsNotEmpty, IsUrl, validateSync } from "class-validator";
+import { IsNotEmpty, IsUrl, Matches, validateSync } from "class-validator";
 import {
   IsBoolean,
   IsDefined,
@@ -21,6 +21,9 @@ export class ApiEnvVo implements ApiEnv {
 
   @IsString()
   public jwtSecret: string;
+
+  @IsBoolean()
+  public corsEnabled: boolean;
 
   @IsString()
   public corsOrigin: string;

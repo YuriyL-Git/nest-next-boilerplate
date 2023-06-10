@@ -61,6 +61,7 @@ runs:
                     sudo echo "${{ inputs.env-file }}" | base64 --decode | sudo tee .env &&
                     sudo pnpm "cd:validate-env" &&
                     sudo pnpm install &&
+                    sudo npx ts-node --project tools/tsconfig.tools.json tools/env-update/enable-cors.ts &&
 
                     sudo pnpm db:dockers &&
                     sudo pnpm cd:db-seed &&
