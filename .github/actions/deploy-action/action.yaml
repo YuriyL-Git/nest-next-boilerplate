@@ -63,6 +63,7 @@ runs:
                     sudo pnpm install &&
 
                     sudo pnpm db:dockers &&
+                    sudo pnpm cd:db-seed &&
                     sudo pnpm services-update &&
 
                     sudo yes | sudo cp ./tools/services/web.service /etc/systemd/system/web.service &&

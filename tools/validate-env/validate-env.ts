@@ -1,7 +1,5 @@
 import { plainToInstance, Type } from "class-transformer";
 import { IsNotEmpty, IsUrl, validateSync } from "class-validator";
-// @ts-ignore
-import { environment } from "../../libs/shared/environement/src/lib/environment.ts";
 import {
   IsBoolean,
   IsDefined,
@@ -10,6 +8,7 @@ import {
   ValidateNested,
 } from "class-validator";
 import "reflect-metadata";
+import { environment } from "../../libs/shared/environement/src/index";
 
 type ApiEnv = typeof environment;
 
