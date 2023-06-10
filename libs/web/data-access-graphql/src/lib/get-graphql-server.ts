@@ -9,8 +9,6 @@ const { jwtSecret, cookieSecret, nextServerAccountId } = environment;
 export const getGraphqServer = (url: string) => {
   const tokenUnsigned = sign({ sub: nextServerAccountId }, jwtSecret);
   const token = cookieSign(tokenUnsigned, cookieSecret);
-  console.log("url=>>", url);
-  console.log("token=>>", token);
 
   const client = new GraphQLClient(url, {
     headers: {

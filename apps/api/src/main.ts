@@ -6,7 +6,7 @@ import helmet from "@fastify/helmet";
 import fastifyCookie from "@fastify/cookie";
 import { environment } from "@libs/shared/environement";
 
-const { api, isProd, cookieSecret } = environment;
+const { api, isProd, cookieSecret, corsOrigin } = environment;
 const host = isProd ? "0.0.0.0" : "localhost";
 
 async function bootstrap() {
@@ -27,11 +27,9 @@ async function bootstrap() {
     contentSecurityPolicy: isProd ? true : developmentContentSecurityPolicy,
   });
   app.enableCors({
-    origin: isProd ? "test.com" : "*",
+    origin: isProd ? corsOrigin : "*",
     credentials: true,
   });
-
-  //test
 
   const port = api.port;
   await app.listen(port, host);
