@@ -1,8 +1,8 @@
 import { getGraphqServer } from "@next-nest-boilerplate/web/data-access-graphql";
-import { webEnv } from "../environments/environments";
+import { environment } from "@next-nest-boilerplate/shared/environement";
 
 const {
   api: { gqlUrl },
-} = webEnv;
+} = environment;
 
 export const gqlServer = getGraphqServer(gqlUrl);

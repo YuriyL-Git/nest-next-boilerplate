@@ -1,0 +1,26 @@
+{
+  "name": "shared-environement",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared/environement/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:swc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/shared/environement",
+        "main": "libs/shared/environement/src/index.ts",
+        "tsConfig": "libs/shared/environement/tsconfig.lib.json",
+        "assets": ["libs/shared/environement/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/shared/environement/**/*.ts"]
+      }
+    }
+  },
+  "tags": ["scope:api","scope:web", "type:shared"]
+}

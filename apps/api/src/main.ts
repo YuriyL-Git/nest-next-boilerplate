@@ -1,13 +1,12 @@
 import { Logger } from "@nestjs/common";
 import { NestFactory } from "@nestjs/core";
-
 import { AppModule } from "./app/app.module";
 import { FastifyAdapter, NestFastifyApplication } from "@nestjs/platform-fastify";
 import helmet from "@fastify/helmet";
-import { apiEnv } from "./environments/environments";
 import fastifyCookie from "@fastify/cookie";
+import { environment } from "@next-nest-boilerplate/shared/environement";
 
-const { api, isProd, cookieSecret } = apiEnv;
+const { api, isProd, cookieSecret } = environment;
 const host = isProd ? "0.0.0.0" : "localhost";
 
 async function bootstrap() {

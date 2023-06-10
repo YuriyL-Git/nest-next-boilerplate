@@ -22,6 +22,9 @@
       "@next-nest-boilerplate/api/generated-db-types": [
         "libs/api/generated-db-types/src/index.ts"
       ],
+      "@next-nest-boilerplate/shared/environement": [
+        "libs/shared/environement/src/index.ts"
+      ],
       "@next-nest-boilerplate/web/data-access-graphql": [
         "libs/web/data-access-graphql/src/index.ts"
       ],

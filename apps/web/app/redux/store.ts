@@ -4,9 +4,9 @@ import {
   useDispatch as useDispatchBase,
   useSelector as useSelectorBase,
 } from "react-redux";
-import { webEnv } from "../common/environments/environments";
+import { environment } from "@next-nest-boilerplate/shared/environement";
 
-const { isProd } = webEnv;
+const { isProd } = environment;
 
 export const store = configureStore({
   reducer: {},

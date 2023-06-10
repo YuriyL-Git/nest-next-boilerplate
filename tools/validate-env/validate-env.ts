@@ -1,17 +1,17 @@
 import { plainToInstance, Type } from "class-transformer";
-import { IsNotEmpty, validateSync } from "class-validator";
+import { IsNotEmpty, IsUrl, validateSync } from "class-validator";
 // @ts-ignore
-import { apiEnv } from "../../apps/api/src/environments/environments";
+import { environment } from "../../libs/shared/environement/src/lib/environment.ts";
 import {
   IsBoolean,
   IsDefined,
   IsNumber,
   IsString,
-  ValidateNested
+  ValidateNested,
 } from "class-validator";
 import "reflect-metadata";
 
-type ApiEnv = typeof apiEnv;
+type ApiEnv = typeof environment;
 
 export class ApiEnvVo implements ApiEnv {
   @IsBoolean()
@@ -22,6 +22,9 @@ export class ApiEnvVo implements ApiEnv {
 
   @IsString()
   public jwtSecret: string;
+
+  @IsString()
+  public nextServerAccountId: string;
 
   @IsNumber()
   public jwtExpiresSeconds: number;
@@ -35,6 +38,11 @@ export class ApiEnvVo implements ApiEnv {
   @ValidateNested()
   @Type(() => ApiEnvApiVo)
   public api: ApiEnvApiVo;
+
+  @IsDefined()
+  @ValidateNested()
+  @Type(() => WebStorageVo)
+  public storage: WebStorageVo;
 }
 
 class ApiEnvDbVo {
@@ -46,9 +54,20 @@ class ApiEnvDbVo {
 class ApiEnvApiVo {
   @IsNumber()
   public port: number;
+
+  @IsString()
+  public gqlUrl: string;
 }
 
-const apiEnvVoInstance = plainToInstance(ApiEnvVo, apiEnv);
+class WebStorageVo {
+  @IsUrl()
+  public url: string;
+
+  @IsString()
+  public endpoint: string;
+}
+
+const apiEnvVoInstance = plainToInstance(ApiEnvVo, environment);
 const errors = validateSync(apiEnvVoInstance);
 
 if (errors.length) {
