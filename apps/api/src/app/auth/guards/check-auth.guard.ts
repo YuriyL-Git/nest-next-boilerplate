@@ -12,7 +12,10 @@ export class CheckAuthGuard extends AuthGuard("jwt") {
   handleRequest(error, user, info, context) {
     const context_ = GqlExecutionContext.create(context);
     const reply = context_.getContext().reply;
+
     if (!user || info || error) {
+      reply.setCookie("token", "");
+      reply.setCookie("token-expires", "");
       throw error || new UnauthorizedException();
     }
 

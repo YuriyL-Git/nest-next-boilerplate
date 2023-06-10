@@ -11,7 +11,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       jwtFromRequest: cookieExtractor,
       ignoreExpiration: false,
       secretOrKey: process.env.JWT_SECRET,
-      jsonWebTokenOptions: { algorithms: ["HS256"] }
+      jsonWebTokenOptions: { algorithms: ["HS256"] },
     });
   }
 
