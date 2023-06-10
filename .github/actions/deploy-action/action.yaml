@@ -59,6 +59,7 @@ runs:
                     sudo git reset --hard "origin/${{ inputs.build-branch }}" &&
 
                     sudo echo "${{ inputs.env-file }}" | base64 --decode | sudo tee .env &&
+                    sudo pnpm "cd:validate-env" &&
                     sudo pnpm install &&
 
                     sudo pnpm db:dockers &&
