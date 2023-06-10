@@ -30,7 +30,7 @@ async function bootstrap() {
     origin: isProd ? corsOrigin : "*",
     credentials: true,
   });
-
+  //update cors
   const port = api.port;
   await app.listen(port, host);
   Logger.log(`🚀 Application playground is running on: http://${host}:${port}/graphiql`);
