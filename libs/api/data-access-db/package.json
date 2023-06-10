@@ -1,5 +1,5 @@
 {
-  "name": "@next-nest-boilerplate/api/data-access-db",
+  "name": "@libs/api/data-access-db",
   "version": "0.0.1",
   "type": "commonjs"
 }

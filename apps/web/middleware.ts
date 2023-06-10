@@ -1,8 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-
 import { i18n } from "./i18n/i18n-config";
-
 import { match as matchLocale } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
 import publicFiles from "./i18n/public-files.gen.json";
@@ -21,21 +19,19 @@ function getLocale(request: NextRequest): string | undefined {
   return matchLocale(languages, locales, i18n.defaultLocale);
 }
 
-const apiRoute = process.env.NEXT_PUBLIC_WEB_GQL_URL?.replace("/graphql", "")
-  ?.split("/")
-  .pop();
+const apiRoute = process.env.NEXT_PUBLIC_API_ROUTE;
 
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
   // // `/_next/` and `/api/` are ignored by the watcher, but we need to ignore files in `public` manually.
-  if (publicFiles.list.includes(pathname) || pathname.startsWith(`/${apiRoute}`)) {
+  if (publicFiles.list.includes(pathname) || pathname.startsWith(`${apiRoute}`)) {
     return;
   }
 
   // Check if there is any supported locale in the pathname
   const pathnameIsMissingLocale = i18n.locales.every(
-    (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
+    (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`,
   );
 
   // Redirect if there is no locale
@@ -49,5 +45,5 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   // Matcher ignoring `/_next/` and `/api/`
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"]
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
 };

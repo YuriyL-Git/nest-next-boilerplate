@@ -28,7 +28,7 @@ generator nestgraphql {
 }
 
 model User {
-  id String @id @default(uuid())
+  id String @id @unique @default(uuid())
 
   /// @Validator.IsEmail()
   email String @unique
@@ -39,7 +39,7 @@ model User {
   name String?
 
   /// @Validator.IsString()
-  /// @Validator.MaxLength(100)
+  /// @Validator.MaxLength(300)
   /// @Validator.MinLength(5)
   /// @HideField()
   password String

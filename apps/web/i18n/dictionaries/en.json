@@ -5,5 +5,9 @@
   },
   "HomePageStrings": {
     "Title": "Home Page"
+  },
+  "AuthStrings": {
+    "Login": "Login",
+    "Register": "Register"
   }
 }

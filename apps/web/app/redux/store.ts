@@ -2,16 +2,15 @@ import { configureStore } from "@reduxjs/toolkit";
 import {
   TypedUseSelectorHook,
   useDispatch as useDispatchBase,
-  useSelector as useSelectorBase
+  useSelector as useSelectorBase,
 } from "react-redux";
+import { environment } from "@libs/shared/environement";
 
-import { webEnv } from "../../environments/environments";
-
-const { isProd } = webEnv;
+const { isProd } = environment;
 
 export const store = configureStore({
   reducer: {},
-  devTools: !isProd
+  devTools: !isProd,
 });
 
 export type RootState = ReturnType<typeof store.getState>;
