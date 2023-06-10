@@ -1,7 +1,7 @@
 import { Args, Context, Mutation, Resolver } from "@nestjs/graphql";
 import { AuthenticationService } from "./authentication.service";
 import { UseGuards } from "@nestjs/common";
-import { User } from "@next-nest-boilerplate/api/generated-db-types";
+import { User } from "@libs/api/generated-db-types";
 import { IUserContext } from "./guards/types";
 import { SetAuthGuard } from "./guards/set-auth.guard";
 import { LoginInput } from "./dto/login.input";

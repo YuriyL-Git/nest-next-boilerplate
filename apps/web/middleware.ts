@@ -19,15 +19,13 @@ function getLocale(request: NextRequest): string | undefined {
   return matchLocale(languages, locales, i18n.defaultLocale);
 }
 
-const apiRoute = process.env.NEXT_PUBLIC_WEB_GQL_URL?.replace("/graphql", "")
-  ?.split("/")
-  .pop();
+const apiRoute = process.env.NEXT_PUBLIC_API_ROUTE;
 
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
   // // `/_next/` and `/api/` are ignored by the watcher, but we need to ignore files in `public` manually.
-  if (publicFiles.list.includes(pathname) || pathname.startsWith(`/${apiRoute}`)) {
+  if (publicFiles.list.includes(pathname) || pathname.startsWith(`${apiRoute}`)) {
     return;
   }
 

@@ -4,7 +4,7 @@ import {
   useDispatch as useDispatchBase,
   useSelector as useSelectorBase,
 } from "react-redux";
-import { environment } from "@next-nest-boilerplate/shared/environement";
+import { environment } from "@libs/shared/environement";
 
 const { isProd } = environment;
 

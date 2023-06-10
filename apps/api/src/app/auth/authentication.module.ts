@@ -5,7 +5,7 @@ import { JwtModule } from "@nestjs/jwt";
 import { LocalStrategy } from "./guards/strategy/local.strategy";
 import { JwtStrategy } from "./guards/strategy/jwt.strategy";
 import { UserModule } from "../user-feature/user.module";
-import { environment } from "@next-nest-boilerplate/shared/environement";
+import { environment } from "@libs/shared/environement";
 
 const { jwtSecret, jwtExpiresSeconds } = environment;
 

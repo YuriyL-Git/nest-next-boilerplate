@@ -24,6 +24,9 @@ export class ApiEnvVo implements ApiEnv {
   public jwtSecret: string;
 
   @IsString()
+  public apiRoute: string;
+
+  @IsString()
   public nextServerAccountId: string;
 
   @IsNumber()

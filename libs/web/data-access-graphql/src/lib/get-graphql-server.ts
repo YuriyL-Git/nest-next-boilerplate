@@ -2,7 +2,7 @@ import { GraphQLClient } from "graphql-request";
 import { getSdk } from "./generated/types";
 import { sign } from "jsonwebtoken";
 import { sign as cookieSign } from "cookie-signature";
-import { environment } from "@next-nest-boilerplate/shared/environement";
+import { environment } from "@libs/shared/environement";
 
 const { jwtSecret, cookieSecret, nextServerAccountId } = environment;
 

@@ -1,5 +1,5 @@
 import { FastifyRequest, FastifyReply } from "fastify";
-import { User } from "@next-nest-boilerplate/api/generated-db-types";
+import { User } from "@libs/api/generated-db-types";
 
 export interface IUserContext {
   reply: FastifyReply;

@@ -1,5 +1,5 @@
-import { getGraphqServer } from "@next-nest-boilerplate/web/data-access-graphql";
-import { environment } from "@next-nest-boilerplate/shared/environement";
+import { getGraphqServer } from "@libs/web/data-access-graphql";
+import { environment } from "@libs/shared/environement";
 
 const {
   api: { gqlUrl },

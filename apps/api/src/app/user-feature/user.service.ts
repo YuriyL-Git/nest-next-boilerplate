@@ -1,11 +1,11 @@
 import { Injectable } from "@nestjs/common";
-import { PrismaService } from "@next-nest-boilerplate/api/data-access-db";
+import { PrismaService } from "@libs/api/data-access-db";
 import {
   CreateOneUserArgs,
   DeleteOneUserArgs,
   FindUniqueUserArgs,
-  UpdateOneUserArgs
-} from "@next-nest-boilerplate/api/generated-db-types";
+  UpdateOneUserArgs,
+} from "@libs/api/generated-db-types";
 import * as bcrypt from "bcrypt";
 
 @Injectable()
@@ -20,8 +20,8 @@ export class UserService {
     return this.prisma.user.create({
       data: {
         ...data,
-        password: hashedPassword
-      }
+        password: hashedPassword,
+      },
     });
   }
 

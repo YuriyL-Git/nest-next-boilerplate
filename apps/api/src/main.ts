@@ -4,7 +4,7 @@ import { AppModule } from "./app/app.module";
 import { FastifyAdapter, NestFastifyApplication } from "@nestjs/platform-fastify";
 import helmet from "@fastify/helmet";
 import fastifyCookie from "@fastify/cookie";
-import { environment } from "@next-nest-boilerplate/shared/environement";
+import { environment } from "@libs/shared/environement";
 
 const { api, isProd, cookieSecret } = environment;
 const host = isProd ? "0.0.0.0" : "localhost";

@@ -2,7 +2,7 @@ import styles from "./page.module.css";
 import { gqlServer } from "../common/data-access/graphql-server";
 import { getDictionary } from "../../i18n/get-dirctionary";
 import { Locale } from "../../i18n/i18n-config";
-import { User } from "@next-nest-boilerplate/web/data-access-graphql";
+import { User } from "@libs/web/data-access-graphql";
 import { TestComponent } from "../components/test-component/test-comp";
 
 interface Props {

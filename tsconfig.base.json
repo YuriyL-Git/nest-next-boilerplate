@@ -16,19 +16,19 @@
     "noPropertyAccessFromIndexSignature": false,
     "baseUrl": ".",
     "paths": {
-      "@next-nest-boilerplate/api/data-access-db": [
+      "@libs/api/data-access-db": [
         "libs/api/data-access-db/src/index.ts"
       ],
-      "@next-nest-boilerplate/api/generated-db-types": [
+      "@libs/api/generated-db-types": [
         "libs/api/generated-db-types/src/index.ts"
       ],
-      "@next-nest-boilerplate/shared/environement": [
+      "@libs/shared/environement": [
         "libs/shared/environement/src/index.ts"
       ],
-      "@next-nest-boilerplate/web/data-access-graphql": [
+      "@libs/web/data-access-graphql": [
         "libs/web/data-access-graphql/src/index.ts"
       ],
-      "@next-nest-boilerplate/web/utils-shared": ["libs/web/utils-shared/src/index.ts"]
+      "@libs/web/utils-shared": ["libs/web/utils-shared/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -1,7 +1,7 @@
 "use client";
 
 import { Box } from "@mui/material";
-import { User } from "@next-nest-boilerplate/web/data-access-graphql";
+import { User } from "@libs/web/data-access-graphql";
 import { useEffect, useState } from "react";
 import { gqlClient } from "../../common/data-access/graphql-client";
 

@@ -7,7 +7,7 @@ import LocaleSwitcher from "../locale-switcher/locale-switcher";
 import { gqlClient } from "../../common/data-access/graphql-client";
 import { Typography } from "@mui/material";
 
-import { GetUsers } from "@next-nest-boilerplate/web/data-access-graphql";
+import { GetUsers } from "@libs/web/data-access-graphql";
 import { useDictionary } from "../../hooks/use-dictionary";
 
 export const NavBar: FC = () => {

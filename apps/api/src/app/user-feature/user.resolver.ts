@@ -6,7 +6,7 @@ import {
   FindUniqueUserArgs,
   UpdateOneUserArgs,
   User,
-} from "@next-nest-boilerplate/api/generated-db-types";
+} from "@libs/api/generated-db-types";
 import { UseGuards } from "@nestjs/common";
 import { CheckAuthGuard } from "../auth/guards/check-auth.guard";
 

@@ -4,9 +4,10 @@ export const environment = {
   jwtSecret: process.env.JWT_SECRET as string,
   jwtExpiresSeconds: Number(process.env.JWT_EXPIRES_SECONDS),
   nextServerAccountId: process.env.NEXT_SERVER_ACCOUNT_ID as string,
+  apiRoute: process.env.NEXT_PUBLIC_API_ROUTE as string,
   api: {
     port: Number(process.env.API_PORT),
-    gqlUrl: process.env.NEXT_PUBLIC_WEB_GQL_URL as string,
+    gqlUrl: `${process.env.API_URL}/graphql`,
   },
   db: {
     url: process.env.DB_URL,

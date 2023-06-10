@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 
 import * as bcrypt from "bcrypt";
-import { User } from "@next-nest-boilerplate/api/generated-db-types";
+import { User } from "@libs/api/generated-db-types";
 import { LoginInput } from "./dto/login.input";
 import { UserService } from "../user-feature/user.service";
 
