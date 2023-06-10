@@ -11,12 +11,12 @@ const HTTP_ONLY_COOKIE: CookieSerializeOptions = {
   maxAge: Number(jwtExpiresSecond), // cookie lives same amount of time as jwt
   httpOnly: true,
   signed: true,
-  domain
+  domain,
 };
 
 const USERS_COOKIE: CookieSerializeOptions = {
   maxAge: Number(jwtExpiresSecond), // cookie lives same amount of time as jwt
-  domain
+  domain,
 };
 
 @Injectable()
@@ -33,7 +33,7 @@ export class SetAuthGuard extends AuthGuard("local") {
     return request;
   }
 
-  override handleRequest(error, user, info, context) {
+  handleRequest(error, user, info, context) {
     if (error || !user || info) throw error || new UnauthorizedException();
 
     const authContext = GqlExecutionContext.create(context);

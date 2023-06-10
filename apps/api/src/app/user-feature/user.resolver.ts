@@ -5,21 +5,22 @@ import {
   DeleteOneUserArgs,
   FindUniqueUserArgs,
   UpdateOneUserArgs,
-  User
+  User,
 } from "@next-nest-boilerplate/api/generated-db-types";
 import { UseGuards } from "@nestjs/common";
-import { SetAuthGuard } from "../auth/guards/set-auth.guard";
+import { CheckAuthGuard } from "../auth/guards/check-auth.guard";
 
 @Resolver(() => User)
 export class UserResolver {
   constructor(private readonly userService: UserService) {}
 
+  @UseGuards(CheckAuthGuard)
   @Mutation(() => User)
   createUser(@Args() createOneUserArgs: CreateOneUserArgs) {
     return this.userService.create(createOneUserArgs);
   }
 
-  @UseGuards(SetAuthGuard)
+  @UseGuards(CheckAuthGuard)
   @Query(() => [User])
   users(): Promise<User[]> {
     return this.userService.findAll();
@@ -30,11 +31,13 @@ export class UserResolver {
     return this.userService.findOne(findUniqueUserArgs);
   }
 
+  @UseGuards(CheckAuthGuard)
   @Mutation(() => User)
   updateUser(@Args() updateOneUserArgs: UpdateOneUserArgs) {
     return this.userService.update(updateOneUserArgs);
   }
 
+  @UseGuards(CheckAuthGuard)
   @Mutation(() => User)
   removeUser(@Args() deleteOneUserArgs: DeleteOneUserArgs) {
     return this.userService.remove(deleteOneUserArgs);

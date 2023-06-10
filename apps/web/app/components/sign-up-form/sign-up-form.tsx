@@ -2,36 +2,28 @@
 
 import { useFormik } from "formik";
 import { InputField } from "../input-field/input-field";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { styles } from "./styles";
 import { gqlClient } from "../../common/data-access/graphql-client";
 import { useDictionary } from "../../hooks/use-dictionary";
-import { useRouter } from "next/navigation";
 
-export const LoginForm = () => {
+export const SignUp = () => {
   const { AuthStrings } = useDictionary();
-  const { push } = useRouter();
 
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
     },
-    onSubmit: async (resultValues) => {
-      try {
-        await gqlClient.Login({
-          args: resultValues,
-        });
-        push("/");
-      } catch {
-        console.log("error");
-      }
+    onSubmit: (resultValues) => {
+      gqlClient.SignUp({
+        args: resultValues,
+      });
     },
   });
 
   return (
     <Box sx={styles.container}>
-      <Typography></Typography>
       <InputField fieldName="email" formik={formik} sx={styles.input} />
       <InputField fieldName="password" formik={formik} sx={styles.input} />
       <Button
@@ -39,7 +31,7 @@ export const LoginForm = () => {
           formik.handleSubmit();
         }}
       >
-        {AuthStrings.Login}
+        {AuthStrings.Register}
       </Button>
     </Box>
   );

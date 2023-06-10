@@ -80,6 +80,9 @@ dependencies:
   fastify:
     specifier: ^4.17.0
     version: 4.17.0
+  fetch-cookie:
+    specifier: ^2.1.0
+    version: 2.1.0
   formik:
     specifier: ^2.4.1
     version: 2.4.1(react@18.2.0)
@@ -8729,6 +8732,13 @@ packages:
       pend: 1.2.0
     dev: true
 
+  /fetch-cookie@2.1.0:
+    resolution: {integrity: sha512-39+cZRbWfbibmj22R2Jy6dmTbAWC+oqun1f1FzQaNurkPDUP4C38jpeZbiXCR88RKRVDp8UcDrbFXkNhN+NjYg==}
+    dependencies:
+      set-cookie-parser: 2.6.0
+      tough-cookie: 4.1.2
+    dev: false
+
   /figures@3.2.0:
     resolution: {integrity: sha512-yaduQFRKLXYOGgEn6AZau90j3ggSOyiqXU0F9JZfeXYhNa+Jk4X+s45A2zg5jns87GAFa34BBm2kXw4XpNcbdg==}
     engines: {node: '>=8'}
@@ -12812,7 +12822,6 @@ packages:
 
   /psl@1.9.0:
     resolution: {integrity: sha512-E/ZsdU4HLs/68gYzgGTkMicWTLPdAftJLfJFlLUAAKZGkStNU72sZjT66SnMDVOfOWY/YAoiD7Jxa9iHvngcag==}
-    dev: true
 
   /pump@3.0.0:
     resolution: {integrity: sha512-LwZy+p3SFs1Pytd/jYct4wpv49HiYCqd9Rlc5ZVdk0V+8Yzv6jR5Blk3TRmPL1ft69TxP0IMZGJ+WPFU2BFhww==}
@@ -12877,7 +12886,6 @@ packages:
 
   /querystringify@2.2.0:
     resolution: {integrity: sha512-FIqgj2EUvTa7R50u0rGsyTftzjYmv/a3hO345bZNrqabNqjtgiDMgmo4mkUjd+nzU5oF3dClKqFIPUKybUyqoQ==}
-    dev: true
 
   /queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
@@ -14352,7 +14360,6 @@ packages:
       punycode: 2.3.0
       universalify: 0.2.0
       url-parse: 1.5.10
-    dev: true
 
   /tr46@0.0.3:
     resolution: {integrity: sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==}
@@ -14663,7 +14670,6 @@ packages:
   /universalify@0.2.0:
     resolution: {integrity: sha512-CJ1QgKmNg3CwvAv/kOFmtnEN05f0D/cn9QntgNOQlQF9dgvVTHj3t+8JPdjqawCHk7V/KA+fbUqzZ9XWhcqPUg==}
     engines: {node: '>= 4.0.0'}
-    dev: true
 
   /universalify@2.0.0:
     resolution: {integrity: sha512-hAZsKq7Yy11Zu1DE0OzWjw7nnLZmJZYTDZZyEFHZdUhV8FkH5MCfoU1XMaxXovpyW5nq5scPqq0ZDP9Zyl04oQ==}
@@ -14735,7 +14741,6 @@ packages:
     dependencies:
       querystringify: 2.2.0
       requires-port: 1.0.0
-    dev: true
 
   /urlpattern-polyfill@8.0.2:
     resolution: {integrity: sha512-Qp95D4TPJl1kC9SKigDcqgyM2VDVO4RiJc2d4qe5GrYm+zbIQCWWKAFaJNQ4BhdFeDGwBmAxqJBwWSJDb9T3BQ==}

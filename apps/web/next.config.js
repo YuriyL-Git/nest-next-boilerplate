@@ -16,38 +16,38 @@ const nextConfig = {
   nx: {
     // Set this to true if you would like to use SVGR
     // See: https://github.com/gregberge/svgr
-    svgr: false
+    svgr: false,
   },
   images: {
     remotePatterns: [
       {
         protocol: "https",
         // @ts-ignore
-        hostname: process.env.STORAGE_ENDPOINT
-      }
-    ]
+        hostname: process.env.STORAGE_ENDPOINT,
+      },
+    ],
   },
   async rewrites() {
     return [
       {
         source: `/${apiRoute}/:path*`,
-        destination: `${process.env.API_URL}/:path*`
-      }
+        destination: `${process.env.API_URL}/:path*`,
+      },
     ];
   },
   webpack: (config, options) => {
     config.plugins.push(
       new webpack.NormalModuleReplacementPlugin(/^node:/, (resource) => {
         resource.request = resource.request.replace(/^node:/, "");
-      })
+      }),
     );
     return config;
-  }
+  },
 };
 
 const plugins = [
   // Add more Next.js plugins to this list if needed.
-  withNx
+  withNx,
 ];
 
 module.exports = composePlugins(...plugins)(nextConfig);

@@ -12,12 +12,8 @@ export class AuthenticationService {
   async findUser(email: string, password: string): Promise<User | null> {
     const user = await this.userService.findOne({ where: { email } });
     if (!user) return null;
-    console.log("UESER", user);
-    console.log("user.password", user.password);
-    console.log("password", password);
 
     const isMatch = await bcrypt.compare(password, user.password);
-    console.log("IS MATCH", isMatch);
     if (!isMatch) return null;
 
     return user;

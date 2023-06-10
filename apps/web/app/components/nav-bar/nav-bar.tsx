@@ -1,11 +1,10 @@
 "use client";
 
 import { FC, useEffect, useState } from "react";
-import { Dictionary } from "../../../i18n/get-dirctionary";
 import Link from "next/link";
 import LocaleSwitcher from "../locale-switcher/locale-switcher";
 
-import { gqlClient } from "../../../common/data-access/graphql-client";
+import { gqlClient } from "../../common/data-access/graphql-client";
 import { Typography } from "@mui/material";
 
 import { GetUsers } from "@next-nest-boilerplate/web/data-access-graphql";
