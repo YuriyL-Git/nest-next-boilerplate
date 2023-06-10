@@ -6,13 +6,15 @@ const prisma = new PrismaClient();
 const users: UserCreateInput[] = [
   {
     name: "John Doe",
-    email: "johndoe@gmail.com",
-    password: "123456",
+    email: "johndoetest@gmail.com",
+    // 123456
+    password: "$2b$10$T16..if03x0ux11X5MkXIui7NiEguLsrfP2EXr0WCx8kfCRRUxp7a",
   },
   {
     name: "John Smith",
-    email: "johnSmith@gmail.com",
-    password: "123456",
+    email: "johnSmithtest@gmail.com",
+    // 123456
+    password: "$2b$10$T16..if03x0ux11X5MkXIui7NiEguLsrfP2EXr0WCx8kfCRRUxp7a",
   },
 ];
 

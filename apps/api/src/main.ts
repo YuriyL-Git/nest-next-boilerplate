@@ -27,9 +27,11 @@ async function bootstrap() {
     contentSecurityPolicy: isProd ? true : developmentContentSecurityPolicy,
   });
   app.enableCors({
-    origin: isProd ? "proddomain" : "http://localhost:4200",
+    origin: isProd ? "test.com" : "*",
     credentials: true,
   });
+
+  //test
 
   const port = api.port;
   await app.listen(port, host);

@@ -32,7 +32,9 @@
     "cd:validate-env": "npx env-cmd -f .env npx ts-node --project tools/tsconfig.tools.json tools/validate-env/validate-env.ts",
     "cd:db-push": "pnpm prisma db push --accept-data-loss",
     "cd:db-seed": "npx ts-node --project tools/tsconfig.tools.json tools/seed-db/seed-db.ts",
-    "preinstall": "npx only-allow pnpm"
+    "preinstall": "npx only-allow pnpm",
+    "web-out": "sudo journalctl -f -u web",
+    "api-out": "sudo journalctl -f -u api"
   },
   "private": true,
   "dependencies": {

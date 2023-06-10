@@ -14,6 +14,7 @@ export default async function Page({ params }: Props) {
 
   try {
     const { users } = await gqlServer.GetUsers();
+    console.log("users", users);
 
     usersArray = users;
     // @ts-ignore
