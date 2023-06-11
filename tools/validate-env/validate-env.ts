@@ -43,6 +43,9 @@ export class ApiEnvVo implements ApiEnv {
   @IsString()
   public nextServerAccountId: string;
 
+  @IsString()
+  public nextServerPassword: string;
+
   @IsNumber()
   public jwtExpiresSeconds: number;
 

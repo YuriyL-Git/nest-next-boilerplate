@@ -1,7 +1,17 @@
 import { PrismaClient } from "@prisma/client";
 // @ts-ignore
 import { UserCreateInput } from "@libs/api/generated-db-types";
+import { environment } from "../../libs/shared/environement/src/index";
+import { updateEnvFile } from "../env-update/update-env-keys";
 const prisma = new PrismaClient();
+
+const { nextServerPassword } = environment;
+
+const nextServerAccount: UserCreateInput = {
+  name: "Next_Server",
+  email: "next_server@gmail.com",
+  password: nextServerPassword,
+};
 
 const users: UserCreateInput[] = [
   {
@@ -19,6 +29,17 @@ const users: UserCreateInput[] = [
 ];
 
 async function main() {
+  const { id } = await prisma.user.create({
+    data: nextServerAccount,
+  });
+
+  updateEnvFile(".env", [
+    {
+      key: "NEXT_SERVER_ACCOUNT_ID",
+      value: id,
+    },
+  ]);
+
   await Promise.all(
     users.map((user) => {
       return prisma.user.create({
