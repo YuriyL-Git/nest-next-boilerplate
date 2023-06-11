@@ -21,7 +21,7 @@ jobs:
           build-branch: ${{ github.head_ref || github.ref_name }}
 
           # adjustable values
-          instance_name: next-prod-server-1
+          instance_name: next-prod-server
           zone: us-central1-a
 
 
