@@ -16,8 +16,4 @@ export const environment = {
   db: {
     url: process.env.DB_URL,
   },
-  storage: {
-    url: process.env.STORAGE_URL as string,
-    endpoint: process.env.STORAGE_ENDPOINT as string,
-  },
 };

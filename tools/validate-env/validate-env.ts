@@ -58,11 +58,6 @@ export class ApiEnvVo implements ApiEnv {
   @ValidateNested()
   @Type(() => ApiEnvApiVo)
   public api: ApiEnvApiVo;
-
-  @IsDefined()
-  @ValidateNested()
-  @Type(() => WebStorageVo)
-  public storage: WebStorageVo;
 }
 
 class ApiEnvDbVo {
@@ -77,14 +72,6 @@ class ApiEnvApiVo {
 
   @IsString()
   public gqlUrl: string;
-}
-
-class WebStorageVo {
-  @IsUrl()
-  public url: string;
-
-  @IsString()
-  public endpoint: string;
 }
 
 const apiEnvVoInstance = plainToInstance(ApiEnvVo, environment);
