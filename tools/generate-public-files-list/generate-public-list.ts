@@ -1,6 +1,8 @@
+// @ts-ignore
 const fs = require("fs").promises;
 const chokidar = require("chokidar");
 
+// @ts-ignore
 const encoding = "utf8";
 const pathToPublicFolder = "./apps/web/public";
 const pathToFile = "./apps/web/i18n/public-files.gen.json";

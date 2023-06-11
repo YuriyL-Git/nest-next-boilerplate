@@ -7,7 +7,6 @@ UserName=$2
 UserEmail=$2@gmail.com
 
 
-#source .env
 sudo fallocate -l 2G /swapfile
 sudo chmod 600 /swapfile
 sudo mkswap /swapfile
@@ -16,6 +15,7 @@ sudo echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
 sudo sysctl vm.swappiness=10
 echo "vm.swappiness=10" | sudo tee -a /etc/sysctl.conf >/dev/null
 
+sudo apt-get install nginx -y
 sudo rm -rf /var/lib/man-db/auto-update
 sudo apt update
 

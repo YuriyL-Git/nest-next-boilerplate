@@ -45,4 +45,6 @@ TODO
 .env
 .local.env
 env.txt
+https_certificate.crt
+https_key.key
 
