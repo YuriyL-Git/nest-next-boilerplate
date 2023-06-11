@@ -5,12 +5,12 @@ import { JwtService } from "@nestjs/jwt";
 import { GqlExecutionContext } from "@nestjs/graphql";
 import { environment } from "@libs/shared/environement";
 
-const { jwtExpiresSeconds } = environment;
+const { jwtExpiresSeconds, corsEnabled } = environment;
 
 const HTTP_ONLY_COOKIE: CookieSerializeOptions = {
   maxAge: Number(jwtExpiresSeconds), // cookie lives same amount of time as jwt
   httpOnly: true,
-  signed: true,
+  secure: corsEnabled,
   path: "/",
 };
 
