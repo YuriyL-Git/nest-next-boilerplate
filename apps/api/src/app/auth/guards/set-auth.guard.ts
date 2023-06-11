@@ -42,6 +42,7 @@ export class SetAuthGuard extends AuthGuard("local") {
     const jwtExpiresMs = Number(jwtExpiresSeconds) * 1000;
     const tokenExpires = Date.now() + jwtExpiresMs;
     const accessToken = this.jwtService.sign({ sub: user.id });
+    console.log("HTTP_ONLY_COOKIE", HTTP_ONLY_COOKIE);
 
     reply.setCookie("token", accessToken, HTTP_ONLY_COOKIE);
     reply.setCookie("token-expires", tokenExpires.toString(), USERS_COOKIE);

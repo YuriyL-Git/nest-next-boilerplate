@@ -85,3 +85,11 @@ if (errors.length) {
   console.error(errors);
   process.exit(1);
 }
+
+/*
+const EnvProdFile;
+
+chokidar.watch(pathToPublicFolder).on("all", () => {
+  generatePublicFilesList();
+});
+*/

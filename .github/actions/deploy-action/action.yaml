@@ -81,7 +81,14 @@ runs:
                     sudo systemctl start api &&
 
                     sudo pnpm "build:web" &&
-                    sudo systemctl start web
+                    sudo systemctl start web &&
+
+                    sudo systemctl stop nginx &&
+                    sudo rm -rf /etc/nginx/conf.d/* &&
+                    sudo cp /home/${{ inputs.vm-user-name }}/${{ github.event.repository.name }}/tools/nginx/nginx.conf /etc/nginx/conf.d/nginx.conf &&
+                    sudo echo "${{ inputs.https-certificate }}" | sudo tee /etc/nginx/conf.d/https_certificate.crt &&
+                    sudo echo "${{ inputs.https-key }}" | sudo tee /etc/nginx/conf.d/https_key.key &&
+                    sudo systemctl start nginx
 
 
 
