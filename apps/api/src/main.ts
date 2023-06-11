@@ -9,6 +9,8 @@ import { environment } from "@libs/shared/environement";
 const { api, isProd, cookieSecret, corsOrigin, corsEnabled } = environment;
 const host = isProd ? "0.0.0.0" : "localhost";
 
+const whitelistOrigin = new Set(["http://localhost:8080", corsOrigin]);
+
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
@@ -27,7 +29,21 @@ async function bootstrap() {
     contentSecurityPolicy: isProd ? true : developmentContentSecurityPolicy,
   });
   app.enableCors({
-    origin: isProd && corsEnabled ? corsOrigin : "*",
+    origin:
+      isProd && corsEnabled
+        ? function (origin, callback) {
+            if (whitelistOrigin.has(origin)) {
+              console.log("origin:", origin);
+              callback(null, true);
+            } else {
+              Logger.log("Blocked cors for:", origin);
+              callback(new Error("Not allowed by CORS"));
+            }
+          }
+        : "*",
+    allowedHeaders:
+      "X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept, Observe",
+    methods: "GET,PUT,POST,DELETE,UPDATE,OPTIONS",
     credentials: true,
   });
 
