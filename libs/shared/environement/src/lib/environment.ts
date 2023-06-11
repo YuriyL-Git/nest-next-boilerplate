@@ -6,7 +6,7 @@ export const environment = {
   nextServerAccountId: process.env.NEXT_SERVER_ACCOUNT_ID as string,
   nextServerPassword: process.env.NEXT_SERVER_PASSWORD as string,
   apiRoute: process.env.NEXT_PUBLIC_API_ROUTE as string,
-  corsOrigin: process.env.CORS_ORIGIN as string,
+  corsOrigin: `https://${process.env.DOMAIN_NAME}`,
   webAppHost: process.env.WEB_APP_HOST as string,
   corsEnabled: process.env.CORS_ENABLED === "true",
   api: {

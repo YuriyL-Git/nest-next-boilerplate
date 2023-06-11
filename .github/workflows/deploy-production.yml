@@ -23,6 +23,7 @@ jobs:
           # adjustable values
           instance_name: next-prod-server
           zone: us-central1-a
+          domain_name: redwoodtest.pp.ua
 
 
 

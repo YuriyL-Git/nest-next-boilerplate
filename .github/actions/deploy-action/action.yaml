@@ -1,6 +1,9 @@
 name: 'Build'
 description: 'Build branch action'
 inputs:
+  domain-name:
+    required: true
+    description: 'Branch name to build'
   build-branch:
     required: true
     description: 'Branch name to build'
@@ -62,7 +65,7 @@ runs:
                     sudo echo "${{ inputs.env-file }}" | base64 --decode | sudo tee .env &&
                     sudo pnpm "cd:validate-env" &&
 
-                    sudo npx ts-node --project tools/tsconfig.tools.json tools/env-update/enable-cors.ts ${{ inputs.build-branch }} &&
+                    sudo npx ts-node --project tools/tsconfig.tools.json tools/env-update/update-domain.ts ${{ inputs.domain-name }} &&
 
                     sudo pnpm db:dockers &&
                     sudo pnpm cd:db-seed &&

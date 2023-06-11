@@ -23,6 +23,7 @@ jobs:
           # adjustable values
           instance_name: next-stage-server
           zone: us-central1-a
+          domain-name: next.redwoodtest.pp.ua
 
 
 
