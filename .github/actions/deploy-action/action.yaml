@@ -58,9 +58,10 @@ runs:
                     sudo git fetch --all &&
                     sudo git reset --hard "origin/${{ inputs.build-branch }}" &&
 
+                    sudo pnpm install &&
                     sudo echo "${{ inputs.env-file }}" | base64 --decode | sudo tee .env &&
                     sudo pnpm "cd:validate-env" &&
-                    sudo pnpm install &&
+
                     sudo npx ts-node --project tools/tsconfig.tools.json tools/env-update/enable-cors.ts ${{ inputs.build-branch }} &&
 
                     sudo pnpm db:dockers &&
