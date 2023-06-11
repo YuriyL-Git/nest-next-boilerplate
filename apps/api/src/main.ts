@@ -6,10 +6,10 @@ import helmet from "@fastify/helmet";
 import fastifyCookie from "@fastify/cookie";
 import { environment } from "@libs/shared/environement";
 
-const { api, isProd, cookieSecret, corsOrigin, corsEnabled } = environment;
+const { api, isProd, cookieSecret, corsOrigin, webAppHost, corsEnabled } = environment;
 const host = isProd ? "0.0.0.0" : "localhost";
 
-const whitelistOrigin = new Set(["http://localhost:8080", corsOrigin]);
+const whitelistOrigin = new Set([webAppHost, corsOrigin]);
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -33,7 +33,6 @@ async function bootstrap() {
       isProd && corsEnabled
         ? function (origin, callback) {
             if (whitelistOrigin.has(origin)) {
-              console.log("origin:", origin);
               callback(null, true);
             } else {
               Logger.log("Blocked cors for:", origin);

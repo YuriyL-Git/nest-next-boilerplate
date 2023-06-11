@@ -5,7 +5,6 @@ import { sign as cookieSign } from "cookie-signature";
 import { environment } from "@libs/shared/environement";
 
 const { jwtSecret, cookieSecret, nextServerAccountId, corsOrigin } = environment;
-
 export const getGraphqServer = (url: string) => {
   const tokenUnsigned = sign({ sub: nextServerAccountId }, jwtSecret);
   const token = cookieSign(tokenUnsigned, cookieSecret);

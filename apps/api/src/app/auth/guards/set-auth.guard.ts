@@ -5,7 +5,7 @@ import { JwtService } from "@nestjs/jwt";
 import { GqlExecutionContext } from "@nestjs/graphql";
 import { environment } from "@libs/shared/environement";
 
-const { jwtExpiresSeconds, webAppHost: domain } = environment;
+const { jwtExpiresSeconds } = environment;
 
 const HTTP_ONLY_COOKIE: CookieSerializeOptions = {
   maxAge: Number(jwtExpiresSeconds), // cookie lives same amount of time as jwt
@@ -16,7 +16,6 @@ const HTTP_ONLY_COOKIE: CookieSerializeOptions = {
 
 const USERS_COOKIE: CookieSerializeOptions = {
   maxAge: Number(jwtExpiresSeconds), // cookie lives same amount of time as jwt
-  domain,
 };
 
 @Injectable()
@@ -42,7 +41,6 @@ export class SetAuthGuard extends AuthGuard("local") {
     const jwtExpiresMs = Number(jwtExpiresSeconds) * 1000;
     const tokenExpires = Date.now() + jwtExpiresMs;
     const accessToken = this.jwtService.sign({ sub: user.id });
-    console.log("HTTP_ONLY_COOKIE", HTTP_ONLY_COOKIE);
 
     reply.setCookie("token", accessToken, HTTP_ONLY_COOKIE);
     reply.setCookie("token-expires", tokenExpires.toString(), USERS_COOKIE);
