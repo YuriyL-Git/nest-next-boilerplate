@@ -5,17 +5,17 @@ import { JwtService } from "@nestjs/jwt";
 import { GqlExecutionContext } from "@nestjs/graphql";
 import { environment } from "@libs/shared/environement";
 
-const { jwtExpiresSeconds, corsEnabled } = environment;
+const { jwtExpiresSeconds, cookiesSecure } = environment;
 
 const HTTP_ONLY_COOKIE: CookieSerializeOptions = {
-  maxAge: Number(jwtExpiresSeconds), // cookie lives same amount of time as jwt
+  maxAge: Number(jwtExpiresSeconds),
   httpOnly: true,
-  secure: corsEnabled,
+  secure: cookiesSecure,
   path: "/",
 };
 
 const USERS_COOKIE: CookieSerializeOptions = {
-  maxAge: Number(jwtExpiresSeconds), // cookie lives same amount of time as jwt
+  maxAge: Number(jwtExpiresSeconds),
 };
 
 @Injectable()
@@ -27,7 +27,6 @@ export class SetAuthGuard extends AuthGuard("local") {
   getRequest(context: ExecutionContext) {
     const context_ = GqlExecutionContext.create(context);
     const request = context_.getContext();
-    // should be the same name as args
     request.body = context_.getArgs().loginInput;
     return request;
   }

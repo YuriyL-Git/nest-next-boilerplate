@@ -7,6 +7,7 @@ export const environment = {
   nextServerPassword: process.env.NEXT_SERVER_PASSWORD as string,
   apiRoute: process.env.NEXT_PUBLIC_API_ROUTE as string,
   corsOrigin: `https://${process.env.DOMAIN_NAME}`,
+  cookiesSecure: process.env.COOKIES_SECURE === "true",
   webAppHost: process.env.WEB_APP_HOST as string,
   corsEnabled: process.env.CORS_ENABLED === "true",
   api: {

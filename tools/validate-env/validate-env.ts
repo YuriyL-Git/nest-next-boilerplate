@@ -34,6 +34,9 @@ export class ApiEnvVo implements ApiEnv {
   @IsBoolean()
   public corsEnabled: boolean;
 
+  @IsBoolean()
+  public cookiesSecure: boolean;
+
   @IsString()
   public corsOrigin: string;
 
