@@ -3,7 +3,7 @@
 import { Box } from "@mui/material";
 import { User } from "@libs/web/data-access-graphql";
 import { useEffect, useState } from "react";
-import { gqlClient } from "../../common/data-access/graphql-client";
+import { gqlClient } from "../../common/graphql/graphql-client";
 
 export const TestComponent = () => {
   const [state, setState] = useState<User[]>([]);

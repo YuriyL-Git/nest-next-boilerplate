@@ -5,11 +5,14 @@ import {
   useSelector as useSelectorBase,
 } from "react-redux";
 import { environment } from "@libs/shared/environement";
+import user from "./slices/user-slice";
 
 const { isProd } = environment;
 
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    user,
+  },
   devTools: !isProd,
 });
 

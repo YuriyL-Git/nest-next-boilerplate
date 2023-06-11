@@ -3,19 +3,19 @@ import { ExecutionContext, Injectable, UnauthorizedException } from "@nestjs/com
 import { AuthGuard } from "@nestjs/passport";
 import { JwtService } from "@nestjs/jwt";
 import { GqlExecutionContext } from "@nestjs/graphql";
+import { environment } from "@libs/shared/environement";
 
-const domain = process.env.WEB_APP_HOST;
-const jwtExpiresSecond = process.env.JWT_EXPIRES_SECONDS;
+const { jwtExpiresSeconds, webAppHost: domain } = environment;
 
 const HTTP_ONLY_COOKIE: CookieSerializeOptions = {
-  maxAge: Number(jwtExpiresSecond), // cookie lives same amount of time as jwt
+  maxAge: Number(jwtExpiresSeconds), // cookie lives same amount of time as jwt
   httpOnly: true,
   signed: true,
-  domain,
+  path: "/",
 };
 
 const USERS_COOKIE: CookieSerializeOptions = {
-  maxAge: Number(jwtExpiresSecond), // cookie lives same amount of time as jwt
+  maxAge: Number(jwtExpiresSeconds), // cookie lives same amount of time as jwt
   domain,
 };
 
@@ -39,7 +39,7 @@ export class SetAuthGuard extends AuthGuard("local") {
     const authContext = GqlExecutionContext.create(context);
     const { reply } = authContext.getContext();
 
-    const jwtExpiresMs = Number(jwtExpiresSecond) * 1000;
+    const jwtExpiresMs = Number(jwtExpiresSeconds) * 1000;
     const tokenExpires = Date.now() + jwtExpiresMs;
     const accessToken = this.jwtService.sign({ sub: user.id });
 

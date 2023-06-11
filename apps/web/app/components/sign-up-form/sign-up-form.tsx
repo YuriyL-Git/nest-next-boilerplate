@@ -4,7 +4,7 @@ import { useFormik } from "formik";
 import { InputField } from "../input-field/input-field";
 import { Box, Button } from "@mui/material";
 import { styles } from "./styles";
-import { gqlClient } from "../../common/data-access/graphql-client";
+import { gqlClient } from "../../common/graphql/graphql-client";
 import { useDictionary } from "../../hooks/use-dictionary";
 
 export const SignUp = () => {

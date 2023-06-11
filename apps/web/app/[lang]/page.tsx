@@ -1,9 +1,10 @@
 import styles from "./page.module.css";
-import { gqlServer } from "../common/data-access/graphql-server";
+import { gqlServer } from "../common/graphql/graphql-server";
 import { getDictionary } from "../../i18n/get-dirctionary";
 import { Locale } from "../../i18n/i18n-config";
 import { User } from "@libs/web/data-access-graphql";
 import { TestComponent } from "../components/test-component/test-comp";
+import { NavBar } from "../components/nav-bar/nav-bar";
 
 interface Props {
   params: { lang: Locale };
@@ -14,7 +15,6 @@ export default async function Page({ params }: Props) {
 
   try {
     const { users } = await gqlServer.GetUsers();
-    console.log("users", users);
 
     usersArray = users;
     // @ts-ignore
@@ -25,9 +25,11 @@ export default async function Page({ params }: Props) {
 
   return (
     <div className={styles.container}>
+      <NavBar />
       <h1>{HomePageStrings.Title}</h1>
       <h1>Update readme update branch name</h1>
       <TestComponent />
+
       {usersArray.map((user) => (
         <div key={user.id}>{user.name}</div>
       ))}

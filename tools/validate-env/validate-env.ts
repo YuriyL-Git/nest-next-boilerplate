@@ -22,6 +22,9 @@ export class ApiEnvVo implements ApiEnv {
   @IsString()
   public jwtSecret: string;
 
+  @IsString()
+  public webAppHost: string;
+
   @IsBoolean()
   public corsEnabled: boolean;
 
