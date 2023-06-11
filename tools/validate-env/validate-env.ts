@@ -95,7 +95,7 @@ if (errors.length) {
 const { isProd } = environment;
 
 const envPath = "./.env";
-const checkSumPath = "./tools/validate-env/env-checksum.sum";
+const checkSumPath = "./tools/validate-env/env.sum";
 
 const getCheckSum = (content: string) => {
   const cleanContent = content
@@ -112,7 +112,9 @@ if (isProd) {
     const content = await fs.readFile(envPath, encoding);
     const checkSum = await fs.readFile(checkSumPath, encoding);
     if (checkSum !== getCheckSum(content)) {
-      console.error("Env file should be updated");
+      console.error(
+        "!! ENV FILE WAS UPDATED. Run yarn env-gen and paste env content to github ENV_FILE secret",
+      );
       process.exit(1);
     }
   }, 0);
