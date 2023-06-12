@@ -5,11 +5,13 @@ import { JwtService } from "@nestjs/jwt";
 import { GqlExecutionContext } from "@nestjs/graphql";
 import { environment } from "@libs/shared/environement";
 
-const { jwtExpiresSeconds } = environment;
+const { jwtExpiresSeconds, cookiesSecure } = environment;
 
 const HTTP_ONLY_COOKIE: CookieSerializeOptions = {
   maxAge: Number(jwtExpiresSeconds),
   httpOnly: true,
+  signed: true,
+  secure: cookiesSecure,
   path: "/",
 };
 
