@@ -4,7 +4,7 @@
   "parserOptions": {
     "sourceType": "module"
   },
-  "ignorePatterns": ["**/*"],
+  "ignorePatterns": ["**/*", "pnpm-lock.yaml"],
   "plugins": ["@typescript-eslint", "@nrwl/nx", "unicorn", "unused-imports"],
   "overrides": [
     {

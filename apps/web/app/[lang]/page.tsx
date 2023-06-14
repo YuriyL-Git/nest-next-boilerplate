@@ -14,7 +14,6 @@ interface Props {
 
 export default async function Page({ params }: Props) {
   let usersArray: User[] = [];
-
   try {
     const { users } = await gqlServer.GetUsers();
 
