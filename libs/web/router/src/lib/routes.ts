@@ -1,6 +1,4 @@
-export interface HomeParams {
-  lang: string;
-}
+import { LoginWithIdParams, HomeWithIdSlugParams, LoginWithIdSlugParams } from "./types";
 
 export const HomePage = {
   getRoute: () => {
@@ -8,29 +6,11 @@ export const HomePage = {
   },
 };
 
-export interface SignUpParams {
-  lang: string;
-}
-
-export const SignUpPage = {
-  getRoute: () => {
-    return `/sign-up`;
-  },
-};
-
-export interface LoginParams {
-  lang: string;
-}
-
 export const LoginPage = {
   getRoute: () => {
     return `/login`;
   },
 };
-
-export interface DashboardLoginParams {
-  lang: string;
-}
 
 export const DashboardLoginPage = {
   getRoute: () => {
@@ -38,20 +18,17 @@ export const DashboardLoginPage = {
   },
 };
 
-export interface PageExampleParams {
-  lang: string;
-}
-
 export const PageExamplePage = {
   getRoute: () => {
     return `/page-example`;
   },
 };
 
-export interface LoginWithIdParams {
-  lang: string;
-  id: string;
-}
+export const SignUpPage = {
+  getRoute: () => {
+    return `/sign-up`;
+  },
+};
 
 export const LoginWithIdPage = {
   getRoute: ({ id }: Omit<LoginWithIdParams, "lang">) => {
@@ -59,24 +36,12 @@ export const LoginWithIdPage = {
   },
 };
 
-export interface HomeWithIdSlugParams {
-  lang: string;
-  id: string;
-  _slug: string[];
-}
-
 export const HomeWithIdSlugPage = {
   getRoute: ({ id, _slug }: Omit<HomeWithIdSlugParams, "lang">) => {
     const __slug = _slug.join("/");
     return `/${id}/${__slug}`;
   },
 };
-
-export interface LoginWithIdSlugParams {
-  lang: string;
-  id: string;
-  _slug: string[];
-}
 
 export const LoginWithIdSlugPage = {
   getRoute: ({ id, _slug }: Omit<LoginWithIdSlugParams, "lang">) => {

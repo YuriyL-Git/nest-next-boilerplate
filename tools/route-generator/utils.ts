@@ -133,7 +133,7 @@ export const getTypesData = (uniqueRouteData: RouteData[]) => {
       routeObject: `export const ${routeData.baseRouteName}Page = {
       ${getRouteFunc}
     };`,
-      hookObject: `${routeData.baseRouteName}: {
+      hookObject: `${routeData.baseRouteName}Page: {
       ${getRouteFunc},
       navigate: (${getProps}) => {
         router.push(${routeData.baseRouteName}Page.getRoute(${hookNavigateParams}));
