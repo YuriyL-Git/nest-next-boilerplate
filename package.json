@@ -24,6 +24,7 @@
     "upgrade": "nx migrate latest && pnpm install && pnpm i next@latest",
     "test": "nx test",
     "env-gen": "cat .env | base64 -w 0 | xclip -selection clipboard",
+    "ts-lint": "tsc --noEmit --incremental --watch",
     "-----ci-cd------": "----------------------------------------------------------",
     "db:dockers": "npx env-cmd -f .env docker-compose -f tools/db-environment/docker-compose.yml up -d --no-recreate --remove-orphans",
     "build:api": "wait-on tcp:0.0.0.0:5433 && pnpm cd:db-push && pnpm nx build api --prod",

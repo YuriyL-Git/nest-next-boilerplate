@@ -1,36 +1,36 @@
-name: 'Build'
-description: 'Build branch action'
+name: "Build"
+description: "Build branch action"
 inputs:
   domain-name:
     required: true
-    description: 'Branch name to build'
+    description: "Branch name to build"
   build-branch:
     required: true
-    description: 'Branch name to build'
+    description: "Branch name to build"
   env-file:
     required: true
-    description: 'Env file'
+    description: "Env file"
   gcp-credentials:
     required: true
-    description: 'Google service account json credentials file. Before service account should be set-up and added to vm instance'
+    description: "Google service account json credentials file. Before service account should be set-up and added to vm instance"
   gcp-ssh-private-key:
     required: true
-    description: 'Google virtual machine ssh private key - https://cloud.google.com/compute/docs/connect/create-ssh-keys -> create metadata key and set private key here'
+    description: "Google virtual machine ssh private key - https://cloud.google.com/compute/docs/connect/create-ssh-keys -> create metadata key and set private key here"
   vm-user-name:
     required: true
-    description: 'Virtual machine user name'
+    description: "Virtual machine user name"
   instance_name:
     required: true
-    description: 'Virtual machine instance name'
+    description: "Virtual machine instance name"
   zone:
     required: true
-    description: 'Virtual machine zone'
+    description: "Virtual machine zone"
   https-certificate:
     required: true
-    description: 'Https certificate file content'
+    description: "Https certificate file content"
   https-key:
     required: true
-    description: 'Https key file content'
+    description: "Https key file content"
 runs:
   using: "composite"
   steps:
@@ -41,64 +41,55 @@ runs:
       with:
         path: ./tools/host-setup/hostsetup.sh
 
-    - id: 'auth'
-      uses: 'google-github-actions/auth@v1'
+    - id: "auth"
+      uses: "google-github-actions/auth@v1"
       with:
-        credentials_json: '${{ inputs.gcp-credentials }}'
-    - id: 'compute-ssh'
-      uses: 'google-github-actions/ssh-compute@v0'
+        credentials_json: "${{ inputs.gcp-credentials }}"
+    - id: "compute-ssh"
+      uses: "google-github-actions/ssh-compute@v0"
       with:
-        instance_name: '${{ inputs.instance_name }}'
-        zone: '${{ inputs.zone }}'
-        ssh_private_key: '${{ inputs.gcp-ssh-private-key }}'
-        command:    cd /home/${{ inputs.vm-user-name }} &&
-                    sudo echo '${{ steps.hostsetup.outputs.content }}'| sudo tee hostsetup.sh  &&
-                    sudo chmod +x hostsetup.sh &&
-                    sudo test -e /home/hostsetup || sudo ./hostsetup.sh ${{ github.repository }} ${{ inputs.vm-user-name }};
+        instance_name: "${{ inputs.instance_name }}"
+        zone: "${{ inputs.zone }}"
+        ssh_private_key: "${{ inputs.gcp-ssh-private-key }}"
+        command: cd /home/${{ inputs.vm-user-name }} &&
+          sudo echo '${{ steps.hostsetup.outputs.content }}'| sudo tee hostsetup.sh  &&
+          sudo chmod +x hostsetup.sh &&
+          sudo test -e /home/hostsetup || sudo ./hostsetup.sh ${{ github.repository }} ${{ inputs.vm-user-name }};
 
-                    cd /home/${{ inputs.vm-user-name }}/${{ github.event.repository.name }} &&
-                    sudo git config --global --add safe.directory /home/${{ inputs.vm-user-name }}/${{ github.event.repository.name }} &&
-                    sudo git fetch --all &&
-                    sudo git reset --hard "origin/${{ inputs.build-branch }}" &&
+          cd /home/${{ inputs.vm-user-name }}/${{ github.event.repository.name }} &&
+          sudo git config --global --add safe.directory /home/${{ inputs.vm-user-name }}/${{ github.event.repository.name }} &&
+          sudo git fetch --all &&
+          sudo git reset --hard "origin/${{ inputs.build-branch }}" &&
 
-                    sudo pnpm install &&
-                    sudo echo "${{ inputs.env-file }}" | base64 --decode | sudo tee .env &&
-                    sudo pnpm "cd:validate-env" &&
+          sudo pnpm install &&
+          sudo echo "${{ inputs.env-file }}" | base64 --decode | sudo tee .env &&
+          sudo pnpm "cd:validate-env" &&
 
-                    sudo npx ts-node --project tools/tsconfig.tools.json tools/env-update/update-domain.ts ${{ inputs.domain-name }} &&
+          sudo npx ts-node --project tools/tsconfig.tools.json tools/env-update/update-domain.ts ${{ inputs.domain-name }} &&
 
-                    sudo pnpm db:dockers &&
-                    sudo pnpm cd:db-seed &&
-                    sudo pnpm services-update &&
+          sudo pnpm db:dockers &&
+          sudo pnpm cd:db-seed &&
+          sudo pnpm services-update &&
 
-                    sudo yes | sudo cp ./tools/services/web.service /etc/systemd/system/web.service &&
-                    sudo yes | sudo cp ./tools/services/api.service /etc/systemd/system/api.service &&
-                    sudo systemctl daemon-reload &&
-                    sudo systemctl enable api &&
-                    sudo systemctl enable web &&
+          sudo yes | sudo cp ./tools/services/web.service /etc/systemd/system/web.service &&
+          sudo yes | sudo cp ./tools/services/api.service /etc/systemd/system/api.service &&
+          sudo systemctl daemon-reload &&
+          sudo systemctl enable api &&
+          sudo systemctl enable web &&
 
-                    sudo systemctl stop api &&
-                    sudo systemctl stop web &&
-                    sudo rm -rf dist &&
+          sudo systemctl stop api &&
+          sudo systemctl stop web &&
+          sudo rm -rf dist &&
 
-                    sudo pnpm "build:api" &&
-                    sudo systemctl start api &&
+          sudo pnpm "build:api" &&
+          sudo systemctl start api &&
 
-                    sudo pnpm "build:web" &&
-                    sudo systemctl start web &&
+          sudo pnpm "build:web" &&
+          sudo systemctl start web &&
 
-                    sudo systemctl stop nginx &&
-                    sudo rm -rf /etc/nginx/conf.d/* &&
-                    sudo cp /home/${{ inputs.vm-user-name }}/${{ github.event.repository.name }}/tools/nginx/nginx.conf /etc/nginx/conf.d/nginx.conf &&
-                    sudo echo "${{ inputs.https-certificate }}" | sudo tee /etc/nginx/conf.d/https_certificate.crt &&
-                    sudo echo "${{ inputs.https-key }}" | sudo tee /etc/nginx/conf.d/https_key.key &&
-                    sudo systemctl start nginx
-
-
-
-
-
-
-
-
-
+          sudo systemctl stop nginx &&
+          sudo rm -rf /etc/nginx/conf.d/* &&
+          sudo cp /home/${{ inputs.vm-user-name }}/${{ github.event.repository.name }}/tools/nginx/nginx.conf /etc/nginx/conf.d/nginx.conf &&
+          sudo echo "${{ inputs.https-certificate }}" | sudo tee /etc/nginx/conf.d/https_certificate.crt &&
+          sudo echo "${{ inputs.https-key }}" | sudo tee /etc/nginx/conf.d/https_key.key &&
+          sudo systemctl start nginx

@@ -18,7 +18,7 @@ export type TransformFunc = (props: TransformFuncProps) => string;
 export async function updateEnvFile(
   envFileName: string,
   keys: Array<KeyValuePair>,
-  transformFunc?: TransformFunc
+  transformFunc?: TransformFunc,
 ) {
   const envFilePath = path.join(__dirname, "..", "..", envFileName);
   let envData = await fs.readFile(envFilePath, encoding);
@@ -28,7 +28,7 @@ export async function updateEnvFile(
     const resultValue = transformFunc
       ? transformFunc({
           prevValue: envData.match(keyLineRegex)?.[0]?.split("=")?.[1] ?? "",
-          newValue: value
+          newValue: value,
         })
       : value;
     envData = envData.replace(keyLineRegex, `${key}=${resultValue}`);
