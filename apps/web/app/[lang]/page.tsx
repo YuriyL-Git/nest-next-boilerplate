@@ -5,6 +5,8 @@ import { Locale } from "../../i18n/i18n-config";
 import { User } from "@libs/web/data-access-graphql";
 import { TestComponent } from "../components/test-component/test-comp";
 import { NavBar } from "../components/nav-bar/nav-bar";
+import Link from "next/link";
+import { LoginWithIdPage } from "@app/web/router";
 
 interface Props {
   params: { lang: Locale };
@@ -25,6 +27,13 @@ export default async function Page({ params }: Props) {
 
   return (
     <div className={styles.container}>
+      <Link
+        href={LoginWithIdPage.getRoute({
+          id: "fdsfsf",
+        })}
+      >
+        DashBoardLoginPage{" "}
+      </Link>
       <NavBar />
       <h1>{HomePageStrings.Title}</h1>
       <h1>Update readme update branch name</h1>

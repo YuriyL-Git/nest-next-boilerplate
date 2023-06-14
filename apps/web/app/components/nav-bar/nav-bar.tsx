@@ -19,7 +19,15 @@ export const NavBar: FC = () => {
           {NavBarStrings.Menu}
         </Link>
         <LocaleSwitcher />
-        <Button onClick={() => LoginWithIdPage.navigate()}>Move to login</Button>
+        <Button
+          onClick={() =>
+            LoginWithIdPage.navigate({
+              id: "testid",
+            })
+          }
+        >
+          Move to login
+        </Button>
       </div>
     </nav>
   );
