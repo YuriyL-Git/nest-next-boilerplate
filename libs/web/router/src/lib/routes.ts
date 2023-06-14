@@ -6,6 +6,12 @@ export const HomePage = {
   },
 };
 
+export const PageExamplePage = {
+  getRoute: () => {
+    return `/page-example`;
+  },
+};
+
 export const LoginPage = {
   getRoute: () => {
     return `/login`;
@@ -15,12 +21,6 @@ export const LoginPage = {
 export const DashboardLoginPage = {
   getRoute: () => {
     return `/dashboard/login`;
-  },
-};
-
-export const PageExamplePage = {
-  getRoute: () => {
-    return `/page-example`;
   },
 };
 

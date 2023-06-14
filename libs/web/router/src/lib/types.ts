@@ -2,15 +2,15 @@ export interface HomeParams {
   lang: string;
 }
 
+export interface PageExampleParams {
+  lang: string;
+}
+
 export interface LoginParams {
   lang: string;
 }
 
 export interface DashboardLoginParams {
-  lang: string;
-}
-
-export interface PageExampleParams {
   lang: string;
 }
 

@@ -3,8 +3,8 @@ import { useRouter } from "next/navigation";
 
 import {
   HomePage,
-  LoginPage,
   PageExamplePage,
+  LoginPage,
   SignUpPage,
   DashboardLoginPage,
   LoginWithIdPage,
@@ -26,6 +26,15 @@ export const useAppRouter = () => {
       },
     },
 
+    PageExamplePage: {
+      getRoute: () => {
+        return `/page-example`;
+      },
+      navigate: () => {
+        router.push(PageExamplePage.getRoute());
+      },
+    },
+
     LoginPage: {
       getRoute: () => {
         return `/login`;
@@ -41,15 +50,6 @@ export const useAppRouter = () => {
       },
       navigate: () => {
         router.push(DashboardLoginPage.getRoute());
-      },
-    },
-
-    PageExamplePage: {
-      getRoute: () => {
-        return `/page-example`;
-      },
-      navigate: () => {
-        router.push(PageExamplePage.getRoute());
       },
     },
 
