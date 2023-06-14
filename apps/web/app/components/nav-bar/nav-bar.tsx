@@ -5,9 +5,12 @@ import Link from "next/link";
 import LocaleSwitcher from "../locale-switcher/locale-switcher";
 
 import { useDictionary } from "../../hooks/use-dictionary";
+import { Button } from "@mui/material";
+import { useAppRouter } from "@app/web/router";
 
 export const NavBar: FC = () => {
   const { NavBarStrings } = useDictionary();
+  const { LoginWithIdPage } = useAppRouter();
 
   return (
     <nav className="flex h-20 items-center justify-between md:h-28 lg:h-36">
@@ -16,6 +19,7 @@ export const NavBar: FC = () => {
           {NavBarStrings.Menu}
         </Link>
         <LocaleSwitcher />
+        <Button onClick={() => LoginWithIdPage.navigate()}>Move to login</Button>
       </div>
     </nav>
   );

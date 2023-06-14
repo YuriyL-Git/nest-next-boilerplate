@@ -16,18 +16,12 @@
     "noPropertyAccessFromIndexSignature": false,
     "baseUrl": ".",
     "paths": {
-      "@libs/api/data-access-db": [
-        "libs/api/data-access-db/src/index.ts"
-      ],
-      "@libs/api/generated-db-types": [
-        "libs/api/generated-db-types/src/index.ts"
-      ],
-      "@libs/shared/environement": [
-        "libs/shared/environement/src/index.ts"
-      ],
-      "@libs/web/data-access-graphql": [
-        "libs/web/data-access-graphql/src/index.ts"
-      ],
+      "@app/web/router": ["libs/web/router/src/index.ts"],
+      "@app/web/router/server": ["libs/web/router/src/server.ts"],
+      "@libs/api/data-access-db": ["libs/api/data-access-db/src/index.ts"],
+      "@libs/api/generated-db-types": ["libs/api/generated-db-types/src/index.ts"],
+      "@libs/shared/environement": ["libs/shared/environement/src/index.ts"],
+      "@libs/web/data-access-graphql": ["libs/web/data-access-graphql/src/index.ts"],
       "@libs/web/utils-shared": ["libs/web/utils-shared/src/index.ts"]
     }
   },

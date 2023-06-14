@@ -15,4 +15,10 @@ nx g @nrwl/js:library --name={lib name} --directory=web --bundler=swc  --tags "s
 ### example:
 nx g @nrwl/js:library --name=utils-shared --directory=web --bundler=swc --tags "scope:web"
 
+## create next library 
+nx g @nx/next:lib --name={lib name} --directory=web --bundler=swc --tags "scope:web"
+
+### example:
+nx g @nx/next:lib --name=router --directory=web --bundler=swc --tags "scope:web"
+
 

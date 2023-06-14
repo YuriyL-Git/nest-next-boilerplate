@@ -1,5 +1,6 @@
 // @ts-ignore
 const fs = require("fs").promises;
+// @ts-ignore
 const chokidar = require("chokidar");
 
 // @ts-ignore

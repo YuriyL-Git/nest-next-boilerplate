@@ -1,5 +1,5 @@
-import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 import { i18n } from "./i18n/i18n-config";
 import { match as matchLocale } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
@@ -8,6 +8,7 @@ import { environment } from "@libs/shared/environement";
 import { DecryptToken } from "./lib/cookies/decrypt-token";
 
 function getLocale(request: NextRequest): string | undefined {
+  const cookiesLocale = request.cookies.get("locale")?.value;
   const negotiatorHeaders: Record<string, string> = {};
   // @ts-ignore
   for (const [key, value] of request.headers.entries()) {
@@ -18,7 +19,7 @@ function getLocale(request: NextRequest): string | undefined {
 
   // @ts-ignore locales are readonly
   const locales: string[] = i18n.locales;
-  return matchLocale(languages, locales, i18n.defaultLocale);
+  return cookiesLocale || matchLocale(languages, locales, i18n.defaultLocale);
 }
 
 const { apiRoute } = environment;
