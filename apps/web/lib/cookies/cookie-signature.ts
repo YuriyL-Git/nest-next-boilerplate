@@ -16,15 +16,15 @@ async function sign(val: string, secret: string): Promise<string> {
 
     const signature = await subtleCrypto.sign(algorithm, cryptoKey, data);
 
-    const signatureArray = Array.from(new Uint8Array(signature));
+    const signatureArray = [...new Uint8Array(signature)];
     const signatureString = signatureArray
-      .map((byte) => String.fromCharCode(byte))
+      .map((byte) => String.fromCodePoint(byte))
       .join("");
     const base64Signature = btoa(signatureString);
 
-    return val + "." + base64Signature.replace(/\=+$/, "");
-  } catch (e) {
-    const error = e as Error;
+    return val + "." + base64Signature.replace(/=+$/, "");
+  } catch (error_) {
+    const error = error_ as Error;
     throw new Error("Error signing the cookie: " + error.message);
   }
 }
@@ -42,7 +42,7 @@ async function unsign(input: string, secret: string): Promise<string | boolean> 
     const signature = atob(base64Signature);
 
     const data = encoder.encode(val);
-    const signatureArray = [...signature].map((char) => char.charCodeAt(0));
+    const signatureArray = [...signature].map((char) => char.codePointAt(0)) as number[];
     const signatureBytes = new Uint8Array(signatureArray);
 
     const subtleCrypto = crypto.subtle;
@@ -60,8 +60,8 @@ async function unsign(input: string, secret: string): Promise<string | boolean> 
     );
 
     return isValid ? val : false;
-  } catch (e) {
-    const error = e as Error;
+  } catch (error_) {
+    const error = error_ as Error;
     throw new Error("Error verifying the cookie signature: " + error);
   }
 }

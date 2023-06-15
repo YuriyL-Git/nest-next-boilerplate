@@ -2,6 +2,10 @@ export interface HomeParams {
   lang: string;
 }
 
+export interface SignUpParams {
+  lang: string;
+}
+
 export interface PageExampleParams {
   lang: string;
 }
@@ -11,10 +15,6 @@ export interface LoginParams {
 }
 
 export interface DashboardLoginParams {
-  lang: string;
-}
-
-export interface SignUpParams {
   lang: string;
 }
 

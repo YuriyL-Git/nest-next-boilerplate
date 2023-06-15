@@ -3,11 +3,11 @@ import { useRouter } from "next/navigation";
 
 import {
   HomePage,
+  SignUpPage,
   PageExamplePage,
   LoginPage,
-  SignUpPage,
-  DashboardLoginPage,
   LoginWithIdPage,
+  DashboardLoginPage,
   HomeWithIdSlugPage,
   LoginWithIdSlugPage,
 } from "./routes";
@@ -23,6 +23,15 @@ export const useAppRouter = () => {
       },
       navigate: () => {
         router.push(HomePage.getRoute());
+      },
+    },
+
+    SignUpPage: {
+      getRoute: () => {
+        return `/sign-up`;
+      },
+      navigate: () => {
+        router.push(SignUpPage.getRoute());
       },
     },
 
@@ -50,15 +59,6 @@ export const useAppRouter = () => {
       },
       navigate: () => {
         router.push(DashboardLoginPage.getRoute());
-      },
-    },
-
-    SignUpPage: {
-      getRoute: () => {
-        return `/sign-up`;
-      },
-      navigate: () => {
-        router.push(SignUpPage.getRoute());
       },
     },
 

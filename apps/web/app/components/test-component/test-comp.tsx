@@ -10,20 +10,14 @@ export const TestComponent = () => {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    try {
-      gqlClient
-        .GetUsers()
-        .then((result) => {
-          setState(result.users);
-        })
-        .catch((error) => {
-          setError(JSON.stringify(error.response.errors));
-        });
-
-      // @ts-ignore
-    } catch (error) {
-      console.log("error", error);
-    }
+    gqlClient
+      .GetUsers()
+      .then((result) => {
+        setState(result.users);
+      })
+      .catch((error_) => {
+        setError(JSON.stringify(error_.response.errors));
+      });
   }, []);
 
   return (

@@ -6,6 +6,12 @@ export const HomePage = {
   },
 };
 
+export const SignUpPage = {
+  getRoute: () => {
+    return `/sign-up`;
+  },
+};
+
 export const PageExamplePage = {
   getRoute: () => {
     return `/page-example`;
@@ -21,12 +27,6 @@ export const LoginPage = {
 export const DashboardLoginPage = {
   getRoute: () => {
     return `/dashboard/login`;
-  },
-};
-
-export const SignUpPage = {
-  getRoute: () => {
-    return `/sign-up`;
   },
 };
 

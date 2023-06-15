@@ -1,4 +1,4 @@
 node_modules
-libs/web/data-access-graphql/src/lib/data-access.gql.gen.ts
-libs/web/data-access-graphql/src/lib/generated/types.ts
+libs/web/data-access-graphql/src/lib/generated/**.*
 libs/api/generated-db-types/src/index.ts
+apps/web/.next
