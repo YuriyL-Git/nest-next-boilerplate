@@ -8,7 +8,8 @@ import { HOOK_IMPORTS, HOOK_WRAPPER_END, HOOK_WRAPPER_START } from "./consts";
 const { exec } = require("child_process");
 
 const encoding = "utf8";
-const routerPath = path.join(__dirname, "..", "..", "libs/web/router/src/lib");
+const routerBasePath = "libs/web/router/src/lib";
+const routerPath = path.join(__dirname, "..", "..", routerBasePath);
 const routerFile = path.join(routerPath, "routes.ts");
 const hookFile = path.join(routerPath, "use-app-router.ts");
 const typesFile = path.join(routerPath, "types.ts");
@@ -43,7 +44,9 @@ const generateRoutes = async () => {
   await fs.writeFile(routerFile, routesFileResult, encoding);
   await fs.writeFile(hookFile, hooksFileResult, encoding);
   await fs.writeFile(typesFile, typesFileResult, encoding);
-  exec("npx prettier 'libs/web/router/src/lib/**/*.ts' --write");
+
+  exec(`nx lint '${routerBasePath}/**/*.ts' --fix --all`);
+  exec(`npx prettier '${routerBasePath}/**/*.ts' --write`);
 };
 
 chokidar
