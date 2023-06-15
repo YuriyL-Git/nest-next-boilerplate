@@ -1,4 +1,4 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-pnpm ts && pnpm verify && git add -A .
+pnpm ts && pnpm verify

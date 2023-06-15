@@ -167,7 +167,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "pnpm ts && pnpm verify && git add -A ."
+      "pre-commit": "pnpm ts && pnpm verify"
     }
   }
 }
