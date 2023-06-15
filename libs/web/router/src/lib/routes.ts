@@ -1,4 +1,10 @@
-import { LoginWithIdParams, LoginWithIdSlugParams, HomeWithIdSlugParams } from "./types";
+import { HomeWithIdSlugParams, LoginWithIdParams, LoginWithIdSlugParams } from "./types";
+
+export const DashboardLoginPage = {
+  getRoute: () => {
+    return `/dashboard/login`;
+  },
+};
 
 export const HomePage = {
   getRoute: () => {
@@ -6,27 +12,16 @@ export const HomePage = {
   },
 };
 
-export const SignUpPage = {
-  getRoute: () => {
-    return `/sign-up`;
-  },
-};
-
-export const PageExamplePage = {
-  getRoute: () => {
-    return `/page-example`;
+export const HomeWithIdSlugPage = {
+  getRoute: ({ id, _slug }: Omit<HomeWithIdSlugParams, "lang">) => {
+    const __slug = _slug.join("/");
+    return `/${id}/${__slug}`;
   },
 };
 
 export const LoginPage = {
   getRoute: () => {
     return `/login`;
-  },
-};
-
-export const DashboardLoginPage = {
-  getRoute: () => {
-    return `/dashboard/login`;
   },
 };
 
@@ -43,9 +38,14 @@ export const LoginWithIdSlugPage = {
   },
 };
 
-export const HomeWithIdSlugPage = {
-  getRoute: ({ id, _slug }: Omit<HomeWithIdSlugParams, "lang">) => {
-    const __slug = _slug.join("/");
-    return `/${id}/${__slug}`;
+export const PageExamplePage = {
+  getRoute: () => {
+    return `/page-example`;
+  },
+};
+
+export const SignUpPage = {
+  getRoute: () => {
+    return `/sign-up`;
   },
 };

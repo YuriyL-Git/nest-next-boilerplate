@@ -6,6 +6,10 @@ export function toPascalCase(str: string) {
   return str.split("-").map(capitalize).join("");
 }
 
+export function sortByKey<T extends Record<string, any>>(array: Array<T>, key: keyof T) {
+  return array.sort((a, b) => a[key].localeCompare(b[key]));
+}
+
 export const getRouteData = (path: string) => {
   const params = path
     .match(/(?<!\[)\[(?!\[)(?!\.\.).+?\]/g)

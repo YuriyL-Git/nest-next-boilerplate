@@ -3,20 +3,29 @@ import { useRouter } from "next/navigation";
 
 import {
   HomePage,
-  SignUpPage,
-  PageExamplePage,
+  HomeWithIdSlugPage,
   LoginPage,
   LoginWithIdPage,
   DashboardLoginPage,
   LoginWithIdSlugPage,
-  HomeWithIdSlugPage,
+  PageExamplePage,
+  SignUpPage,
 } from "./routes";
-import { LoginWithIdParams, LoginWithIdSlugParams, HomeWithIdSlugParams } from "./types";
+import { HomeWithIdSlugParams, LoginWithIdParams, LoginWithIdSlugParams } from "./types";
 
 export const useAppRouter = () => {
   const router = useRouter();
 
   return {
+    DashboardLoginPage: {
+      getRoute: () => {
+        return `/dashboard/login`;
+      },
+      navigate: () => {
+        router.push(DashboardLoginPage.getRoute());
+      },
+    },
+
     HomePage: {
       getRoute: () => {
         return `/`;
@@ -26,21 +35,13 @@ export const useAppRouter = () => {
       },
     },
 
-    SignUpPage: {
-      getRoute: () => {
-        return `/sign-up`;
+    HomeWithIdSlugPage: {
+      getRoute: ({ id, _slug }: Omit<HomeWithIdSlugParams, "lang">) => {
+        const __slug = _slug.join("/");
+        return `/${id}/${__slug}`;
       },
-      navigate: () => {
-        router.push(SignUpPage.getRoute());
-      },
-    },
-
-    PageExamplePage: {
-      getRoute: () => {
-        return `/page-example`;
-      },
-      navigate: () => {
-        router.push(PageExamplePage.getRoute());
+      navigate: ({ id, _slug }: Omit<HomeWithIdSlugParams, "lang">) => {
+        router.push(HomeWithIdSlugPage.getRoute({ id, _slug }));
       },
     },
 
@@ -50,15 +51,6 @@ export const useAppRouter = () => {
       },
       navigate: () => {
         router.push(LoginPage.getRoute());
-      },
-    },
-
-    DashboardLoginPage: {
-      getRoute: () => {
-        return `/dashboard/login`;
-      },
-      navigate: () => {
-        router.push(DashboardLoginPage.getRoute());
       },
     },
 
@@ -81,13 +73,21 @@ export const useAppRouter = () => {
       },
     },
 
-    HomeWithIdSlugPage: {
-      getRoute: ({ id, _slug }: Omit<HomeWithIdSlugParams, "lang">) => {
-        const __slug = _slug.join("/");
-        return `/${id}/${__slug}`;
+    PageExamplePage: {
+      getRoute: () => {
+        return `/page-example`;
       },
-      navigate: ({ id, _slug }: Omit<HomeWithIdSlugParams, "lang">) => {
-        router.push(HomeWithIdSlugPage.getRoute({ id, _slug }));
+      navigate: () => {
+        router.push(PageExamplePage.getRoute());
+      },
+    },
+
+    SignUpPage: {
+      getRoute: () => {
+        return `/sign-up`;
+      },
+      navigate: () => {
+        router.push(SignUpPage.getRoute());
       },
     },
   };

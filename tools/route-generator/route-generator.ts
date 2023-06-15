@@ -1,4 +1,4 @@
-import { getRouteData, getTypesData, getUniqueRouteNames } from "./utils";
+import { getRouteData, getTypesData, getUniqueRouteNames, sortByKey } from "./utils";
 import { glob } from "glob";
 const chokidar = require("chokidar");
 const appFolder = "apps/web/app";
@@ -19,11 +19,16 @@ const generateRoutes = async () => {
     file.replace(appFolder, "").replace("/page.tsx", ""),
   );
 
-  const routeData = pagePaths.map((path) => getRouteData(path));
+  const routeData = sortByKey(
+    pagePaths.map((path) => getRouteData(path)),
+    "baseRouteName",
+  );
   const uniqueRouteData = getUniqueRouteNames(routeData);
-  const typesData = getTypesData(uniqueRouteData);
+  const typesData = sortByKey(getTypesData(uniqueRouteData), "interface");
 
-  const hookProps = typesData.map((item) => `${item.hookObject} \n `).join(", \n");
+  const hookProps = sortByKey(typesData, "interface")
+    .map((item) => `${item.hookObject} \n `)
+    .join(", \n");
   const importPagesList = routeData.map((item) => `${item.baseRouteName}Page`);
   const importParamsList = typesData.map((item) => item.params).filter((param) => param);
   const paramsImport = `import { ${importParamsList.join(", ")} } from "./types";`;

@@ -1,20 +1,18 @@
+export interface DashboardLoginParams {
+  lang: string;
+}
+
 export interface HomeParams {
   lang: string;
 }
 
-export interface SignUpParams {
+export interface HomeWithIdSlugParams {
   lang: string;
-}
-
-export interface PageExampleParams {
-  lang: string;
+  id: string;
+  _slug: string[];
 }
 
 export interface LoginParams {
-  lang: string;
-}
-
-export interface DashboardLoginParams {
   lang: string;
 }
 
@@ -29,8 +27,10 @@ export interface LoginWithIdSlugParams {
   _slug: string[];
 }
 
-export interface HomeWithIdSlugParams {
+export interface PageExampleParams {
   lang: string;
-  id: string;
-  _slug: string[];
+}
+
+export interface SignUpParams {
+  lang: string;
 }
