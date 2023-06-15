@@ -4,5 +4,6 @@
 /node_modules
 pnpm-lock.yaml
 libs/web/data-access-graphql/src/lib/generated/**.*
-libs/api/generated-db-types/src/index.ts
+libs/api/generated-db-types
 apps/web/.next
+libs/api/generated-db-types
