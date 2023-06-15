@@ -75,6 +75,9 @@ class ApiEnvApiVo {
 
   @IsString()
   public gqlUrl: string;
+
+  @IsString()
+  public apiUrl: string;
 }
 
 const apiEnvVoInstance = plainToInstance(ApiEnvVo, environment);

@@ -11,6 +11,7 @@ export const environment = {
   webAppHost: process.env.WEB_APP_HOST as string,
   corsEnabled: process.env.CORS_ENABLED === "true",
   api: {
+    apiUrl: process.env.API_URL as string,
     port: Number(process.env.API_PORT),
     gqlUrl: `${process.env.API_URL}/graphql`,
   },
