@@ -2,6 +2,10 @@ export interface DashboardLoginParams {
   lang: string;
 }
 
+export interface DashboardParams {
+  lang: string;
+}
+
 export interface HomeParams {
   lang: string;
 }

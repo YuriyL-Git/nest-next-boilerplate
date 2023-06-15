@@ -10,7 +10,8 @@ export function sortByKey<T extends Record<string, any>>(array: Array<T>, key: k
   return array.sort((a, b) => a[key].localeCompare(b[key]));
 }
 
-export const getRouteData = (path: string) => {
+export const getRouteData = (inputPath: string) => {
+  const path = inputPath.replace(/\/\(.+?\)/g, "");
   const params = path
     .match(/(?<!\[)\[(?!\[)(?!\.\.).+?\]/g)
     .map((param) => param.replace(/\[|\]/g, ""));

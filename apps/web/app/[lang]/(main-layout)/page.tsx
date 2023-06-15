@@ -1,10 +1,10 @@
 import styles from "./page.module.css";
-import { gqlServer } from "../common/graphql/graphql-server";
-import { getDictionary } from "../../i18n/get-dirctionary";
-import { Locale } from "../../i18n/i18n-config";
+import { gqlServer } from "../../common/graphql/graphql-server";
+import { getDictionary } from "../../../i18n/get-dirctionary";
+import { Locale } from "../../../i18n/i18n-config";
 import { User } from "@libs/web/data-access-graphql";
-import { TestComponent } from "../components/test-component/test-comp";
-import { NavBar } from "../components/nav-bar/nav-bar";
+import { TestComponent } from "../../components/test-component/test-comp";
+import { NavBar } from "../../components/nav-bar/nav-bar";
 import Link from "next/link";
 import { LoginWithIdPage } from "@app/web/router";
 

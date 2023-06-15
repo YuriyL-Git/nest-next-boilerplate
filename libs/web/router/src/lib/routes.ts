@@ -6,6 +6,12 @@ export const DashboardLoginPage = {
   },
 };
 
+export const DashboardPage = {
+  getRoute: () => {
+    return `/dashboard`;
+  },
+};
+
 export const HomePage = {
   getRoute: () => {
     return `/`;

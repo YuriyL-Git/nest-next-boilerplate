@@ -2,6 +2,7 @@
 import { useRouter } from "next/navigation";
 import { HomeWithIdSlugParams, LoginWithIdParams, LoginWithIdSlugParams } from "./types";
 import {
+  DashboardPage,
   HomePage,
   HomeWithIdSlugPage,
   LoginPage,
@@ -22,6 +23,15 @@ export const useAppRouter = () => {
       },
       navigate: () => {
         router.push(DashboardLoginPage.getRoute());
+      },
+    },
+
+    DashboardPage: {
+      getRoute: () => {
+        return `/dashboard`;
+      },
+      navigate: () => {
+        router.push(DashboardPage.getRoute());
       },
     },
 
