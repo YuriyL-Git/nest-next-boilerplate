@@ -4,14 +4,14 @@ import { useRouter } from "next/navigation";
 import {
   HomePage,
   SignUpPage,
-  LoginPage,
   PageExamplePage,
-  DashboardLoginPage,
+  LoginPage,
   LoginWithIdPage,
-  HomeWithIdSlugPage,
+  DashboardLoginPage,
   LoginWithIdSlugPage,
+  HomeWithIdSlugPage,
 } from "./routes";
-import { LoginWithIdParams, HomeWithIdSlugParams, LoginWithIdSlugParams } from "./types";
+import { LoginWithIdParams, LoginWithIdSlugParams, HomeWithIdSlugParams } from "./types";
 
 export const useAppRouter = () => {
   const router = useRouter();
@@ -35,6 +35,15 @@ export const useAppRouter = () => {
       },
     },
 
+    PageExamplePage: {
+      getRoute: () => {
+        return `/page-example`;
+      },
+      navigate: () => {
+        router.push(PageExamplePage.getRoute());
+      },
+    },
+
     LoginPage: {
       getRoute: () => {
         return `/login`;
@@ -53,31 +62,12 @@ export const useAppRouter = () => {
       },
     },
 
-    PageExamplePage: {
-      getRoute: () => {
-        return `/page-example`;
-      },
-      navigate: () => {
-        router.push(PageExamplePage.getRoute());
-      },
-    },
-
     LoginWithIdPage: {
       getRoute: ({ id }: Omit<LoginWithIdParams, "lang">) => {
         return `/login/${id}`;
       },
       navigate: ({ id }: Omit<LoginWithIdParams, "lang">) => {
         router.push(LoginWithIdPage.getRoute({ id }));
-      },
-    },
-
-    HomeWithIdSlugPage: {
-      getRoute: ({ id, _slug }: Omit<HomeWithIdSlugParams, "lang">) => {
-        const __slug = _slug.join("/");
-        return `/${id}/${__slug}`;
-      },
-      navigate: ({ id, _slug }: Omit<HomeWithIdSlugParams, "lang">) => {
-        router.push(HomeWithIdSlugPage.getRoute({ id, _slug }));
       },
     },
 
@@ -88,6 +78,16 @@ export const useAppRouter = () => {
       },
       navigate: ({ id, _slug }: Omit<LoginWithIdSlugParams, "lang">) => {
         router.push(LoginWithIdSlugPage.getRoute({ id, _slug }));
+      },
+    },
+
+    HomeWithIdSlugPage: {
+      getRoute: ({ id, _slug }: Omit<HomeWithIdSlugParams, "lang">) => {
+        const __slug = _slug.join("/");
+        return `/${id}/${__slug}`;
+      },
+      navigate: ({ id, _slug }: Omit<HomeWithIdSlugParams, "lang">) => {
+        router.push(HomeWithIdSlugPage.getRoute({ id, _slug }));
       },
     },
   };
