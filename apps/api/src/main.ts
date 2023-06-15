@@ -8,7 +8,6 @@ import { environment } from "@libs/shared/environement";
 
 const { api, isProd, cookieSecret, corsOrigin, webAppHost, corsEnabled } = environment;
 const host = isProd ? "0.0.0.0" : "localhost";
-
 const whitelistOrigin = new Set([webAppHost, corsOrigin]);
 
 async function bootstrap() {
