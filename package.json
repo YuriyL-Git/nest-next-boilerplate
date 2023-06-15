@@ -38,7 +38,8 @@
     "web-out": "sudo journalctl -f -u web",
     "api-out": "sudo journalctl -f -u api",
     "update-secrets": "npx ts-node --project tools/tsconfig.tools.json tools/env-update/secrets-gen.ts",
-    "services-update": "ts-node --project tools/tsconfig.tools.json tools/services/services-update.ts"
+    "services-update": "ts-node --project tools/tsconfig.tools.json tools/services/services-update.ts",
+    "prepare": "husky install"
   },
   "private": true,
   "dependencies": {
