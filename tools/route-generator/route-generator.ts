@@ -39,9 +39,9 @@ const generateRoutes = async () => {
     typesData.map((item) => `${item.routeObject} \n \n \n`).join("");
 
   const hooksFileResult = `
-  ${HOOK_IMPORTS}\n
-  import { ${importPagesList.join(", ")}} from "./routes";
+  ${HOOK_IMPORTS}
   ${paramsImport}
+  import { ${importPagesList.join(", ")}} from "./routes";
   ${HOOK_WRAPPER_START}\n
    ${hookProps}
    ${HOOK_WRAPPER_END}`;

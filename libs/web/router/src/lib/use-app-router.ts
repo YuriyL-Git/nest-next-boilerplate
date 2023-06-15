@@ -1,17 +1,16 @@
 "use client";
 import { useRouter } from "next/navigation";
-
+import { HomeWithIdSlugParams, LoginWithIdParams, LoginWithIdSlugParams } from "./types";
 import {
   HomePage,
   HomeWithIdSlugPage,
   LoginPage,
-  LoginWithIdPage,
   DashboardLoginPage,
+  LoginWithIdPage,
   LoginWithIdSlugPage,
   PageExamplePage,
   SignUpPage,
 } from "./routes";
-import { HomeWithIdSlugParams, LoginWithIdParams, LoginWithIdSlugParams } from "./types";
 
 export const useAppRouter = () => {
   const router = useRouter();
