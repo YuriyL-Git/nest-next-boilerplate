@@ -18,4 +18,8 @@ export const environment = {
   db: {
     url: process.env.DB_URL,
   },
+  googleAuth: {
+    googleClientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID as string,
+    googleClientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+  },
 };

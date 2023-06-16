@@ -54,22 +54,27 @@ export class ApiEnvVo implements ApiEnv {
 
   @IsDefined()
   @ValidateNested()
-  @Type(() => ApiEnvDbVo)
-  public db: ApiEnvDbVo;
+  @Type(() => EnvDbVo)
+  public db: EnvDbVo;
 
   @IsDefined()
   @ValidateNested()
-  @Type(() => ApiEnvApiVo)
-  public api: ApiEnvApiVo;
+  @Type(() => EnvApiVo)
+  public api: EnvApiVo;
+
+  @IsDefined()
+  @ValidateNested()
+  @Type(() => EnvGoogleAuthVo)
+  public googleAuth: EnvGoogleAuthVo;
 }
 
-class ApiEnvDbVo {
+class EnvDbVo {
   @IsNotEmpty()
   @IsString()
   public url: string;
 }
 
-class ApiEnvApiVo {
+class EnvApiVo {
   @IsNumber()
   public port: number;
 
@@ -78,6 +83,16 @@ class ApiEnvApiVo {
 
   @IsString()
   public apiUrl: string;
+}
+
+class EnvGoogleAuthVo {
+  @IsNotEmpty()
+  @IsString()
+  public googleClientId: string;
+
+  @IsNotEmpty()
+  @IsString()
+  public googleClientSecret: string;
 }
 
 const apiEnvVoInstance = plainToInstance(ApiEnvVo, environment);
