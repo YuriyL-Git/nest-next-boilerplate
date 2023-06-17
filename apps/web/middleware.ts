@@ -5,17 +5,12 @@ import { match as matchLocale } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
 import publicFiles from "./i18n/public-files.gen.json";
 import { DecryptToken } from "./lib/cookies/decrypt-token";
-import { unprotectedRoutes, authRedirectRoute } from "@app/web/router";
-import { revalidatePath } from "next/cache";
+import { unprotectedRoutes, authRedirectRoute, nextApiRoute } from "@app/web/router";
 
 export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
   if (publicFiles.list.includes(pathname)) {
     return;
-  }
-
-  if (pathname.endsWith("revalidate")) {
-    revalidatePath("/");
   }
 
   const token = request.cookies.get("token")?.value;
@@ -29,6 +24,15 @@ export async function middleware(request: NextRequest) {
   const isProtectedRoute = !unprotectedRoutes.includes(
     pathname.replace(new RegExp(`^(/${locale})`), ""),
   );
+
+  if (pathname.startsWith(nextApiRoute)) {
+    return tokenPayload
+      ? undefined
+      : new NextResponse(
+          JSON.stringify({ success: false, message: "Authentication failed" }),
+          { status: 401, headers: { "content-type": "application/json" } },
+        );
+  }
 
   if (!tokenPayload && isProtectedRoute) {
     return NextResponse.redirect(new URL(`/${locale}${authRedirectRoute}`, request.url));
