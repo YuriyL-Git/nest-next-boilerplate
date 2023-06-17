@@ -6,11 +6,16 @@ import Negotiator from "negotiator";
 import publicFiles from "./i18n/public-files.gen.json";
 import { DecryptToken } from "./lib/cookies/decrypt-token";
 import { unprotectedRoutes, authRedirectRoute } from "@app/web/router";
+import { revalidatePath } from "next/cache";
 
 export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
   if (publicFiles.list.includes(pathname)) {
     return;
+  }
+
+  if (pathname.endsWith("revalidate")) {
+    revalidatePath("/");
   }
 
   const token = request.cookies.get("token")?.value;
