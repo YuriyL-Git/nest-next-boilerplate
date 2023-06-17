@@ -5,6 +5,8 @@ import { User } from "@libs/api/generated-db-types";
 import { IUserContext } from "./guards/types";
 import { SetAuthGuard } from "./guards/set-auth.guard";
 import { LoginInput } from "./dto/login.input";
+import { SetGoogleAuthGuard } from "./guards/set-google-auth.guard";
+import { GoogleLoginInput } from "./dto/google.login.input";
 
 @Resolver(() => User)
 export class AuthenticationResolver {
@@ -18,8 +20,18 @@ export class AuthenticationResolver {
     return this.authenticationService.login(user);
   }
 
+  @UseGuards(SetGoogleAuthGuard)
+  @Mutation(() => User)
+  loginWithGoogle(
+    @Args("googleLoginInput") googleLoginInput: GoogleLoginInput,
+    @Context() context: IUserContext,
+  ) {
+    const { user } = context;
+    return this.authenticationService.login(user);
+  }
+
   @Mutation(() => User)
   signUp(@Args("signUpInput") signUpInput: LoginInput) {
-    return this.authenticationService.signUp(signUpInput);
+    return this.authenticationService.signUpWithCredentials(signUpInput);
   }
 }

@@ -6,6 +6,7 @@ const GET_USERS = gql`
       id
       email
       name
+      isVerified
       __typename
     }
   }
@@ -17,6 +18,7 @@ const GET_USER = gql`
       id
       email
       name
+      isVerified
       __typename
     }
   }

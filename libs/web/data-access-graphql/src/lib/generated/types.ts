@@ -17,15 +17,20 @@ export type Scalars = {
   Float: { input: number; output: number; }
 };
 
+export type GoogleLoginInput = {
+  googleToken?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type LoginInput = {
   email: Scalars['String']['input'];
-  password: Scalars['String']['input'];
+  password?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
   createUser: User;
   login: User;
+  loginWithGoogle: User;
   removeUser: User;
   signUp: User;
   updateUser: User;
@@ -39,6 +44,11 @@ export type MutationCreateUserArgs = {
 
 export type MutationLoginArgs = {
   loginInput: LoginInput;
+};
+
+
+export type MutationLoginWithGoogleArgs = {
+  googleLoginInput: GoogleLoginInput;
 };
 
 
@@ -71,7 +81,9 @@ export type QueryUserArgs = {
 export type User = {
   __typename?: 'User';
   email: Scalars['String']['output'];
+  icon?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
+  isVerified: Scalars['Boolean']['output'];
   name?: Maybe<Scalars['String']['output']>;
 };
 
@@ -79,34 +91,44 @@ export type UserCountAggregate = {
   __typename?: 'UserCountAggregate';
   _all: Scalars['Int']['output'];
   email: Scalars['Int']['output'];
+  icon: Scalars['Int']['output'];
   id: Scalars['Int']['output'];
+  isVerified: Scalars['Int']['output'];
   name: Scalars['Int']['output'];
 };
 
 export type UserCreateInput = {
   email: Scalars['String']['input'];
+  icon?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
+  isVerified?: InputMaybe<Scalars['Boolean']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
-  password: Scalars['String']['input'];
+  password?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type UserMaxAggregate = {
   __typename?: 'UserMaxAggregate';
   email?: Maybe<Scalars['String']['output']>;
+  icon?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['String']['output']>;
+  isVerified?: Maybe<Scalars['Boolean']['output']>;
   name?: Maybe<Scalars['String']['output']>;
 };
 
 export type UserMinAggregate = {
   __typename?: 'UserMinAggregate';
   email?: Maybe<Scalars['String']['output']>;
+  icon?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['String']['output']>;
+  isVerified?: Maybe<Scalars['Boolean']['output']>;
   name?: Maybe<Scalars['String']['output']>;
 };
 
 export type UserUpdateInput = {
   email?: InputMaybe<Scalars['String']['input']>;
+  icon?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
+  isVerified?: InputMaybe<Scalars['Boolean']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   password?: InputMaybe<Scalars['String']['input']>;
 };
@@ -121,26 +143,33 @@ export type SignUpVariables = Exact<{
 }>;
 
 
-export type SignUp = { __typename?: 'Mutation', signUp: { __typename?: 'User', id: string, name?: string | null, email: string } };
+export type SignUp = { __typename?: 'Mutation', signUp: { __typename?: 'User', id: string, name?: string | null, email: string, isVerified: boolean, icon?: string | null } };
 
 export type LoginVariables = Exact<{
   args: LoginInput;
 }>;
 
 
-export type Login = { __typename?: 'Mutation', login: { __typename?: 'User', id: string, name?: string | null, email: string } };
+export type Login = { __typename?: 'Mutation', login: { __typename?: 'User', id: string, name?: string | null, email: string, isVerified: boolean, icon?: string | null } };
+
+export type LoginWithGoogleVariables = Exact<{
+  args: GoogleLoginInput;
+}>;
+
+
+export type LoginWithGoogle = { __typename?: 'Mutation', loginWithGoogle: { __typename?: 'User', id: string, name?: string | null, email: string, isVerified: boolean, icon?: string | null } };
 
 export type GetUsersVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetUsers = { __typename?: 'Query', users: Array<{ __typename: 'User', id: string, email: string, name?: string | null }> };
+export type GetUsers = { __typename?: 'Query', users: Array<{ __typename: 'User', id: string, email: string, name?: string | null, isVerified: boolean }> };
 
 export type GetUserVariables = Exact<{
   where: UserWhereUniqueInput;
 }>;
 
 
-export type GetUser = { __typename?: 'Query', user: { __typename: 'User', id: string, email: string, name?: string | null } };
+export type GetUser = { __typename?: 'Query', user: { __typename: 'User', id: string, email: string, name?: string | null, isVerified: boolean } };
 
 export type CreateUserVariables = Exact<{
   data: UserCreateInput;
@@ -156,6 +185,8 @@ export const SignUpDocument = /*#__PURE__*/ gql`
     id
     name
     email
+    isVerified
+    icon
   }
 }
     `;
@@ -165,6 +196,19 @@ export const LoginDocument = /*#__PURE__*/ gql`
     id
     name
     email
+    isVerified
+    icon
+  }
+}
+    `;
+export const LoginWithGoogleDocument = /*#__PURE__*/ gql`
+    mutation LoginWithGoogle($args: GoogleLoginInput!) {
+  loginWithGoogle(googleLoginInput: $args) {
+    id
+    name
+    email
+    isVerified
+    icon
   }
 }
     `;
@@ -174,6 +218,7 @@ export const GetUsersDocument = /*#__PURE__*/ gql`
     id
     email
     name
+    isVerified
     __typename
   }
 }
@@ -184,6 +229,7 @@ export const GetUserDocument = /*#__PURE__*/ gql`
     id
     email
     name
+    isVerified
     __typename
   }
 }
@@ -210,6 +256,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     Login(variables: LoginVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Login> {
       return withWrapper((wrappedRequestHeaders) => client.request<Login>(LoginDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Login', 'mutation');
+    },
+    LoginWithGoogle(variables: LoginWithGoogleVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<LoginWithGoogle> {
+      return withWrapper((wrappedRequestHeaders) => client.request<LoginWithGoogle>(LoginWithGoogleDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'LoginWithGoogle', 'mutation');
     },
     GetUsers(variables?: GetUsersVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetUsers> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetUsers>(GetUsersDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetUsers', 'query');

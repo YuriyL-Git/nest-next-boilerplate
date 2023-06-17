@@ -17,7 +17,7 @@ export class UserResolver {
   @UseGuards(CheckAuthGuard)
   @Mutation(() => User)
   createUser(@Args() createOneUserArgs: CreateOneUserArgs) {
-    return this.userService.create(createOneUserArgs);
+    return this.userService.createWithCredentials(createOneUserArgs);
   }
 
   @UseGuards(CheckAuthGuard)

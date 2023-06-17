@@ -14,7 +14,9 @@ export enum UserScalarFieldEnum {
     id = "id",
     email = "email",
     name = "name",
-    password = "password"
+    password = "password",
+    icon = "icon",
+    isVerified = "isVerified"
 }
 
 export enum TransactionIsolationLevel {
@@ -43,6 +45,28 @@ registerEnumType(UserScalarFieldEnum, { name: 'UserScalarFieldEnum', description
 export class AffectedRows {
     @Field(() => Int, {nullable:false})
     count!: number;
+}
+
+@InputType()
+export class BoolFilter {
+    @Field(() => Boolean, {nullable:true})
+    equals?: boolean;
+    @Field(() => BoolFilter, {nullable:true})
+    not?: InstanceType<typeof BoolFilter>;
+}
+
+@InputType()
+export class BoolWithAggregatesFilter {
+    @Field(() => Boolean, {nullable:true})
+    equals?: boolean;
+    @Field(() => BoolWithAggregatesFilter, {nullable:true})
+    not?: InstanceType<typeof BoolWithAggregatesFilter>;
+    @Field(() => IntFilter, {nullable:true})
+    _count?: InstanceType<typeof IntFilter>;
+    @Field(() => BoolFilter, {nullable:true})
+    _min?: InstanceType<typeof BoolFilter>;
+    @Field(() => BoolFilter, {nullable:true})
+    _max?: InstanceType<typeof BoolFilter>;
 }
 
 @InputType()
@@ -312,6 +336,10 @@ export class UserCountAggregateInput {
     @Field(() => Boolean, {nullable:true})
     password?: true;
     @Field(() => Boolean, {nullable:true})
+    icon?: true;
+    @Field(() => Boolean, {nullable:true})
+    isVerified?: true;
+    @Field(() => Boolean, {nullable:true})
     _all?: true;
 }
 
@@ -326,6 +354,10 @@ export class UserCountAggregate {
     @HideField()
     password!: number;
     @Field(() => Int, {nullable:false})
+    icon!: number;
+    @Field(() => Int, {nullable:false})
+    isVerified!: number;
+    @Field(() => Int, {nullable:false})
     _all!: number;
 }
 
@@ -339,6 +371,10 @@ export class UserCountOrderByAggregateInput {
     name?: keyof typeof SortOrder;
     @Field(() => SortOrder, {nullable:true})
     password?: keyof typeof SortOrder;
+    @Field(() => SortOrder, {nullable:true})
+    icon?: keyof typeof SortOrder;
+    @Field(() => SortOrder, {nullable:true})
+    isVerified?: keyof typeof SortOrder;
 }
 
 @InputType()
@@ -353,11 +389,16 @@ export class UserCreateManyInput {
     @Validator.MaxLength(100)
     @Validator.MinLength(1)
     name?: string;
-    @Field(() => String, {nullable:false})
+    @Field(() => String, {nullable:true})
     @Validator.IsString()
     @Validator.MaxLength(300)
     @Validator.MinLength(5)
-    password!: string;
+    password?: string;
+    @Field(() => String, {nullable:true})
+    @Validator.IsString()
+    icon?: string;
+    @Field(() => Boolean, {nullable:true})
+    isVerified?: boolean;
 }
 
 @InputType()
@@ -372,11 +413,16 @@ export class UserCreateInput {
     @Validator.MaxLength(100)
     @Validator.MinLength(1)
     name?: string;
-    @Field(() => String, {nullable:false})
+    @Field(() => String, {nullable:true})
     @Validator.IsString()
     @Validator.MaxLength(300)
     @Validator.MinLength(5)
-    password!: string;
+    password?: string;
+    @Field(() => String, {nullable:true})
+    @Validator.IsString()
+    icon?: string;
+    @Field(() => Boolean, {nullable:true})
+    isVerified?: boolean;
 }
 
 @ArgsType()
@@ -416,7 +462,12 @@ export class UserGroupBy {
     @Validator.MinLength(1)
     name?: string;
     @HideField()
-    password!: string;
+    password?: string;
+    @Field(() => String, {nullable:true})
+    @Validator.IsString()
+    icon?: string;
+    @Field(() => Boolean, {nullable:false})
+    isVerified!: boolean;
     @Field(() => UserCountAggregate, {nullable:true})
     _count?: InstanceType<typeof UserCountAggregate>;
     @Field(() => UserMinAggregate, {nullable:true})
@@ -435,6 +486,10 @@ export class UserMaxAggregateInput {
     name?: true;
     @Field(() => Boolean, {nullable:true})
     password?: true;
+    @Field(() => Boolean, {nullable:true})
+    icon?: true;
+    @Field(() => Boolean, {nullable:true})
+    isVerified?: true;
 }
 
 @ObjectType()
@@ -451,6 +506,11 @@ export class UserMaxAggregate {
     name?: string;
     @HideField()
     password?: string;
+    @Field(() => String, {nullable:true})
+    @Validator.IsString()
+    icon?: string;
+    @Field(() => Boolean, {nullable:true})
+    isVerified?: boolean;
 }
 
 @InputType()
@@ -463,6 +523,10 @@ export class UserMaxOrderByAggregateInput {
     name?: keyof typeof SortOrder;
     @Field(() => SortOrder, {nullable:true})
     password?: keyof typeof SortOrder;
+    @Field(() => SortOrder, {nullable:true})
+    icon?: keyof typeof SortOrder;
+    @Field(() => SortOrder, {nullable:true})
+    isVerified?: keyof typeof SortOrder;
 }
 
 @InputType()
@@ -475,6 +539,10 @@ export class UserMinAggregateInput {
     name?: true;
     @Field(() => Boolean, {nullable:true})
     password?: true;
+    @Field(() => Boolean, {nullable:true})
+    icon?: true;
+    @Field(() => Boolean, {nullable:true})
+    isVerified?: true;
 }
 
 @ObjectType()
@@ -491,6 +559,11 @@ export class UserMinAggregate {
     name?: string;
     @HideField()
     password?: string;
+    @Field(() => String, {nullable:true})
+    @Validator.IsString()
+    icon?: string;
+    @Field(() => Boolean, {nullable:true})
+    isVerified?: boolean;
 }
 
 @InputType()
@@ -503,6 +576,10 @@ export class UserMinOrderByAggregateInput {
     name?: keyof typeof SortOrder;
     @Field(() => SortOrder, {nullable:true})
     password?: keyof typeof SortOrder;
+    @Field(() => SortOrder, {nullable:true})
+    icon?: keyof typeof SortOrder;
+    @Field(() => SortOrder, {nullable:true})
+    isVerified?: keyof typeof SortOrder;
 }
 
 @InputType()
@@ -515,6 +592,10 @@ export class UserOrderByWithAggregationInput {
     name?: keyof typeof SortOrder;
     @Field(() => SortOrder, {nullable:true})
     password?: keyof typeof SortOrder;
+    @Field(() => SortOrder, {nullable:true})
+    icon?: keyof typeof SortOrder;
+    @Field(() => SortOrder, {nullable:true})
+    isVerified?: keyof typeof SortOrder;
     @Field(() => UserCountOrderByAggregateInput, {nullable:true})
     _count?: InstanceType<typeof UserCountOrderByAggregateInput>;
     @Field(() => UserMaxOrderByAggregateInput, {nullable:true})
@@ -533,6 +614,10 @@ export class UserOrderByWithRelationInput {
     name?: keyof typeof SortOrder;
     @Field(() => SortOrder, {nullable:true})
     password?: keyof typeof SortOrder;
+    @Field(() => SortOrder, {nullable:true})
+    icon?: keyof typeof SortOrder;
+    @Field(() => SortOrder, {nullable:true})
+    isVerified?: keyof typeof SortOrder;
 }
 
 @InputType()
@@ -551,6 +636,10 @@ export class UserScalarWhereWithAggregatesInput {
     name?: InstanceType<typeof StringWithAggregatesFilter>;
     @Field(() => StringWithAggregatesFilter, {nullable:true})
     password?: InstanceType<typeof StringWithAggregatesFilter>;
+    @Field(() => StringWithAggregatesFilter, {nullable:true})
+    icon?: InstanceType<typeof StringWithAggregatesFilter>;
+    @Field(() => BoolWithAggregatesFilter, {nullable:true})
+    isVerified?: InstanceType<typeof BoolWithAggregatesFilter>;
 }
 
 @InputType()
@@ -565,11 +654,16 @@ export class UserUncheckedCreateInput {
     @Validator.MaxLength(100)
     @Validator.MinLength(1)
     name?: string;
-    @Field(() => String, {nullable:false})
+    @Field(() => String, {nullable:true})
     @Validator.IsString()
     @Validator.MaxLength(300)
     @Validator.MinLength(5)
-    password!: string;
+    password?: string;
+    @Field(() => String, {nullable:true})
+    @Validator.IsString()
+    icon?: string;
+    @Field(() => Boolean, {nullable:true})
+    isVerified?: boolean;
 }
 
 @InputType()
@@ -589,6 +683,11 @@ export class UserUncheckedUpdateManyInput {
     @Validator.MaxLength(300)
     @Validator.MinLength(5)
     password?: string;
+    @Field(() => String, {nullable:true})
+    @Validator.IsString()
+    icon?: string;
+    @Field(() => Boolean, {nullable:true})
+    isVerified?: boolean;
 }
 
 @InputType()
@@ -608,6 +707,11 @@ export class UserUncheckedUpdateInput {
     @Validator.MaxLength(300)
     @Validator.MinLength(5)
     password?: string;
+    @Field(() => String, {nullable:true})
+    @Validator.IsString()
+    icon?: string;
+    @Field(() => Boolean, {nullable:true})
+    isVerified?: boolean;
 }
 
 @InputType()
@@ -627,6 +731,11 @@ export class UserUpdateManyMutationInput {
     @Validator.MaxLength(300)
     @Validator.MinLength(5)
     password?: string;
+    @Field(() => String, {nullable:true})
+    @Validator.IsString()
+    icon?: string;
+    @Field(() => Boolean, {nullable:true})
+    isVerified?: boolean;
 }
 
 @InputType()
@@ -646,6 +755,11 @@ export class UserUpdateInput {
     @Validator.MaxLength(300)
     @Validator.MinLength(5)
     password?: string;
+    @Field(() => String, {nullable:true})
+    @Validator.IsString()
+    icon?: string;
+    @Field(() => Boolean, {nullable:true})
+    isVerified?: boolean;
 }
 
 @InputType()
@@ -673,6 +787,10 @@ export class UserWhereInput {
     name?: InstanceType<typeof StringFilter>;
     @Field(() => StringFilter, {nullable:true})
     password?: InstanceType<typeof StringFilter>;
+    @Field(() => StringFilter, {nullable:true})
+    icon?: InstanceType<typeof StringFilter>;
+    @Field(() => BoolFilter, {nullable:true})
+    isVerified?: InstanceType<typeof BoolFilter>;
 }
 
 @ObjectType()
@@ -684,5 +802,9 @@ export class User {
     @Field(() => String, {nullable:true})
     name!: string | null;
     @HideField()
-    password!: string;
+    password!: string | null;
+    @Field(() => String, {nullable:true})
+    icon!: string | null;
+    @Field(() => Boolean, {nullable:false,defaultValue:false})
+    isVerified!: boolean;
 }

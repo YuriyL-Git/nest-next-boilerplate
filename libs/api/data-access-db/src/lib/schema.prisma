@@ -42,5 +42,10 @@ model User {
   /// @Validator.MaxLength(300)
   /// @Validator.MinLength(5)
   /// @HideField()
-  password String
+  password String?
+
+  /// @Validator.IsString()
+  icon String?
+
+  isVerified Boolean @default(false)
 }

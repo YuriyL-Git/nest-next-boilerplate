@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 
 import * as bcrypt from "bcrypt";
-import { User } from "@libs/api/generated-db-types";
+import { CreateOneUserArgs, User } from "@libs/api/generated-db-types";
 import { LoginInput } from "./dto/login.input";
 import { UserService } from "../user-feature/user.service";
 
@@ -9,7 +9,7 @@ import { UserService } from "../user-feature/user.service";
 export class AuthenticationService {
   constructor(private readonly userService: UserService) {}
 
-  async findUser(email: string, password: string): Promise<User | null> {
+  async findCredentials(email: string, password: string): Promise<User | null> {
     const user = await this.userService.findOne({ where: { email } });
     if (!user) return null;
 
@@ -19,12 +19,25 @@ export class AuthenticationService {
     return user;
   }
 
+  async findUserByEmail(email: string): Promise<User | null> {
+    const user = await this.userService.findOne({ where: { email } });
+    if (!user) return null;
+    return user;
+  }
+
   login(user: User) {
     return user;
   }
 
-  async signUp(signUpInput: LoginInput) {
+  async signUpWithCredentials(signUpInput: LoginInput) {
     const { email, password } = signUpInput;
-    return this.userService.create({ data: { email, password } });
+    return this.userService.createWithCredentials({ data: { email, password } });
+  }
+
+  async signUpWithEmail(createOneUserArgs: CreateOneUserArgs) {
+    const { data } = createOneUserArgs;
+    return this.userService.create({
+      data,
+    });
   }
 }

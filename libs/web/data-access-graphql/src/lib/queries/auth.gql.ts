@@ -6,6 +6,8 @@ const SIGN_UP = gql`
       id
       name
       email
+      isVerified
+      icon
     }
   }
 `;
@@ -16,6 +18,20 @@ const LOGIN = gql`
       id
       name
       email
+      isVerified
+      icon
+    }
+  }
+`;
+
+const LOGIN_WITH_GOOGLE = gql`
+  mutation LoginWithGoogle($args: GoogleLoginInput!) {
+    loginWithGoogle(googleLoginInput: $args) {
+      id
+      name
+      email
+      isVerified
+      icon
     }
   }
 `;

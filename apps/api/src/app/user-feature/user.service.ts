@@ -12,7 +12,7 @@ import * as bcrypt from "bcrypt";
 export class UserService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async create(createOneUserArgs: CreateOneUserArgs) {
+  async createWithCredentials(createOneUserArgs: CreateOneUserArgs) {
     const { data } = createOneUserArgs;
 
     const saltOrRounds = 10;
@@ -22,6 +22,13 @@ export class UserService {
         ...data,
         password: hashedPassword,
       },
+    });
+  }
+
+  async create(createOneUserArgs: CreateOneUserArgs) {
+    const { data } = createOneUserArgs;
+    return this.prisma.user.create({
+      data,
     });
   }
 
