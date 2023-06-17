@@ -12,6 +12,9 @@ interface Props {
   params: { lang: Locale };
 }
 
+// will revalidate page content every 30 seconds
+export const revalidate = 120;
+
 export default async function Page({ params }: Props) {
   let usersArray: User[] = [];
 
