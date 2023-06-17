@@ -4,6 +4,8 @@ import { revalidatePath } from "next/cache";
 export const runtime = "edge";
 
 export async function GET(request: NextRequest) {
-  revalidatePath("/");
+  const path = request.nextUrl.searchParams.get("path") || "/";
+
+  revalidatePath(path);
   return NextResponse.json({ revalidated: true, now: Date.now() });
 }

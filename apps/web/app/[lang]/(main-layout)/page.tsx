@@ -7,6 +7,7 @@ import { TestComponent } from "../../components/test-component/test-comp";
 import { NavBar } from "../../components/nav-bar/nav-bar";
 import Link from "next/link";
 import { LoginWithIdPage } from "@app/web/router";
+import { RevalidateButton } from "../../components/revalidate-button/revalidate-button";
 
 interface Props {
   params: { lang: Locale };
@@ -42,6 +43,8 @@ export default async function Page({ params }: Props) {
       {usersArray.map((user) => (
         <div key={user.id}>{user.name}</div>
       ))}
+
+      <RevalidateButton />
     </div>
   );
 }

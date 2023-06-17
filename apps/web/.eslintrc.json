@@ -21,7 +21,8 @@
               "kebabCase": true
             }
           }
-        ]
+        ],
+        "unicorn/consistent-function-scoping": "off"
       }
     },
     {
