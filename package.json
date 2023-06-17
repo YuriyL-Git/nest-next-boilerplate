@@ -150,6 +150,7 @@
     "eslint-plugin-react-hooks": "4.6.0",
     "eslint-plugin-unicorn": "^47.0.0",
     "eslint-plugin-unused-imports": "^2.0.0",
+    "fast-folder-size": "^2.0.0",
     "glob": "^10.2.7",
     "husky": "^8.0.3",
     "install": "^0.13.0",

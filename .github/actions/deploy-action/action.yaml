@@ -65,6 +65,7 @@ runs:
           sudo echo "${{ inputs.env-file }}" | base64 --decode | sudo tee .env &&
           sudo pnpm "cd:validate-env" &&
 
+          sudo npx ts-node --project tools/tsconfig.tools.json tools/check-cache/check-cache.ts &&
           sudo npx ts-node --project tools/tsconfig.tools.json tools/env-update/update-domain.ts ${{ inputs.domain-name }} &&
 
           sudo pnpm db:dockers &&
