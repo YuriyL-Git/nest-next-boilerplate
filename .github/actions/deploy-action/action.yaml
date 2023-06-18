@@ -69,7 +69,6 @@ runs:
           sudo npx ts-node --project tools/tsconfig.tools.json tools/env-update/update-domain.ts ${{ inputs.domain-name }} &&
 
           sudo pnpm db:dockers &&
-          sudo pnpm cd:db-seed &&
           sudo pnpm services-update &&
 
           sudo yes | sudo cp ./tools/services/web.service /etc/systemd/system/web.service &&
@@ -83,6 +82,7 @@ runs:
           sudo rm -rf dist &&
 
           sudo pnpm "build:api" &&
+          sudo pnpm cd:db-seed &&
           sudo systemctl start api &&
 
           sudo pnpm "build:web" &&
