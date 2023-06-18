@@ -8,6 +8,7 @@ import { NavBar } from "../../components/nav-bar/nav-bar";
 import Link from "next/link";
 import { LoginWithIdPage } from "@app/web/router";
 import { RevalidateButton } from "../../components/revalidate-button/revalidate-button";
+import { getGraphqlHeaders } from "../../common/helpers/get-graphql-headers";
 
 interface Props {
   params: { lang: Locale };
@@ -17,7 +18,7 @@ export default async function Page({ params }: Props) {
   let usersArray: User[] = [];
 
   try {
-    const { users } = await gqlServer.GetUsers();
+    const { users } = await gqlServer.GetUsers({}, getGraphqlHeaders());
 
     usersArray = users;
     // @ts-ignore
