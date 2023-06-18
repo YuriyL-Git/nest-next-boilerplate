@@ -1,4 +1,4 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-pnpm ts && pnpm verify
+x-terminal-emulator -e "pnpm db:migrate:dev" && git add libs/api/data-access-db/src/lib/migrations && pnpm ts && pnpm verify

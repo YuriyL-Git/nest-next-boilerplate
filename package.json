@@ -13,6 +13,7 @@
     "start:prisma-studio": "wait-on tcp:3333 && npx env-cmd -f .local.env npx prisma studio",
     "start:generate-public": "npx ts-node --project tools/tsconfig.tools.json tools/generate-public-files-list/generate-public-list.ts",
     "start:generate-routes": "npx ts-node --project tools/tsconfig.tools.json tools/route-generator/route-generator.ts",
+    "start:generate-prisma": "npx ts-node --project tools/tsconfig.tools.json tools/prisma-generator/prisma-generator.ts",
     "start:verify-env": "npx env-cmd -f .local.env ts-node --project tools/tsconfig.tools.json tools/validate-env/validate-env.ts",
     "start:gql:watch": "graphql-codegen --watch --config tools/graphql-codegen/codegen.ts",
     "---helpers-----": "----------------------------------------------------------",
@@ -173,7 +174,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "pnpm ts && pnpm verify"
+      "pre-commit": "pnpm db:migrate:dev && git add libs/api/data-access-db/src/lib/migrations && pnpm ts && pnpm verify"
     }
   }
 }

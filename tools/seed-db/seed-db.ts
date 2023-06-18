@@ -11,6 +11,7 @@ const nextServerAccount: UserCreateInput = {
   name: "Next_Server",
   email: "next_server@gmail.com",
   password: nextServerPassword,
+  isVerified: true,
 };
 
 const users: UserCreateInput[] = [
@@ -19,12 +20,14 @@ const users: UserCreateInput[] = [
     email: "johndoetest@gmail.com",
     // 123456
     password: "$2b$10$T16..if03x0ux11X5MkXIui7NiEguLsrfP2EXr0WCx8kfCRRUxp7a",
+    isVerified: true,
   },
   {
     name: "John Smith",
     email: "johnSmithtest@gmail.com",
     // 123456
     password: "$2b$10$T16..if03x0ux11X5MkXIui7NiEguLsrfP2EXr0WCx8kfCRRUxp7a",
+    isVerified: true,
   },
 ];
 
