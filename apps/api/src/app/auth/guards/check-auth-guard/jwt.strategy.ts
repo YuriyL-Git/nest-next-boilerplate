@@ -2,7 +2,7 @@ import { Strategy } from "passport-jwt";
 import { PassportStrategy } from "@nestjs/passport";
 import { Injectable } from "@nestjs/common";
 import { FastifyRequest } from "fastify";
-import { UserJwtPayload } from "../types";
+import { UserJwtPayload } from "../../dto/types";
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -17,7 +17,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
   async validate(payload: { sub?: string }): Promise<UserJwtPayload> {
     if (!payload.sub) return false;
-
     return { id: payload.sub };
   }
 }

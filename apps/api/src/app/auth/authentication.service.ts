@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 
 import * as bcrypt from "bcrypt";
 import { CreateOneUserArgs, User } from "@libs/api/generated-db-types";
-import { LoginInput } from "./dto/login.input";
+import { LoginInput } from "./dto/credentials.login.input";
 import { UserService } from "../user-feature/user.service";
 
 @Injectable()
@@ -31,6 +31,7 @@ export class AuthenticationService {
 
   async signUpWithCredentials(signUpInput: LoginInput) {
     const { email, password } = signUpInput;
+
     return this.userService.createWithCredentials({ data: { email, password } });
   }
 

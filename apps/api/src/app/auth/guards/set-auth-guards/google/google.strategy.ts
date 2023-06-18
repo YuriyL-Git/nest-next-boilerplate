@@ -1,6 +1,6 @@
 import { PassportStrategy } from "@nestjs/passport";
 import { Injectable, UnauthorizedException } from "@nestjs/common";
-import { AuthenticationService } from "../../authentication.service";
+import { AuthenticationService } from "../../../authentication.service";
 import { Strategy } from "passport-custom";
 import { OAuth2Client } from "google-auth-library";
 import { environment } from "@libs/shared/environement";

@@ -14,7 +14,9 @@ export class CheckAuthGuard extends AuthGuard("jwt") {
     const reply = context_.getContext().reply;
 
     if (!user || info || error) {
-      reply.setCookie("token", "");
+      reply.setCookie("token", "", {
+        path: "/",
+      });
       reply.setCookie("token-expires", "");
       throw error || new UnauthorizedException();
     }
