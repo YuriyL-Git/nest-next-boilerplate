@@ -7,11 +7,8 @@ import {
   UpdateOneUserArgs,
   User,
 } from "@libs/api/generated-db-types";
-import { UseGuards } from "@nestjs/common";
-import { CheckAuthGuard } from "../auth/guards/check-auth-guard/check-auth.guard";
 
 @Resolver(() => User)
-@UseGuards(CheckAuthGuard)
 export class UserResolver {
   constructor(private readonly userService: UserService) {}
 

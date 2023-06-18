@@ -42,6 +42,6 @@ export class GoogleStrategy extends PassportStrategy(Strategy, "google") {
       }
 
       done(error, user);
-    }); // email will be passed to validate function
+    });
   }
 }

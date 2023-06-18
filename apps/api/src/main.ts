@@ -1,10 +1,11 @@
 import { Logger } from "@nestjs/common";
-import { NestFactory } from "@nestjs/core";
+import { NestFactory, Reflector } from "@nestjs/core";
 import { AppModule } from "./app/app.module";
 import { FastifyAdapter, NestFastifyApplication } from "@nestjs/platform-fastify";
 import helmet from "@fastify/helmet";
 import fastifyCookie from "@fastify/cookie";
 import { environment } from "@libs/shared/environement";
+import { CheckAuthGuard } from "./app/auth/guards/check-auth-guard/check-auth.guard";
 
 const { api, isProd, cookieSecret, corsOrigin, webAppHost, corsEnabled } = environment;
 const host = isProd ? "0.0.0.0" : "localhost";
@@ -35,7 +36,7 @@ async function bootstrap() {
               callback(null, true);
             } else {
               Logger.log("Blocked cors for:", origin);
-              callback(new Error("Not allowed by CORS"));
+              callback(new Error(`Not allowed by CORS: ${origin}`));
             }
           }
         : "*",
@@ -44,6 +45,9 @@ async function bootstrap() {
     methods: "GET,PUT,POST,DELETE,UPDATE,OPTIONS",
     credentials: true,
   });
+
+  const reflector = app.get(Reflector);
+  app.useGlobalGuards(new CheckAuthGuard(reflector));
 
   const port = api.port;
   await app.listen(port, host);
