@@ -7,11 +7,13 @@ import { SetCredentialsAuthGuard } from "./guards/set-auth-guards/credentials/se
 import { LoginInput } from "./dto/credentials.login.input";
 import { SetGoogleAuthGuard } from "./guards/set-auth-guards/google/set-google-auth.guard";
 import { GoogleLoginInput } from "./dto/google.login.input";
+import { PublicGuard } from "./guards/public-guard/public-guard";
 
 @Resolver(() => User)
 export class AuthenticationResolver {
   constructor(private readonly authenticationService: AuthenticationService) {}
 
+  @PublicGuard()
   @UseGuards(SetCredentialsAuthGuard)
   @Mutation(() => User)
   login(@Args("loginInput") loginInput: LoginInput, @Context() context: IUserContext) {
@@ -19,6 +21,7 @@ export class AuthenticationResolver {
     return this.authenticationService.login(user);
   }
 
+  @PublicGuard()
   @UseGuards(SetGoogleAuthGuard)
   @Mutation(() => User)
   loginWithGoogle(
@@ -29,6 +32,7 @@ export class AuthenticationResolver {
     return this.authenticationService.login(user);
   }
 
+  @PublicGuard()
   @Mutation(() => User)
   signUp(@Args("signUpInput") signUpInput: LoginInput) {
     return this.authenticationService.signUpWithCredentials(signUpInput);
