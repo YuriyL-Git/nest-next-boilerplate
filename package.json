@@ -37,7 +37,7 @@
     "serve:api": "pnpm nx serve api --prod",
     "serve:web": "cd dist/apps/web && npx env-cmd -f ./../../../.env pnpm next start -p 8080",
     "cd:validate-env": "npx env-cmd -f .env npx ts-node --project tools/tsconfig.tools.json tools/validate-env/validate-env.ts",
-    "cd:db-deploy": "npx prisma migrate deploy",
+    "cd:db-deploy": "npx prisma migrate deploy && npx prisma generate",
     "cd:db-seed": "npx ts-node --project tools/tsconfig.tools.json tools/seed-db/seed-db.ts",
     "web-out": "sudo journalctl -f -u web",
     "api-out": "sudo journalctl -f -u api",
