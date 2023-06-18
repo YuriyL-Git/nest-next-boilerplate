@@ -85,6 +85,7 @@ export type User = {
   id: Scalars['ID']['output'];
   isVerified: Scalars['Boolean']['output'];
   name?: Maybe<Scalars['String']['output']>;
+  testField: Scalars['String']['output'];
   verificationToken?: Maybe<Scalars['String']['output']>;
 };
 
@@ -96,6 +97,7 @@ export type UserCountAggregate = {
   id: Scalars['Int']['output'];
   isVerified: Scalars['Int']['output'];
   name: Scalars['Int']['output'];
+  testField: Scalars['Int']['output'];
   verificationToken: Scalars['Int']['output'];
 };
 
@@ -106,6 +108,7 @@ export type UserCreateInput = {
   isVerified?: InputMaybe<Scalars['Boolean']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   password?: InputMaybe<Scalars['String']['input']>;
+  testField?: InputMaybe<Scalars['String']['input']>;
   verificationToken?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -116,6 +119,7 @@ export type UserMaxAggregate = {
   id?: Maybe<Scalars['String']['output']>;
   isVerified?: Maybe<Scalars['Boolean']['output']>;
   name?: Maybe<Scalars['String']['output']>;
+  testField?: Maybe<Scalars['String']['output']>;
   verificationToken?: Maybe<Scalars['String']['output']>;
 };
 
@@ -126,6 +130,7 @@ export type UserMinAggregate = {
   id?: Maybe<Scalars['String']['output']>;
   isVerified?: Maybe<Scalars['Boolean']['output']>;
   name?: Maybe<Scalars['String']['output']>;
+  testField?: Maybe<Scalars['String']['output']>;
   verificationToken?: Maybe<Scalars['String']['output']>;
 };
 
@@ -136,6 +141,7 @@ export type UserUpdateInput = {
   isVerified?: InputMaybe<Scalars['Boolean']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   password?: InputMaybe<Scalars['String']['input']>;
+  testField?: InputMaybe<Scalars['String']['input']>;
   verificationToken?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -168,7 +174,7 @@ export type LoginWithGoogle = { __typename?: 'Mutation', loginWithGoogle: { __ty
 export type GetUsersVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetUsers = { __typename?: 'Query', users: Array<{ __typename: 'User', id: string, email: string, name?: string | null, isVerified: boolean }> };
+export type GetUsers = { __typename?: 'Query', users: Array<{ __typename: 'User', id: string, email: string, name?: string | null, isVerified: boolean, testField: string }> };
 
 export type GetUserVariables = Exact<{
   where: UserWhereUniqueInput;
@@ -225,6 +231,7 @@ export const GetUsersDocument = /*#__PURE__*/ gql`
     email
     name
     isVerified
+    testField
     __typename
   }
 }

@@ -51,4 +51,6 @@ model User {
 
   /// @Validator.IsString()
   verificationToken String?
+
+  testField String @default("My_default_test_value")
 }

@@ -7,6 +7,7 @@ const GET_USERS = gql`
       email
       name
       isVerified
+      testField
       __typename
     }
   }
