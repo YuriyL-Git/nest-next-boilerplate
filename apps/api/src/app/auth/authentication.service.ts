@@ -31,8 +31,9 @@ export class AuthenticationService {
 
   async signUpWithCredentials(signUpInput: LoginInput) {
     const { email, password } = signUpInput;
-
-    return this.userService.createWithCredentials({ data: { email, password } });
+    return this.userService.createWithCredentials({
+      data: { email, password, isVerified: false },
+    });
   }
 
   async signUpWithEmail(createOneUserArgs: CreateOneUserArgs) {

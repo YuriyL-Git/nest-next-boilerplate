@@ -14,18 +14,41 @@ export const SignUp = () => {
     initialValues: {
       email: "",
       password: "",
+      passwordConfirm: "",
     },
     onSubmit: (resultValues) => {
-      gqlClient.SignUp({
-        args: resultValues,
-      });
+      const { password, passwordConfirm, email } = resultValues;
+      if (password === passwordConfirm) {
+        gqlClient.SignUp({
+          args: {
+            email,
+            password,
+          },
+        });
+      }
     },
   });
 
   return (
     <Box sx={styles.container}>
-      <InputField fieldName="email" formik={formik} sx={styles.input} />
-      <InputField fieldName="password" formik={formik} sx={styles.input} />
+      <InputField
+        fieldName="email"
+        formik={formik}
+        sx={styles.input}
+        placeholder={AuthStrings.Email}
+      />
+      <InputField
+        fieldName="password"
+        formik={formik}
+        sx={styles.input}
+        placeholder={AuthStrings.Password}
+      />
+      <InputField
+        fieldName="passwordConfirm"
+        formik={formik}
+        sx={styles.input}
+        placeholder={AuthStrings.ConfirmPassword}
+      />
       <Button
         onClick={() => {
           formik.handleSubmit();

@@ -3,8 +3,7 @@ import * as fs from "node:fs/promises";
 import * as path from "path";
 import { HOOK_IMPORTS, HOOK_WRAPPER_END, HOOK_WRAPPER_START } from "./consts";
 import { getRouteData, getTypesData, getUniqueRouteNames, sortByKey } from "./utils";
-
-const chokidar = require("chokidar");
+import { watch } from "chokidar";
 const { exec } = require("child_process");
 
 const appFolder = "apps/web/app";
@@ -55,8 +54,7 @@ const generateRoutes = async () => {
   exec(`npx prettier '${routerBasePath}/**/*.ts' --write`);
 };
 
-chokidar
-  .watch(appFolder)
+watch(appFolder)
   .on("add", async () => {
     generateRoutes();
   })

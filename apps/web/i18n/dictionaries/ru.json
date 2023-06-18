@@ -8,6 +8,9 @@
   },
   "AuthStrings": {
     "Login": "Логин",
-    "Register": "Регистрация"
+    "Register": "Регистрация",
+    "Email": "И-мейл",
+    "Password": "Пароль",
+    "ConfirmPassword": "Подтвердить пароль"
   }
 }

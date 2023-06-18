@@ -85,6 +85,7 @@ export type User = {
   id: Scalars['ID']['output'];
   isVerified: Scalars['Boolean']['output'];
   name?: Maybe<Scalars['String']['output']>;
+  verificationToken?: Maybe<Scalars['String']['output']>;
 };
 
 export type UserCountAggregate = {
@@ -95,6 +96,7 @@ export type UserCountAggregate = {
   id: Scalars['Int']['output'];
   isVerified: Scalars['Int']['output'];
   name: Scalars['Int']['output'];
+  verificationToken: Scalars['Int']['output'];
 };
 
 export type UserCreateInput = {
@@ -104,6 +106,7 @@ export type UserCreateInput = {
   isVerified?: InputMaybe<Scalars['Boolean']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   password?: InputMaybe<Scalars['String']['input']>;
+  verificationToken?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type UserMaxAggregate = {
@@ -113,6 +116,7 @@ export type UserMaxAggregate = {
   id?: Maybe<Scalars['String']['output']>;
   isVerified?: Maybe<Scalars['Boolean']['output']>;
   name?: Maybe<Scalars['String']['output']>;
+  verificationToken?: Maybe<Scalars['String']['output']>;
 };
 
 export type UserMinAggregate = {
@@ -122,6 +126,7 @@ export type UserMinAggregate = {
   id?: Maybe<Scalars['String']['output']>;
   isVerified?: Maybe<Scalars['Boolean']['output']>;
   name?: Maybe<Scalars['String']['output']>;
+  verificationToken?: Maybe<Scalars['String']['output']>;
 };
 
 export type UserUpdateInput = {
@@ -131,6 +136,7 @@ export type UserUpdateInput = {
   isVerified?: InputMaybe<Scalars['Boolean']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   password?: InputMaybe<Scalars['String']['input']>;
+  verificationToken?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type UserWhereUniqueInput = {

@@ -8,6 +8,9 @@
   },
   "AuthStrings": {
     "Login": "Login",
-    "Register": "Register"
+    "Register": "Register",
+    "Email": "E-mail",
+    "Password": "Password",
+    "ConfirmPassword": "Confirm password"
   }
 }
