@@ -9,8 +9,8 @@
     "start:web": "wait-on tcp:3333 && nx serve web",
     "start:web-browser": "wait-on tcp:4200 && open http://localhost:4200",
     "start:graphql-playground": "wait-on tcp:3333 && open http://localhost:3333/graphiql",
-    "start:db:watch": "pnpm db:dockers:dev && prisma generate --watch",
-    "start:prisma-studio": "wait-on tcp:3333 && npx env-cmd -f .local.env npx prisma studio",
+    "start:db": "pnpm db:dockers:dev &&  npx env-cmd -f .local.env npx prisma db push --accept-data-loss && npx env-cmd -f .local.env npx prisma generate",
+    "start:prisma-studio": "wait-on tcp:3333  && npx env-cmd -f .local.env npx prisma studio",
     "start:generate-public": "npx ts-node --project tools/tsconfig.tools.json tools/generate-public-files-list/generate-public-list.ts",
     "start:generate-routes": "npx ts-node --project tools/tsconfig.tools.json tools/route-generator/route-generator.ts",
     "start:generate-prisma": "npx ts-node --project tools/tsconfig.tools.json tools/prisma-generator/prisma-generator.ts",
@@ -19,7 +19,7 @@
     "---helpers-----": "----------------------------------------------------------",
     "stop-ports": "npx kill-port 5433 3333 4200",
     "migrate-dev": "npx env-cmd -f .local.env npx prisma migrate dev",
-    "migrate-create": "npx prisma migrate dev --create-only",
+    "migrate-create": "npx env-cmd -f .local.env npx prisma migrate dev --create-only",
     "db:dockers:dev": "npx env-cmd -f .local.env docker compose -f tools/db-environment/dev.docker-compose.yml up -d --no-recreate --remove-orphans",
     "lint-fix": "nx lint --fix --all",
     "verify": "nx run api:lint && nx run web:lint && nx format:write && nx format:check && nx affected --base origin/master  --target=lint --fix --parallel=3",
@@ -32,6 +32,7 @@
     "ts": "pnpm ts-api && pnpm ts-web && pnpm ts-libs",
     "upgrade": "nx migrate latest && pnpm install && pnpm i next@latest",
     "preinstall": "npx only-allow pnpm",
+    "pre-commit": "x-terminal-emulator -e \"pnpm migrate-create\" && git add libs/api/data-access-db/src/lib/migrations && pnpm ts && pnpm verify",
     "-----ci-cd------": "----------------------------------------------------------",
     "db:dockers": "npx env-cmd -f .env docker-compose -f tools/db-environment/docker-compose.yml up -d --no-recreate --remove-orphans",
     "build:api": "wait-on tcp:0.0.0.0:5433 && pnpm cd:db-deploy && pnpm nx build api --prod",
@@ -64,7 +65,7 @@
     "@nestjs/passport": "^9.0.3",
     "@nestjs/platform-fastify": "^9.4.2",
     "@nx/next": "16.3.2",
-    "@prisma/client": "^4.14.1",
+    "@prisma/client": "^4.15.0",
     "@react-oauth/google": "^0.11.0",
     "@reduxjs/toolkit": "^1.9.5",
     "@swc/helpers": "~0.5.0",
@@ -162,7 +163,7 @@
     "nx": "16.3.2",
     "postcss": "^8.4.24",
     "prettier": "^2.8.8",
-    "prisma": "^4.14.1",
+    "prisma": "^4.15.0",
     "prisma-nestjs-graphql": "^18.0.2",
     "ts-jest": "^29.1.0",
     "ts-node": "10.9.1",
@@ -175,7 +176,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "pnpm migrate-dev && git add libs/api/data-access-db/src/lib/migrations && pnpm ts && pnpm verify"
+      "pre-commit": "pnpm pre-commit"
     }
   }
 }
