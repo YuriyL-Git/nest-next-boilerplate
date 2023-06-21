@@ -2,10 +2,7 @@
    ![img.png](img.png)
 
 Add secrets:
-![img_2.png](img_2.png)
-
-2 Add ENV_FILE sercret variable
-Run pnpm env-gen to copy base64 encoded .env file content and pass to ENV_FILE secret variable
+![img_11.png](img_11.png)
 
 ###
 
@@ -21,3 +18,4 @@ Setup google cloud as described here https://github.com/google-github-actions/ss
    insert JSON key content to GCP_CREDENTIALS
 4. Create metadata private key as described here https://cloud.google.com/compute/docs/connect/create-ssh-keys
    and add to GCP_SSH_PRIVATE_KEY
+5. Add SSL sertificates

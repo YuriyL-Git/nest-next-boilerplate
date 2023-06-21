@@ -8,8 +8,8 @@ const migrationsFolder = "libs/api/data-access-db/src/lib/migrations";
 const encoding = "utf8";
 
 async function prismaMigrate() {
-  await exec("npx env-cmd -f .local.env npx prisma migrate dev --create-only");
   const migrations = await glob(`${migrationsFolder}/**/*.sql`);
+
   for (const migration of migrations) {
     const migrationContent = await fs.readFile(migration, encoding);
     if (migrationContent === "-- This is an empty migration.") {

@@ -10,6 +10,9 @@ inputs:
   env-file:
     required: true
     description: "Env file"
+  env-encrypt-key:
+    required: true
+    description: "Env encryption key"
   gcp-credentials:
     required: true
     description: "Google service account json credentials file. Before service account should be set-up and added to vm instance"
@@ -62,7 +65,7 @@ runs:
           sudo git reset --hard "origin/${{ inputs.build-branch }}" &&
 
           sudo pnpm install &&
-          sudo echo "${{ inputs.env-file }}" | base64 --decode | sudo tee .env &&
+          sudo npx ts-node --project tools/tsconfig.tools.json tools/env-crypt/decrypt-env.ts ${{ inputs.env-encrypt-key }} &&
           sudo pnpm "cd:validate-env" &&
 
           sudo npx ts-node --project tools/tsconfig.tools.json tools/check-cache/check-cache.ts &&

@@ -13,6 +13,7 @@ jobs:
       - uses: ./.github/actions/deploy-action
         with:
           env-file: ${{ secrets.ENV_FILE }}
+          env-encrypt-key: ${{ secrets.ENV_ENCRYPTION_KEY }}
           gcp-credentials: ${{ secrets.GCP_CREDENTIALS }}
           gcp-ssh-private-key: ${{ secrets.GCP_SSH_PRIVATE_KEY }}
           https-certificate: ${{ secrets.HTTPS_SERTIFICATE }}
