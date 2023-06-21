@@ -19,7 +19,7 @@
     "---helpers-----": "----------------------------------------------------------",
     "stop-ports": "npx kill-port 5433 3333 4200",
     "migrate-dev": "npx env-cmd -f .local.env npx prisma migrate dev",
-    "migrate-create": "npx env-cmd -f .local.env npx prisma migrate dev --create-only",
+    "migrate-create": "npx ts-node --project tools/tsconfig.tools.json tools/prisma-generator/prisma-migrate.ts",
     "db:dockers:dev": "npx env-cmd -f .local.env docker compose -f tools/db-environment/dev.docker-compose.yml up -d --no-recreate --remove-orphans",
     "lint-fix": "nx lint --fix --all",
     "verify": "nx run api:lint && nx run web:lint && nx format:write && nx format:check && nx affected --base origin/master  --target=lint --fix --parallel=3",
