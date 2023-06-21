@@ -1,7 +1,27 @@
 import { exec } from "child_process";
+import { glob } from "glob";
+import * as fs from "node:fs/promises";
+import * as path from "path";
+import * as process from "process";
 
-exec("npx env-cmd -f .local.env npx prisma migrate status", (_, stdout) => {
-  if (!stdout.includes("schema is up to date")) {
-    exec("npx env-cmd -f .local.env npx prisma migrate dev --create-only");
+const migrationsFolder = "libs/api/data-access-db/src/lib/migrations";
+const encoding = "utf8";
+
+async function prismaMigrate() {
+  await exec("npx env-cmd -f .local.env npx prisma migrate dev --create-only");
+  const migrations = await glob(`${migrationsFolder}/**/*.sql`);
+  for (const migration of migrations) {
+    const migrationContent = await fs.readFile(migration, encoding);
+    if (migrationContent === "-- This is an empty migration.") {
+      const emptyMigrationDir = path.basename(path.dirname(migration));
+      await fs.rm(`${migrationsFolder}/${emptyMigrationDir}`, {
+        recursive: true,
+        force: true,
+      });
+    }
   }
-});
+
+  process.exit(0);
+}
+
+prismaMigrate();
