@@ -22,4 +22,11 @@ export const environment = {
     googleClientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID as string,
     googleClientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
   },
+  nodemailer: {
+    mailAddress: process.env.GMAIL_ADDRESS as string,
+    googleClientIdEmail: process.env.GOOGLE_CLIENT_ID_MAIL as string,
+    googleClientSecretEmail: process.env.GOOGLE_CLIENT_SECRET_MAIL as string,
+    googleAccessTokenEmail: process.env.GOOGLE_ACCESS_TOKEN_EMAIL as string,
+    googleRefreshTokenEmail: process.env.GOOGLE_REFRESH_TOKEN_EMAIL as string,
+  },
 };

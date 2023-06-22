@@ -50,27 +50,32 @@ export class ApiEnvVo implements ApiEnv {
 
   @IsDefined()
   @ValidateNested()
-  @Type(() => EnvDbVo)
-  public db: EnvDbVo;
+  @Type(() => Db)
+  public db: Db;
 
   @IsDefined()
   @ValidateNested()
-  @Type(() => EnvApiVo)
-  public api: EnvApiVo;
+  @Type(() => Api)
+  public api: Api;
 
   @IsDefined()
   @ValidateNested()
-  @Type(() => EnvGoogleAuthVo)
-  public googleAuth: EnvGoogleAuthVo;
+  @Type(() => GoogleAuth)
+  public googleAuth: GoogleAuth;
+
+  @IsDefined()
+  @ValidateNested()
+  @Type(() => NodeMailer)
+  public nodemailer: NodeMailer;
 }
 
-class EnvDbVo {
+class Db {
   @IsNotEmpty()
   @IsString()
   public url: string;
 }
 
-class EnvApiVo {
+class Api {
   @IsNumber()
   public port: number;
 
@@ -81,7 +86,7 @@ class EnvApiVo {
   public apiUrl: string;
 }
 
-class EnvGoogleAuthVo {
+class GoogleAuth {
   @IsNotEmpty()
   @IsString()
   public googleClientId: string;
@@ -89,6 +94,28 @@ class EnvGoogleAuthVo {
   @IsNotEmpty()
   @IsString()
   public googleClientSecret: string;
+}
+
+class NodeMailer {
+  @IsNotEmpty()
+  @IsString()
+  public googleRefreshTokenEmail: string;
+
+  @IsNotEmpty()
+  @IsString()
+  public googleClientSecretEmail: string;
+
+  @IsNotEmpty()
+  @IsString()
+  public googleClientIdEmail: string;
+
+  @IsNotEmpty()
+  @IsString()
+  public mailAddress: string;
+
+  @IsNotEmpty()
+  @IsString()
+  public googleAccessTokenEmail: string;
 }
 
 const apiEnvVoInstance = plainToInstance(ApiEnvVo, environment);
