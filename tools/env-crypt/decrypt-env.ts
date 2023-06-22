@@ -1,6 +1,6 @@
 import * as fs from "node:fs/promises";
 import { decryptText } from "./utils";
-import { envCryptedPath, encoding, envPath } from "./consts";
+import { envCryptedPath, encoding } from "./consts";
 import * as process from "process";
 import * as path from "path";
 

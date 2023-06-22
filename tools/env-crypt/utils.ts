@@ -3,8 +3,15 @@ import * as process from "process";
 
 const algorithm = "aes-256-ctr";
 
-const getKey = (input: string) => {
-  return createHash("sha256").update(String(input)).digest("base64").substring(0, 32);
+const getKey = (encryptionKey: string) => {
+  return createHash("sha256")
+    .update(String(encryptionKey))
+    .digest("base64")
+    .substring(0, 32);
+};
+
+const getCheckSum = (text: string) => {
+  return createHash("md5").update(text).digest("hex");
 };
 
 export const encryptText = (text: string): string => {
@@ -14,12 +21,18 @@ export const encryptText = (text: string): string => {
   const iv = randomBytes(16);
   const cipher = createCipheriv(algorithm, key, iv);
 
-  return Buffer.concat([iv, cipher.update(bufferText), cipher.final()]).toString(
+  const checksum = getCheckSum(text);
+  const result = Buffer.concat([iv, cipher.update(bufferText), cipher.final()]).toString(
     "base64",
   );
+
+  return `${checksum}.${result}`;
 };
 
-export const decryptText = (encryptedText: string, encryptionKey: string): string => {
+export const decryptText = (text: string, encryptionKey: string): string => {
+  const splitIndex = text.indexOf(".");
+  const checksum = text.slice(0, splitIndex);
+  const encryptedText = text.slice(splitIndex + 1, text.length);
   const key = getKey(encryptionKey);
 
   const encrypted = Buffer.from(encryptedText, "base64");
@@ -27,5 +40,14 @@ export const decryptText = (encryptedText: string, encryptionKey: string): strin
   const encryptedData = encrypted.slice(16);
   const decipher = createDecipheriv(algorithm, key, iv);
 
-  return Buffer.concat([decipher.update(encryptedData), decipher.final()]).toString();
+  const result = Buffer.concat([
+    decipher.update(encryptedData),
+    decipher.final(),
+  ]).toString();
+
+  if (checksum !== getCheckSum(result)) {
+    throw new Error("Invalid encryption key");
+  }
+
+  return result;
 };
