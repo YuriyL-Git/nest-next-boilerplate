@@ -1,4 +1,3 @@
-import { exec } from "child_process";
 import { glob } from "glob";
 import * as fs from "node:fs/promises";
 import * as path from "path";
