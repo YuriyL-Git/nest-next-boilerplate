@@ -7,9 +7,6 @@ inputs:
   build-branch:
     required: true
     description: "Branch name to build"
-  env-file:
-    required: true
-    description: "Env file"
   env-encrypt-key:
     required: true
     description: "Env encryption key"

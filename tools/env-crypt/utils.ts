@@ -46,7 +46,7 @@ export const decryptText = (text: string, encryptionKey: string): string => {
   ]).toString();
 
   if (checksum !== getCheckSum(result)) {
-    throw new Error("Invalid encryption key");
+    throw new Error("Invalid encryption key or encrypted file corrupted");
   }
 
   return result;
