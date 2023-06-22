@@ -3,9 +3,9 @@ import { AuthenticationService } from "./authentication.service";
 import { UseGuards } from "@nestjs/common";
 import { User } from "@libs/api/generated-db-types";
 import { IUserContext } from "./dto/types";
-import { SetCredentialsAuthGuard } from "./guards/set-auth-guards/credentials/set-credentials.auth.guard";
+import { SetCredentialsAuthGuard } from "./guards/login-guards/credentials/set-credentials.auth.guard";
 import { LoginInput } from "./dto/credentials.login.input";
-import { SetGoogleAuthGuard } from "./guards/set-auth-guards/google/set-google-auth.guard";
+import { SetGoogleAuthGuard } from "./guards/login-guards/google/set-google-auth.guard";
 import { GoogleLoginInput } from "./dto/google.login.input";
 import { PublicGuard } from "./guards/public-guard/public-guard";
 

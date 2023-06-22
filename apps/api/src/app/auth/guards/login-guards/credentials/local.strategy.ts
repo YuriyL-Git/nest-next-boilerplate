@@ -3,6 +3,7 @@ import { Strategy } from "passport-local";
 import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { User } from "@libs/api/generated-db-types";
 import { AuthenticationService } from "../../../authentication.service";
+import { MessageStrings } from "../../../../consts/message-strings";
 
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy) {
@@ -13,8 +14,12 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
   async validate(email: string, password: string): Promise<User> {
     const user = await this.authService.findCredentials(email, password);
 
-    if (user == null || !user.isVerified) {
+    if (user == null) {
       throw new UnauthorizedException();
+    }
+
+    if (!user.isVerified) {
+      throw new UnauthorizedException(MessageStrings.UserNotVerified);
     }
 
     return user;

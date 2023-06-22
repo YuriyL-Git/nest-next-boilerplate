@@ -50,5 +50,6 @@ model User {
   isVerified Boolean @default(false)
 
   /// @Validator.IsString()
+  /// @HideField()
   verificationToken String?
 }

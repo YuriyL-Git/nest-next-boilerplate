@@ -360,7 +360,7 @@ export class UserCountAggregate {
     icon!: number;
     @Field(() => Int, {nullable:false})
     isVerified!: number;
-    @Field(() => Int, {nullable:false})
+    @HideField()
     verificationToken!: number;
     @Field(() => Int, {nullable:false})
     _all!: number;
@@ -481,8 +481,7 @@ export class UserGroupBy {
     icon?: string;
     @Field(() => Boolean, {nullable:false})
     isVerified!: boolean;
-    @Field(() => String, {nullable:true})
-    @Validator.IsString()
+    @HideField()
     verificationToken?: string;
     @Field(() => UserCountAggregate, {nullable:true})
     _count?: InstanceType<typeof UserCountAggregate>;
@@ -529,8 +528,7 @@ export class UserMaxAggregate {
     icon?: string;
     @Field(() => Boolean, {nullable:true})
     isVerified?: boolean;
-    @Field(() => String, {nullable:true})
-    @Validator.IsString()
+    @HideField()
     verificationToken?: string;
 }
 
@@ -589,8 +587,7 @@ export class UserMinAggregate {
     icon?: string;
     @Field(() => Boolean, {nullable:true})
     isVerified?: boolean;
-    @Field(() => String, {nullable:true})
-    @Validator.IsString()
+    @HideField()
     verificationToken?: string;
 }
 
@@ -860,6 +857,6 @@ export class User {
     icon!: string | null;
     @Field(() => Boolean, {nullable:false,defaultValue:false})
     isVerified!: boolean;
-    @Field(() => String, {nullable:true})
+    @HideField()
     verificationToken!: string | null;
 }

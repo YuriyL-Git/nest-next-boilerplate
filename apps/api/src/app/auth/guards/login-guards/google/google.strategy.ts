@@ -28,7 +28,7 @@ export class GoogleStrategy extends PassportStrategy(Strategy, "google") {
 
         user = await this.authService.findUserByEmail(email);
         if (!user) {
-          user = await this.authService.signUpWithEmail({
+          user = await this.authService.signUpWithEmailProvider({
             data: {
               email,
               name,
