@@ -16,6 +16,7 @@
     "noPropertyAccessFromIndexSignature": false,
     "baseUrl": ".",
     "paths": {
+      "@app/shared/types": ["libs/shared/types/src/index.ts"],
       "@app/web/router": ["libs/web/router/src/index.ts"],
       "@app/web/router/server": ["libs/web/router/src/server.ts"],
       "@libs/api/data-access-db": ["libs/api/data-access-db/src/index.ts"],

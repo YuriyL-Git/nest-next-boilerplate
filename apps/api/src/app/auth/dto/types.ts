@@ -7,4 +7,4 @@ export interface IUserContext {
   user: User;
 }
 
-export type UserJwtPayload = false | { id: string };
+export type UserJwtPayload = false | { id: string; isVerified: boolean };

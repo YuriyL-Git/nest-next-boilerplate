@@ -1,10 +1,12 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { randomBytes } from "node:crypto";
 import { promisify } from "node:util";
 import * as bcrypt from "bcrypt";
 import { CreateOneUserArgs, User } from "@libs/api/generated-db-types";
 import { LoginInput } from "./dto/credentials.login.input";
 import { UserService } from "../user-feature/user.service";
+import { sendMail } from "../../services/nodemailer";
+import { MessageStrings } from "../../consts/message-strings";
 
 @Injectable()
 export class AuthenticationService {
@@ -34,9 +36,24 @@ export class AuthenticationService {
     const bytesGenerated = await randomBytesAsync(48);
     const verificationToken = bytesGenerated.toString("base64url").replaceAll(/\W/g, "");
 
-    return this.userService.createWithCredentials({
-      data: { email, password, isVerified: false, verificationToken },
-    });
+    let user: User | null = null;
+
+    try {
+      user = await this.userService.createWithCredentials({
+        data: { email, password, isVerified: false, verificationToken },
+      });
+    } catch {
+      throw new UnauthorizedException(MessageStrings.UserAlreadyExists);
+    }
+
+    if (user) {
+      sendMail({
+        subject: "Verification link",
+        receivers: [email],
+        htmlBody: `<a href="https://${process.env.DOMAIN_NAME}/verification/${verificationToken}">Click here to verify Your e-mail</a>`,
+      });
+    }
+    return user;
   }
 
   async signUpWithEmailProvider(createOneUserArgs: CreateOneUserArgs) {

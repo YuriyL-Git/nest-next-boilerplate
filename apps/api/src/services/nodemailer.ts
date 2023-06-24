@@ -4,7 +4,6 @@ import { environment } from "@libs/shared/environement";
 // https://blog.devgenius.io/correct-way-in-setting-up-nodemailer-for-email-service-946f6bfd73e8
 interface mailProps {
   receivers: string[];
-  from: string;
   subject: string;
   htmlBody: string;
 }
@@ -19,7 +18,7 @@ const {
   },
 } = environment;
 
-export async function sendMail({ receivers, from, subject, htmlBody }: mailProps) {
+export async function sendMail({ receivers, subject, htmlBody }: mailProps) {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -33,7 +32,7 @@ export async function sendMail({ receivers, from, subject, htmlBody }: mailProps
   });
 
   await transporter.sendMail({
-    from: `"${from}" ${mailAddress}`,
+    from: `"${mailAddress}"`,
     to: receivers.join(","),
     subject,
     html: htmlBody,

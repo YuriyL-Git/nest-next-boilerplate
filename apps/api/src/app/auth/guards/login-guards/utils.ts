@@ -30,7 +30,7 @@ export const getHandleRequest: GetHandleRequest = (jwtService: JwtService) => {
 
     const jwtExpiresMs = Number(jwtExpiresSeconds) * 1000;
     const tokenExpires = Date.now() + jwtExpiresMs;
-    const accessToken = jwtService.sign({ sub: user.id });
+    const accessToken = jwtService.sign({ sub: user.id, isVerified: user.isVerified });
 
     reply.setCookie("token", accessToken, HTTP_ONLY_COOKIE);
     reply.setCookie("token-expires", tokenExpires.toString(), USERS_COOKIE);

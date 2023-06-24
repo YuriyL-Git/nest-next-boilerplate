@@ -10,6 +10,7 @@ export const environment = {
   cookiesSecure: process.env.COOKIES_SECURE === "true",
   webAppHost: process.env.WEB_APP_HOST as string,
   corsEnabled: process.env.CORS_ENABLED === "true",
+  domainName: process.env.DOMAIN_NAME as string,
   api: {
     apiUrl: process.env.API_URL as string,
     port: Number(process.env.API_PORT),

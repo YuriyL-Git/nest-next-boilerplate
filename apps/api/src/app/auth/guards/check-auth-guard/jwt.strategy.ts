@@ -3,6 +3,7 @@ import { PassportStrategy } from "@nestjs/passport";
 import { Injectable } from "@nestjs/common";
 import { FastifyRequest } from "fastify";
 import { UserJwtPayload } from "../../dto/types";
+import { TokenPayload } from "@app/shared/types";
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -15,9 +16,12 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
-  async validate(payload: { sub?: string }): Promise<UserJwtPayload> {
-    if (!payload.sub) return false;
-    return { id: payload.sub };
+  async validate(payload: TokenPayload): Promise<UserJwtPayload> {
+    const { isVerified, sub } = payload;
+    if (!sub) {
+      return false;
+    }
+    return { id: sub, isVerified };
   }
 }
 

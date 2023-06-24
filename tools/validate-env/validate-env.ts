@@ -48,6 +48,9 @@ export class ApiEnvVo implements ApiEnv {
   @IsNumber()
   public jwtExpiresSeconds: number;
 
+  @IsString()
+  public domainName: string;
+
   @IsDefined()
   @ValidateNested()
   @Type(() => Db)
