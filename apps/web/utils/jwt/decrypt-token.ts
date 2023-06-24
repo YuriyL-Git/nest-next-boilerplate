@@ -1,12 +1,9 @@
 import { unsign } from "./cookie-signature";
 import * as jose from "jose";
 import { environment } from "@libs/shared/environement";
+import { TokenPayload } from "@app/shared/types";
 
 const { cookieSecret, jwtSecret } = environment;
-
-interface TokenPayload {
-  sub: string;
-}
 
 export const DecryptToken = async (token: string) => {
   if (!token) {
