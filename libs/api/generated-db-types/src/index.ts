@@ -37,6 +37,12 @@ export enum QueryMode {
     insensitive = "insensitive"
 }
 
+export enum NullsOrder {
+    first = "first",
+    last = "last"
+}
+
+registerEnumType(NullsOrder, { name: 'NullsOrder', description: undefined })
 registerEnumType(QueryMode, { name: 'QueryMode', description: undefined })
 registerEnumType(SortOrder, { name: 'SortOrder', description: undefined })
 registerEnumType(TransactionIsolationLevel, { name: 'TransactionIsolationLevel', description: undefined })
@@ -88,6 +94,14 @@ export class IntFilter {
     gte?: number;
     @Field(() => IntFilter, {nullable:true})
     not?: InstanceType<typeof IntFilter>;
+}
+
+@InputType()
+export class SortOrderInput {
+    @Field(() => SortOrder, {nullable:false})
+    sort!: keyof typeof SortOrder;
+    @Field(() => NullsOrder, {nullable:true})
+    nulls?: keyof typeof NullsOrder;
 }
 
 @InputType()
@@ -615,16 +629,16 @@ export class UserOrderByWithAggregationInput {
     id?: keyof typeof SortOrder;
     @Field(() => SortOrder, {nullable:true})
     email?: keyof typeof SortOrder;
-    @Field(() => SortOrder, {nullable:true})
-    name?: keyof typeof SortOrder;
-    @Field(() => SortOrder, {nullable:true})
-    password?: keyof typeof SortOrder;
-    @Field(() => SortOrder, {nullable:true})
-    icon?: keyof typeof SortOrder;
+    @Field(() => SortOrderInput, {nullable:true})
+    name?: InstanceType<typeof SortOrderInput>;
+    @Field(() => SortOrderInput, {nullable:true})
+    password?: InstanceType<typeof SortOrderInput>;
+    @Field(() => SortOrderInput, {nullable:true})
+    icon?: InstanceType<typeof SortOrderInput>;
     @Field(() => SortOrder, {nullable:true})
     isVerified?: keyof typeof SortOrder;
-    @Field(() => SortOrder, {nullable:true})
-    verificationToken?: keyof typeof SortOrder;
+    @Field(() => SortOrderInput, {nullable:true})
+    verificationToken?: InstanceType<typeof SortOrderInput>;
     @Field(() => UserCountOrderByAggregateInput, {nullable:true})
     _count?: InstanceType<typeof UserCountOrderByAggregateInput>;
     @Field(() => UserMaxOrderByAggregateInput, {nullable:true})
@@ -639,16 +653,16 @@ export class UserOrderByWithRelationInput {
     id?: keyof typeof SortOrder;
     @Field(() => SortOrder, {nullable:true})
     email?: keyof typeof SortOrder;
-    @Field(() => SortOrder, {nullable:true})
-    name?: keyof typeof SortOrder;
-    @Field(() => SortOrder, {nullable:true})
-    password?: keyof typeof SortOrder;
-    @Field(() => SortOrder, {nullable:true})
-    icon?: keyof typeof SortOrder;
+    @Field(() => SortOrderInput, {nullable:true})
+    name?: InstanceType<typeof SortOrderInput>;
+    @Field(() => SortOrderInput, {nullable:true})
+    password?: InstanceType<typeof SortOrderInput>;
+    @Field(() => SortOrderInput, {nullable:true})
+    icon?: InstanceType<typeof SortOrderInput>;
     @Field(() => SortOrder, {nullable:true})
     isVerified?: keyof typeof SortOrder;
-    @Field(() => SortOrder, {nullable:true})
-    verificationToken?: keyof typeof SortOrder;
+    @Field(() => SortOrderInput, {nullable:true})
+    verificationToken?: InstanceType<typeof SortOrderInput>;
 }
 
 @InputType()
@@ -817,6 +831,9 @@ export class UserWhereUniqueInput {
     @Field(() => String, {nullable:true})
     @Validator.IsEmail()
     email?: string;
+    @Field(() => String, {nullable:true})
+    @Validator.IsString()
+    verificationToken?: string;
 }
 
 @InputType()

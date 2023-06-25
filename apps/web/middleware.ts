@@ -14,8 +14,9 @@ export async function middleware(request: NextRequest) {
   const isAuthenticated = await checkAuth(request);
   const { locale, isLocaleMissing } = getLocale(request);
 
-  const isProtectedRoute = !unprotectedRoutes.includes(
-    pathname.replace(new RegExp(`^(/${locale})`), ""),
+  const basePathName = pathname.replace(new RegExp(`^(/${locale})`), "");
+  const isProtectedRoute = !unprotectedRoutes.some((route) =>
+    basePathName.startsWith(route),
   );
 
   if (pathname.startsWith(nextApiRoute)) {

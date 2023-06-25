@@ -38,3 +38,8 @@ export interface PageExampleParams {
 export interface SignUpParams {
   lang: string;
 }
+
+export interface VerificationWithTokenParams {
+  lang: string;
+  token: string;
+}

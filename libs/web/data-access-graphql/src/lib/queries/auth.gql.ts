@@ -35,3 +35,11 @@ const LOGIN_WITH_GOOGLE = gql`
     }
   }
 `;
+
+const VERIFY_EMAIL = gql`
+  mutation VerifyEmail($args: VerificationInput!) {
+    verifyEmail(verificationInput: $args) {
+      isVerified
+    }
+  }
+`;

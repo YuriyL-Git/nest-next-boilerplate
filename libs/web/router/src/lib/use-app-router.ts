@@ -1,6 +1,11 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { HomeWithIdSlugParams, LoginWithIdParams, LoginWithIdSlugParams } from "./types";
+import {
+  HomeWithIdSlugParams,
+  LoginWithIdParams,
+  LoginWithIdSlugParams,
+  VerificationWithTokenParams,
+} from "./types";
 import {
   DashboardPage,
   HomePage,
@@ -11,6 +16,7 @@ import {
   LoginWithIdSlugPage,
   PageExamplePage,
   SignUpPage,
+  VerificationWithTokenPage,
 } from "./routes";
 
 export const useAppRouter = () => {
@@ -97,6 +103,15 @@ export const useAppRouter = () => {
       },
       navigate: () => {
         router.push(SignUpPage.getRoute());
+      },
+    },
+
+    VerificationWithTokenPage: {
+      getRoute: ({ token }: Omit<VerificationWithTokenParams, "lang">) => {
+        return `/verification/${token}`;
+      },
+      navigate: ({ token }: Omit<VerificationWithTokenParams, "lang">) => {
+        router.push(VerificationWithTokenPage.getRoute({ token }));
       },
     },
   };

@@ -51,5 +51,5 @@ model User {
 
   /// @Validator.IsString()
   /// @HideField()
-  verificationToken String?
+  verificationToken String? @unique
 }

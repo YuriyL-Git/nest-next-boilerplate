@@ -7,3 +7,10 @@ export class GoogleLoginInput {
   @Validator.IsString()
   googleToken: string;
 }
+
+@InputType()
+export class VerificationInput {
+  @Field(() => String)
+  @Validator.IsString()
+  verificationToken: string;
+}

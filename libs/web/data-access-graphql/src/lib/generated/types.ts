@@ -34,6 +34,7 @@ export type Mutation = {
   removeUser: User;
   signUp: User;
   updateUser: User;
+  verifyEmail: User;
 };
 
 
@@ -65,6 +66,11 @@ export type MutationSignUpArgs = {
 export type MutationUpdateUserArgs = {
   data: UserUpdateInput;
   where: UserWhereUniqueInput;
+};
+
+
+export type MutationVerifyEmailArgs = {
+  verificationInput: VerificationInput;
 };
 
 export type Query = {
@@ -138,6 +144,11 @@ export type UserUpdateInput = {
 export type UserWhereUniqueInput = {
   email?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
+  verificationToken?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type VerificationInput = {
+  verificationToken: Scalars['String']['input'];
 };
 
 export type SignUpVariables = Exact<{
@@ -160,6 +171,13 @@ export type LoginWithGoogleVariables = Exact<{
 
 
 export type LoginWithGoogle = { __typename?: 'Mutation', loginWithGoogle: { __typename?: 'User', id: string, name?: string | null, email: string, isVerified: boolean, icon?: string | null } };
+
+export type VerifyEmailVariables = Exact<{
+  args: VerificationInput;
+}>;
+
+
+export type VerifyEmail = { __typename?: 'Mutation', verifyEmail: { __typename?: 'User', isVerified: boolean } };
 
 export type GetUsersVariables = Exact<{ [key: string]: never; }>;
 
@@ -214,6 +232,13 @@ export const LoginWithGoogleDocument = /*#__PURE__*/ gql`
   }
 }
     `;
+export const VerifyEmailDocument = /*#__PURE__*/ gql`
+    mutation VerifyEmail($args: VerificationInput!) {
+  verifyEmail(verificationInput: $args) {
+    isVerified
+  }
+}
+    `;
 export const GetUsersDocument = /*#__PURE__*/ gql`
     query GetUsers {
   users {
@@ -261,6 +286,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     LoginWithGoogle(variables: LoginWithGoogleVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<LoginWithGoogle> {
       return withWrapper((wrappedRequestHeaders) => client.request<LoginWithGoogle>(LoginWithGoogleDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'LoginWithGoogle', 'mutation');
+    },
+    VerifyEmail(variables: VerifyEmailVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<VerifyEmail> {
+      return withWrapper((wrappedRequestHeaders) => client.request<VerifyEmail>(VerifyEmailDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'VerifyEmail', 'mutation');
     },
     GetUsers(variables?: GetUsersVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetUsers> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetUsers>(GetUsersDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetUsers', 'query');

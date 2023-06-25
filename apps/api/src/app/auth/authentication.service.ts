@@ -62,4 +62,16 @@ export class AuthenticationService {
       data,
     });
   }
+
+  async verifyEmail(verificationToken: string) {
+    const user = await this.userService.findOne({ where: { verificationToken } });
+    if (!user) {
+      throw new UnauthorizedException(MessageStrings.InvalidVerificationToken);
+    }
+
+    return await this.userService.update({
+      where: { id: user.id },
+      data: { isVerified: true, verificationToken: null },
+    });
+  }
 }

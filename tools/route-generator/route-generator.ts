@@ -54,6 +54,8 @@ const generateRoutes = async () => {
   exec(`npx prettier '${routerBasePath}/**/*.ts' --write`);
 };
 
+generateRoutes();
+
 watch(appFolder)
   .on("add", async () => {
     generateRoutes();

@@ -19,7 +19,7 @@ export const getRouteData = (inputPath: string) => {
 
   let route = path;
   let paramsInterface = "";
-  let routeName = path;
+  let baseRoute = path;
   for (const param of params) {
     route =
       param === "lang"
@@ -27,16 +27,16 @@ export const getRouteData = (inputPath: string) => {
         : route.replace(`[${param}]`, `$\{${param}}`);
     paramsInterface = paramsInterface + `${param}:string;`;
 
-    routeName = routeName.replace(`/[${param}]`, "");
+    baseRoute = baseRoute.replace(`/[${param}]`, "");
   }
 
   if (slug) {
     route = route.replace(`${slug}`, `\${__slug}`);
     paramsInterface = paramsInterface + `_slug:string[];`;
-    routeName = routeName.replace(`/${slug}`, "");
+    baseRoute = baseRoute.replace(`/${slug}`, "");
   }
 
-  const subrouteNames = routeName
+  const subrouteNames = baseRoute
     .split("/")
     .filter((str) => str)
     .map((subroute) => toPascalCase(subroute));
@@ -51,6 +51,7 @@ export const getRouteData = (inputPath: string) => {
     paramsInterface,
     slug,
     route,
+    baseRoute,
     subrouteName: subrouteNames.pop(),
   };
 };
@@ -127,16 +128,22 @@ export const getTypesData = (uniqueRouteData: RouteData[]) => {
     const hookNavigateParams = isPropsAvailable ? `{${params}}` : "";
 
     const returnRouteResult = `\`${routeData.route}\``;
+    const returnBaseRouteResult = `\`${routeData.baseRoute || "/"}\``;
     const getRouteFunc = `getRoute: (${getProps}) => {
         ${slugJoin}
         return ${returnRouteResult};
+      }`;
+
+    const getBaseRouteFunc = `getBaseRoute: () => {
+        return ${returnBaseRouteResult};
       }`;
     return {
       interface: `export interface ${interfaceName} {
        ${routeData.paramsInterface}
     }`,
       routeObject: `export const ${routeData.baseRouteName}Page = {
-      ${getRouteFunc}
+      ${getRouteFunc},
+      ${getBaseRouteFunc}
     };`,
       hookObject: `${routeData.baseRouteName}Page: {
       ${getRouteFunc},

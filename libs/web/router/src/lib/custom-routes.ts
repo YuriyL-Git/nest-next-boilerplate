@@ -1,6 +1,8 @@
-import { HomePage, LoginPage, SignUpPage } from "./routes";
+import { HomePage, LoginPage, SignUpPage, VerificationWithTokenPage } from "./routes";
 
-export const unprotectedRoutes = [LoginPage, SignUpPage].map((page) => page.getRoute());
+export const unprotectedRoutes = [LoginPage, SignUpPage, VerificationWithTokenPage].map(
+  (page) => page.getBaseRoute(),
+);
 
 export const authRedirectRoute = LoginPage.getRoute();
 
