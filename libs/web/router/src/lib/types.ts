@@ -6,6 +6,10 @@ export interface DashboardParams {
   lang: string;
 }
 
+export interface GidgetParams {
+  lang: string;
+}
+
 export interface HomeParams {
   lang: string;
 }

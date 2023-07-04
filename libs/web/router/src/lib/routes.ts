@@ -23,6 +23,15 @@ export const DashboardPage = {
   },
 };
 
+export const GidgetPage = {
+  getRoute: () => {
+    return `/gidget`;
+  },
+  getBaseRoute: () => {
+    return `/gidget`;
+  },
+};
+
 export const HomePage = {
   getRoute: () => {
     return `/`;

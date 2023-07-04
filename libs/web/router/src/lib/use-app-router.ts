@@ -8,11 +8,12 @@ import {
 } from "./types";
 import {
   DashboardPage,
+  GidgetPage,
   HomePage,
   HomeWithIdSlugPage,
   LoginPage,
-  LoginWithIdPage,
   DashboardLoginPage,
+  LoginWithIdPage,
   LoginWithIdSlugPage,
   PageExamplePage,
   SignUpPage,
@@ -38,6 +39,15 @@ export const useAppRouter = () => {
       },
       navigate: () => {
         router.push(DashboardPage.getRoute());
+      },
+    },
+
+    GidgetPage: {
+      getRoute: () => {
+        return `/gidget`;
+      },
+      navigate: () => {
+        router.push(GidgetPage.getRoute());
       },
     },
 
