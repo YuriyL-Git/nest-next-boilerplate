@@ -25,8 +25,8 @@ export const LoginForm = () => {
           args: resultValues,
         });
         push(loginSuccessRedirectRoute);
-      } catch {
-        console.log("error");
+      } catch (error) {
+        console.error(error);
       }
     },
   });

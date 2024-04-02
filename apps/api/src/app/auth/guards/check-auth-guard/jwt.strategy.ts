@@ -28,7 +28,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 const cookieExtractor = (request: FastifyRequest): string | null => {
   const isCookieTokenExist = !!request?.cookies?.token;
   if (!isCookieTokenExist) {
-    console.log("Cookie not passed"); // TODO: log
     return null;
   }
 

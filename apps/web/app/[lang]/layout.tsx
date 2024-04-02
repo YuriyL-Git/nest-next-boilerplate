@@ -16,21 +16,10 @@ export default async function RootLayout({
   params: { lang: Locale };
 }) {
   const dictionary = await getDictionary(params.lang);
-  console.log("Lang =>>", params.lang);
 
   return (
     <html lang={params.lang}>
       <head>
-        <script
-          type="module"
-          async
-          src="https://storage.googleapis.com/gidget-static/dev.v.2.0.0.3/gidget/gidget.esm.js"
-        ></script>
-        <script
-          noModule
-          async
-          src="https://storage.googleapis.com/gidget-static/dev.v.2.0.0.3/gidget/gidget.js"
-        ></script>
       </head>
       <body>
         <Providers dictionary={dictionary}>{children}</Providers>

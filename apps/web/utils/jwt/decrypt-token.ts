@@ -2,12 +2,13 @@ import { unsign } from "./cookie-signature";
 import * as jose from "jose";
 import { environment } from "@libs/shared/environement";
 import { TokenPayload } from "@app/shared/types";
+import { MessageStrings } from "../../../api/src/consts/message-strings";
 
 const { cookieSecret, jwtSecret } = environment;
 
 export const DecryptToken = async (token: string) => {
   if (!token) {
-    console.log("Cookie token is missing");
+    console.error(MessageStrings.CoockieTokenMissing);
   }
   const unsignedToken = await unsign(token, cookieSecret);
 

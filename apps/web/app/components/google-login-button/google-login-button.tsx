@@ -31,12 +31,12 @@ export const GoogleLoginButton: FC = () => {
 
               push(loginSuccessRedirectRoute);
             }
-          } catch {
-            console.log("Error");
+          } catch (error) {
+            console.error(error);
           }
         }}
-        onError={() => {
-          console.log("Login Failed");
+        onError={(error) => {
+          console.error(error);
         }}
         locale={locale}
       />
